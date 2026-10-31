@@ -1,0 +1,41 @@
+<p class="wp-block-paragraph">GCPにpythonサーバをデプロイしていたが、料金が高くなりそうなので、月額料金が決まっているさくらのVPSにデプロイしてみる。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">ゴール</a></li><li><a href="#toc2" tabindex="0">VPS</a><ol><li><a href="#toc3" tabindex="0">さくらVPSにssh接続する</a></li></ol></li><li><a href="#toc4" tabindex="0">必要なソフトをインストール</a></li><li><a href="#toc5" tabindex="0">ポートの開放</a></li><li><a href="#toc6" tabindex="0">Apache Webサーバーを起動</a></li><li><a href="#toc7" tabindex="0">Flaskを使用してHello Woldを出力させる</a></li><li><a href="#toc8" tabindex="0">終わりに</a></li><li><a href="#toc9" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">ゴール</span></h2>
+<p class="wp-block-paragraph">さくらインターネットのVPSでpythonサーバをたてて、hello worldを出力させる。</p>
+<h2 class="wp-block-heading"><span id="toc2">VPS</span></h2>
+<p class="wp-block-paragraph">初めにVPSを契約する。VPSの選択肢は色々ある。</p>
+<p class="wp-block-paragraph">最安(おそらく)の <a data-id="https://web.arena.ne.jp/indigo/price/index.html" data-type="URL" href="https://web.arena.ne.jp/indigo/price/index.html" rel="noopener" target="_blank">WebARENA Indigo</a> にしようと思っていたが、インスタンスの在庫不足。</p>
+<p class="wp-block-paragraph">「<a data-id="https://web.arena.ne.jp/news/2021/0219_2.html?a8=8ME.uML6Qf5jfiOjjH5pbEFQ2hiuMTNFSEWhHjOs-zGwbZrNOTECbfE85e-ZsgE8-M1FQTEk.Td0xs00000004307004" data-type="URL" href="https://web.arena.ne.jp/news/2021/0219_2.html?a8=8ME.uML6Qf5jfiOjjH5pbEFQ2hiuMTNFSEWhHjOs-zGwbZrNOTECbfE85e-ZsgE8-M1FQTEk.Td0xs00000004307004" rel="noopener" target="_blank">Indigo Linux全インスタンスの在庫不足</a>」せっかく登録したが、インスタンスの作成ができないらしいので諦めて、すぐに<a data-id="/webarena-cancel/" data-type="URL" href="/webarena-cancel/" target="_blank">解約</a>。</p>
+<p class="wp-block-paragraph"></p>
+<p class="wp-block-paragraph">少し高くなるが、<a data-id="https://vps.sakura.ad.jp/" data-type="URL" href="https://vps.sakura.ad.jp/" rel="noopener" target="_blank">さくらインターネット</a>を契約する。643円/月。初回に2ヶ月分契約する必要がある。</p>
+<p class="wp-block-paragraph">会員登録して、VPSの申し込みを行う。契約中のサービス一覧–&gt;VPSのコントロール画面を開く。</p>
+<h3 class="wp-block-heading"><span id="toc3">さくらVPSにssh接続する</span></h3>
+<ol class="wp-block-list"><li>各種設定 –&gt; OSのインストール</li><li>$ssh ubuntu@your_IP </li></ol>
+<h2 class="wp-block-heading"><span id="toc4">必要なソフトをインストール</span></h2>
+<ol class="wp-block-list"><li><code>$sudo apt-get update</code></li><li><code>$sudo apt-get install libapache2-mod-wsgi python-dev</code></li><li><code>$sudo apt-get install libapache2-mod-wsgi-py3 python3-dev</code></li><li><code>$sudo apt install python3-pip</code></li></ol>
+<p class="wp-block-paragraph">参考サイト。「<a data-id="https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps" data-type="URL" href="https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps" rel="noopener" target="_blank">How To Deploy a Flask Application on an Ubuntu VPS | DigitalOcean</a>」、「<a data-id="https://qiita.com/NomuraS/items/c2e45918daf44817aabc" data-type="URL" href="https://qiita.com/NomuraS/items/c2e45918daf44817aabc" rel="noopener" target="_blank">さくらVPS, Ubuntu 18.04, apache2, flask – Qiita</a>」</p>
+<p class="wp-block-paragraph">tmuxとvimもついでにインストールする。</p>
+<h2 class="wp-block-heading"><span id="toc5">ポートの開放</span></h2>
+<p class="wp-block-paragraph">必要があれば開放する。</p>
+<p class="wp-block-paragraph"><code>$sudo ufw allow 443</code></p>
+<p class="wp-block-paragraph">sshを許可</p>
+<p class="wp-block-paragraph"><code>$sudo ufw allow ssh</code></p>
+<p class="wp-block-paragraph">確認。</p>
+<p class="wp-block-paragraph"><code>$sudo ufw status verbose</code></p>
+<h2 class="wp-block-heading"><span id="toc6">Apache Webサーバーを起動</span></h2>
+<p class="wp-block-paragraph">「<a data-id="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04-ja" data-type="URL" href="https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04-ja" rel="noopener" target="_blank">Ubuntu 20.04にApache Webサーバーをインストールする方法 | DigitalOcean</a>」</p>
+<h2 class="wp-block-heading"><span id="toc7">Flaskを使用してHello Woldを出力させる</span></h2>
+<ol class="wp-block-list"><li>「<a data-id="https://qiita.com/matsui2019/items/bbe8db8a0815325b8c66" data-type="URL" href="https://qiita.com/matsui2019/items/bbe8db8a0815325b8c66" rel="noopener" target="_blank">Flaskで「Hello World」を出力させる – Qiita</a>」を参考にpythonコードをかく</li><li>ポートは443にする(さくらサーバーでは443と80が開いている。)</li><li>$sudo python3 -m pip install flask</li><li>$sudo python3 main.py </li><li>ブラウザから your_IP:443 にアクセスする</li></ol>
+<p class="wp-block-paragraph">pythonやpipを使用するときに、ログインユーザとrootユーザで違う環境かもしれないので、sudoをつけてflaskのインストールを行う。</p>
+<p class="wp-block-paragraph">参考「<a data-id="https://teratail.com/questions/162715" data-type="URL" href="https://teratail.com/questions/162715" rel="noopener" target="_blank">Python – ターミナルでsudo python 〇〇.pyとするとモジュールがないと言われる。｜teratail</a>」</p>
+<h2 class="wp-block-heading"><span id="toc8">終わりに</span></h2>
+<p class="wp-block-paragraph">python環境は改善の余地がありそうだが、さくらVPSでpythonサーバを立てることができた。</p>
+<p class="wp-block-paragraph">これから徐々にアプリを公開していきたい。</p>
+<h2 class="wp-block-heading"><span id="toc9">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

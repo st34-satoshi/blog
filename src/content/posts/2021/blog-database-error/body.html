@@ -1,0 +1,16 @@
+<p class="wp-block-paragraph">GCPでWordpressを使用していたら、「データベース接続確立エラー」と表示されてページにアクセスできなくなった。その時の対処法について説明する。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">出来事</a></li><li><a href="#toc2" tabindex="0">やったこと</a></li><li><a href="#toc3" tabindex="0">終わりに</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">出来事</span></h2>
+<p class="wp-block-paragraph">特にバージョンアップや更新を行ったわけではなく、普段通りWordpressの管理画面にアクセスしようとしたら、「データベース接続確立エラー」と表示された。</p>
+<p class="wp-block-paragraph">普通にブログも見れなくなっている。</p>
+<h2 class="wp-block-heading"><span id="toc2">やったこと</span></h2>
+<p class="wp-block-paragraph">サーバとデータベースがうまくつながっていないことが原因らしいが、調べても対処法がわからない。</p>
+<p class="wp-block-paragraph">GCPの管理画面を見ても特に異常はなさそう。</p>
+<p class="wp-block-paragraph"><strong>VMインスタンスをリセット</strong>したら、元通りアクセスできるようになった。</p>
+<h2 class="wp-block-heading"><span id="toc3">終わりに</span></h2>
+<p class="wp-block-paragraph">自分では対処できないエラーが発生する可能性は常にある。何か起こった時の対応は常に考えておくべき。</p>
+<p class="wp-block-paragraph">ある時点まで戻ったり、ローカルにバックアップを保存したりしたほうが良さそう。</p>

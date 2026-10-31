@@ -1,40 +1,198 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import SiteLayout from './SiteLayout.astro';
-import assets from '../components/head-assets.html?raw';
-import sidebar from '../components/sidebar.html?raw';
-import tail from '../components/page-tail.html?raw';
-interface Props { post: CollectionEntry<'posts'> }
-const { post } = Astro.props;
-const { title, description, publishedAt, updatedAt, categories, tags } = post.data;
-const url = `https://blog.stu345.com/${post.data.slug}/`;
-const escape = (value: string) => value.replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]!));
-const head = `<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><title>${escape(title)} | Notes to Forget</title><meta name="description" content="${escape(description)}"><link rel="canonical" href="${url}"><meta property="og:title" content="${escape(title)}"><meta property="og:type" content="article"><meta property="og:url" content="${url}"><meta property="og:description" content="${escape(description)}">${assets}`;
-const date = (value: Date) => value.toISOString().slice(0, 10).replaceAll('-', '.');
-const bodyAttributes = { class: 'body public-page page-body single single-post ff-hiragino fz-18px fw-400 hlt-center-logo-wrap sidebar-right mblt-footer-mobile-buttons scrollable-mobile-buttons mobile-button-fmb no-mobile-sidebar font-awesome-4 thumb-wide' };
+import type { Entry } from "../lib/content";
+import { content, postPath, terms } from "../lib/content";
+import { date } from "../lib/site";
+import SiteLayout from "./SiteLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Share from "../components/Share.astro";
+import RelatedCard from "../components/RelatedCard.astro";
+import PostNavigation from "../components/PostNavigation.astro";
+const { post, comments = "" } = Astro.props as {
+  post: Entry;
+  comments?: string;
+};
+const d = post.data,
+  isPost = post.collection === "posts";
+const { posts } = await content();
+const index = posts.findIndex((p) => p.id === post.id);
+const related = posts
+  .filter(
+    (p) =>
+      p.id !== post.id &&
+      p.data.categories.some((c) => d.categories.includes(c)),
+  )
+  .slice(0, 6);
+const cats = terms("categories", d.categories, d.categoryIds),
+  tags = terms("tags", d.tags, d.tagIds);
 ---
-<SiteLayout head={head} tail={tail} bodyAttributes={bodyAttributes}>
+
+<SiteLayout
+  title={d.title}
+  seoTitle={d.seoTitle}
+  description={d.description}
+  image={d.image}
+  publishedAt={d.publishedAt.toISOString()}
+  updatedAt={d.updatedAt?.toISOString()}
+  bodyClass={d.bodyClass}
+>
+  {d.mathjax && (
+    <script
+      is:inline
+      src="/assets/vendor/mathjax/MathJax.js?config=default"
+    ></script>
+  )}
   <div id="content" class="content cf">
     <div id="content-in" class="content-in wrap">
-      <main id="main" class="main">
-        <article class="article" itemscope itemtype="https://schema.org/BlogPosting">
+      <main id="main" class="main" itemscope itemtype="https://schema.org/Blog">
+        {isPost && (
+          <div
+            id="breadcrumb"
+            class="breadcrumb breadcrumb-category sbp-main-top"
+          >
+            <div class="breadcrumb-home">
+              <span class="fa fa-home fa-fw" aria-hidden="true"></span>
+              <a href="/">ホーム</a>
+            </div>
+            {cats.map((c) => (
+              <div class="breadcrumb-item">
+                <span class="fa fa-angle-right" aria-hidden="true"></span>
+                <span class="fa fa-folder fa-fw" aria-hidden="true"></span>
+                <a href={c.path}>{c.name}</a>
+              </div>
+            ))}
+          </div>
+        )}
+        <article
+          id={`post-${d.legacyId || d.slug}`}
+          class={`article ${isPost ? "post type-post" : "page type-page"} status-publish hentry`}
+          itemscope
+          itemprop="blogPost"
+          itemtype="https://schema.org/BlogPosting"
+          data-clarity-region="article"
+        >
           <header class="article-header entry-header">
-            <h1 class="entry-title" itemprop="headline">{title}</h1>
+            <h1 class="entry-title" itemprop="headline">
+              {d.title}
+            </h1>
+            <div class="eye-catch-wrap display-none">
+              <figure class="eye-catch">
+                <img
+                  src={d.image}
+                  alt={d.imageAlt}
+                  class="eye-catch-image wp-post-image"
+                />
+              </figure>
+            </div>
             <div class="date-tags">
-              <span class="post-date"><span class="fa fa-clock-o" aria-hidden="true"></span><time datetime={publishedAt.toISOString()} itemprop="datePublished">{date(publishedAt)}</time></span>
-              {updatedAt && <span class="post-update"><span class="fa fa-history" aria-hidden="true"></span><time datetime={updatedAt.toISOString()} itemprop="dateModified">{date(updatedAt)}</time></span>}
+              <span class="post-date">
+                <span class="fa fa-clock-o" aria-hidden="true"></span>
+                <time
+                  class="entry-date date published"
+                  datetime={d.publishedAt.toISOString()}
+                  itemprop="datePublished"
+                >
+                  {date(d.publishedAt)}
+                </time>
+              </span>
+              {d.updatedAt &&
+                d.updatedAt.getTime() > d.publishedAt.getTime() && (
+                  <span class="post-update">
+                    <span class="fa fa-history" aria-hidden="true"></span>
+                    <time
+                      class="entry-date date updated"
+                      datetime={d.updatedAt.toISOString()}
+                      itemprop="dateModified"
+                    >
+                      {date(d.updatedAt)}
+                    </time>
+                  </span>
+                )}
             </div>
           </header>
-          <div class="entry-content cf" itemprop="articleBody"><slot /></div>
+          <div class="entry-content cf" itemprop="mainEntityOfPage">
+            <slot />
+          </div>
           <footer class="article-footer entry-footer">
-            <div class="entry-categories-tags">
-              <div class="entry-categories">{categories.map(category => <span class="cat-link">{category}</span>)}</div>
-              <div class="entry-tags">{tags.map(tag => <span class="tag-link border-element">{tag}</span>)}</div>
+            {isPost && (
+              <div class="entry-categories-tags ctdt-one-row">
+                <div class="entry-categories">
+                  {cats.map((c) => (
+                    <a class={`cat-link cat-link-${c.id}`} href={c.path}>
+                      <span
+                        class="fa fa-folder cat-icon tax-icon"
+                        aria-hidden="true"
+                      ></span>
+                      {c.name}
+                    </a>
+                  ))}
+                </div>
+                <div class="entry-tags">
+                  {tags.map((t) => (
+                    <a class="tag-link border-element" href={t.path}>
+                      <span
+                        class="fa fa-tag tax-icon"
+                        aria-hidden="true"
+                      ></span>
+                      {t.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+            <div class="ad-area no-icon ad-content-bottom ad-rectangle ad-label-visible cf">
+              <div class="ad-label">Sponsored links</div>
+              <div class="ad-wrap">
+                <ins
+                  class="adsbygoogle"
+                  style="display:block"
+                  data-ad-client="ca-pub-2065354794099570"
+                  data-ad-slot="9887613672"
+                  data-ad-format="rectangle"
+                  data-full-width-responsive="true"
+                ></ins>
+              </div>
+            </div>
+            <Share />
+            <div class="footer-meta">
+              <span class="fa fa-pencil" aria-hidden="true"></span>
+              <a href="/author/satoshi-admin/" class="author-link">
+                Satoshi
+              </a>
             </div>
           </footer>
         </article>
+        {isPost && (
+          <>
+            <aside id="related-entries" class="related-entries rect-entry-card">
+              <h2 class="related-entry-heading">
+                <span class="related-entry-main-heading main-caption">
+                  Related articles
+                </span>
+              </h2>
+              <div class="related-list">
+                {related.map((p) => (
+                  <RelatedCard post={p} />
+                ))}
+              </div>
+            </aside>
+            <PostNavigation
+              previous={posts[index + 1]}
+              next={posts[index - 1]}
+            />
+            <Fragment set:html={comments} />
+            <section id="respond" class="comment-status">
+              <h2>コメント</h2>
+              <p>新しいコメントの受付は停止しています。</p>
+            </section>
+          </>
+        )}
+        {!isPost && (
+          <div class="breadcrumb breadcrumb-page pbp-main-bottom">
+            <a href="/">ホーム</a>
+          </div>
+        )}
       </main>
-      <Fragment set:html={sidebar} />
+      <Sidebar />
     </div>
   </div>
 </SiteLayout>

@@ -1,0 +1,39 @@
+<p class="wp-block-paragraph">個人開発でスプラトゥーンまとめサイトを作ったのでその経緯と反省をまとめてみます。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">作ったもの</a></li><li><a href="#toc2" tabindex="0">開発のきっかけ</a><ol><li><a href="#toc3" tabindex="0">開発</a></li><li><a href="#toc4" tabindex="0">技術的な話</a></li></ol></li><li><a href="#toc5" tabindex="0">YouTube API</a><ol><li><a href="#toc6" tabindex="0">YouTube APIの割り当て量を増やすための申請</a></li></ol></li><li><a href="#toc7" tabindex="0">運用</a><ol><li><a href="#toc8" tabindex="0">困っていること</a></li></ol></li><li><a href="#toc9" tabindex="0">終わりに</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">作ったもの</span></h2>
+<p class="wp-block-paragraph">作ったのは、<strong>スプラトゥーン3</strong>の動画を、<strong>ブキ・ステージ・ルールごとに検索できるサイト</strong>です！<br/>普段自分でもプレイする中で、「このブキ、他の人はどう使ってるんだろう？」とか「このステージでうまく立ち回るには？」と気になったことが多く、<strong>すぐに参考動画を見つけられるサイトが欲しい！</strong>と思ったのがきっかけです。</p>
+<p class="wp-block-paragraph">サイトはこちら↓<br/><a href="https://videos.stu345.com/splatoon/videos">スプラトゥーン3動画一覧 | 動画まとめサイト</a></p>
+<h2 class="wp-block-heading"><span id="toc2">開発のきっかけ</span></h2>
+<p class="wp-block-paragraph">個人開発でWebサービスを作るのは好きで何か作ろうと思っており、どハマりしているスプラトゥーンの動画を検索できるサイトがあったら便利だと思って作ってみました。<a data-id="https://www.youtube.com/@mutaito34" data-type="link" href="https://www.youtube.com/@mutaito34">自分で配信も始めている</a>ためその動画の宣伝にもなれば良いと思いました。</p>
+<p class="wp-block-paragraph">将来的には配信者と視聴者を繋ぐサイトになれたら良いと思っています。</p>
+<h3 class="wp-block-heading"><span id="toc3">開発</span></h3>
+<p class="wp-block-paragraph">1年前の2月くらいからぼんやり作ろうと考えていて、YouTubeのAPIを調べたりはしていました。12月にGitHubにリポジトリを作って少し作業して放置。4月にもう一度やる気を出して20時間くらいで作りました。</p>
+<h3 class="wp-block-heading"><span id="toc4">技術的な話</span></h3>
+<p class="wp-block-paragraph">今回はDocker上の<strong>Railsで作りました</strong>。とても慣れているスタイルで環境構築などは1時間もかからずに終わりました。RailsのタスクでYouTubeのAPIを叩いて情報を取得しています。Cursorを使っていてAIが画面やAPIを作ってくれるのでサクサク作ることができました。</p>
+<p class="wp-block-paragraph">Reactを使いたいという思いもあったのですが、フロントとバックエンドでリポジトリを分けるのは少し時間がかかりそうで、サクッとリリースしたいと思い採用しませんでした。</p>
+<p class="wp-block-paragraph">動画からブキ・ステージ・ルールを取得するのは手動でやっていて、結構時間がかかり困っています。AIで動画を見てどうにか自動化したい…</p>
+<h2 class="wp-block-heading"><span id="toc5">YouTube API</span></h2>
+<p class="wp-block-paragraph">今回はスプラトゥーンの動画をYouTubeから取得するために<a data-id="https://developers.google.com/youtube/v3?hl=ja" data-type="link" href="https://developers.google.com/youtube/v3?hl=ja">YouTube Data API</a>を使いました。APIを使うには<a data-id="https://developers.google.com/youtube/v3/getting-started?hl=ja#quota" data-type="link" href="https://developers.google.com/youtube/v3/getting-started?hl=ja#quota">割り当て使用量</a>というのがあり、デフォルトで1日あたり10,000 ユニットの割り当てが設定されています。1回の動画検索に100ユニット必要で毎日APIを叩くには少ないです。</p>
+<p class="wp-block-paragraph">そこで申請フォームからYouTubeに割り当て使用量を増やしてもらえるよう申請してみました。</p>
+<p class="wp-block-paragraph">フォームにはサイトの使い方など記入する欄があり、かなり簡単に書いたのですが、2,3日でGoogleから丁寧な返事が来ました。海外のスタッフが丁寧にサイトを調べてGoogleや<a data-id="https://www.youtube.com/t/terms?hl=ja&amp;override_hl=1" data-type="link" href="https://www.youtube.com/t/terms?hl=ja&amp;override_hl=1">YouTubeの規約</a>や<a data-id="https://developers.google.com/youtube/terms/developer-policies?hl=ja" data-type="link" href="https://developers.google.com/youtube/terms/developer-policies?hl=ja">ポリシー</a>に違反がないか調べてくれます。</p>
+<p class="wp-block-paragraph">サイトの初期段階では規約やポリシーに違反があることを指摘され、7営業日以内に修正するよう依頼されました。個人開発なので時間を作ってすぐに修正して再度審査していただくようにメールしました。</p>
+<h3 class="wp-block-heading"><span id="toc6">YouTube APIの割り当て量を増やすための申請</span></h3>
+<p class="wp-block-paragraph">申請フォームを書いたら2,3日で返事が来ました。規約やポリシーに違反している箇所が複数あり丁寧に指摘してくれているPDFファイルが添付されていました。7営業日以内に修正するよう書いてあります。</p>
+<p class="wp-block-paragraph">一つずつYouTubeやGoogleの規約とポリシーを確認し修正し4日後くらいに再度確認してくれるようメールしました。</p>
+<p class="wp-block-paragraph">2日くらいで返信を受け取ってレビューすると連絡があり、その1週間後くらいに再度修正箇所を指摘されました。</p>
+<p class="wp-block-paragraph">修正して連絡すると、メールを受け取ってレビューを始めると連絡がありましたが、1ヶ月くらい返事が来なくなりました。再度どうなったかメールしてみると、修正箇所を指摘するメールが届きました。</p>
+<p class="wp-block-paragraph">修正して確認してもらうよう連絡すると、さらに審査するとメールが届きました。</p>
+<p class="wp-block-paragraph">(2ヶ月くらいかかっているので、早急に割り当てを増やしてもらうことは難しそう。その後どうなるかはまた追記します。)</p>
+<h2 class="wp-block-heading"><span id="toc7">運用</span></h2>
+<p class="wp-block-paragraph">アクセス数が増えるまではぼちぼち運用しながら宣伝していく予定です。</p>
+<h3 class="wp-block-heading"><span id="toc8">困っていること</span></h3>
+<p class="wp-block-paragraph">YouTubeから動画を取得することは自動でできていますが、動画に出てくるブキ・ステージ・ルールを入力するのは手作業で入力しています。スプラトゥーン関係の動画は毎日40本以上出ているので、1本1分で入力しても40分かかってしまい毎日やるには少し面倒になりそうです…</p>
+<p class="wp-block-paragraph">AIに任せるかスクリプトを書くかなんとか自動化したいと思っていますが、今のところ良いアイディアはないです。もし良いやり方のアイディアがある方がいればぜひ教えていただきたいです。サイトから収益を得られるなら誰か協力してくれる人に依頼したいと思っていますが、なかなか難しそうです。</p>
+<h2 class="wp-block-heading"><span id="toc9">終わりに</span></h2>
+<p class="wp-block-paragraph">なんとなく作りたいと思ってから1年くらいかかってしまったが一応完成してよかったです。最大の課題は時間を確保することで、時間を確保できれば2週間くらいでできました。</p>
+<p class="wp-block-paragraph">データ入力などサイトの運用で作業が発生するサービスは個人開発では大変だとわかっていたが、毎日30分以上の作業が必要になるのはやはり大変でした。</p>
+<p class="wp-block-paragraph">今回スプラトゥーン動画まとめサイトを作ったので、スプラトゥーンだけでなく、いろいろなまとめサイトを今後作れるようになりました。将棋・エンジニア・投資など興味がある分野の動画まとめサイトを作っていきたいと思います。</p>

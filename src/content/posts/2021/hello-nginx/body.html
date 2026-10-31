@@ -1,0 +1,97 @@
+<p class="wp-block-paragraph"><span class="bold-blue">Nginx</span>について何も知らなかったので<span class="bold-blue">hello world</span>と簡単な説明。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">Nginxとは</a></li><li><a href="#toc2" tabindex="0">やること</a><ol><li><a href="#toc3" tabindex="0">Nginxのインストール</a></li><li><a href="#toc4" tabindex="0">コマンド</a></li><li><a href="#toc5" tabindex="0">最初の静的ファイルの変更</a></li></ol></li><li><a href="#toc6" tabindex="0">設定ファイル</a><ol><li><a href="#toc7" tabindex="0">場所</a></li><li><a href="#toc8" tabindex="0">nginx.conf</a></li><li><a href="#toc9" tabindex="0">sites-enabled/default</a></li><li><a href="#toc10" tabindex="0">conf.d/*</a></li></ol></li><li><a href="#toc11" tabindex="0">ログ出力</a><ol><li><a href="#toc12" tabindex="0">ログにホスト名を出力する</a></li></ol></li><li><a href="#toc13" tabindex="0">エラー (詰まったところ)</a><ol><li><a href="#toc14" tabindex="0">nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)</a></li><li><a href="#toc15" tabindex="0">CORSを許可する</a><ol><li><a href="#toc16" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc17" tabindex="0">iframe内で使えるように</a></li></ol></li><li><a href="#toc18" tabindex="0">終わりに</a></li><li><a href="#toc19" tabindex="0">参考</a></li><li><a href="#toc20" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">Nginxとは</span></h2>
+<p class="wp-block-paragraph"><span class="bold-blue">オープンソースのwebサーバ</span>。</p>
+<p class="wp-block-paragraph">これだけではよくわからないので実際に使ってみて理解を深める。</p>
+<h2 class="wp-block-heading"><span id="toc2">やること</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">Nginxのインストール</span></h3>
+<ol class="wp-block-list">
+<li><code>$ sudo apt-get update</code></li>
+<li><code><span class="bold-blue">$ sudo apt-get install nginx</span></code></li>
+<li><code>$ sudo ufw app list</code></li>
+<li><code>$ sudo ufw allow 'Nginx Full'</code></li>
+<li><code>$ sudo ufw allow 'Nginx HTTP'</code></li>
+<li><code>$ sudo ufw allow 'Nginx HTTPS'</code></li>
+<li><code>$ sudo ufw status</code></li>
+<li><code>$ sudo systemctl status nginx</code></li>
+</ol>
+<h3 class="wp-block-heading"><span id="toc4">コマンド</span></h3>
+<ul class="wp-block-list">
+<li>起動: <code><span class="bold-blue">$ sudo service nginx start</span></code></li>
+<li>テスト: $ nginx -t</li>
+<li>ストップ: $ sudo service nginx stop</li>
+<li>リスタート: $ sudo service nginx restart</li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc5">最初の静的ファイルの変更</span></h3>
+<p class="wp-block-paragraph">デフォルトでは <span class="bold-blue"><code>/var/www/html/</code> </span>にある<span class="bold-blue">index.html</span>が指定されている。このファイルを書き換えることで好きなページを表示できる。</p>
+<p class="wp-block-paragraph">アクセスによって表示するファイルを切り替えるには設定ファイルの変更が必要。</p>
+<h2 class="wp-block-heading"><span id="toc6">設定ファイル</span></h2>
+<h3 class="wp-block-heading"><span id="toc7">場所</span></h3>
+<p class="wp-block-paragraph"><code><span class="bold-blue">/etc/nginx/</span></code></p>
+<h3 class="wp-block-heading"><span id="toc8">nginx.conf</span></h3>
+<p class="wp-block-paragraph">最初に読み込まれる設定ファイル。ここでログの場所やアプリケーションごとの設定ファイルを読み込む。</p>
+<h3 class="wp-block-heading"><span id="toc9">sites-enabled/default</span></h3>
+<p class="wp-block-paragraph">初期時の設定ファイル。nginx.confから呼ばれて、デフォルト(ポート80)で/var/www/html にアクセスするように設定されている。</p>
+<h3 class="wp-block-heading"><span id="toc10">conf.d/*</span></h3>
+<p class="wp-block-paragraph">デフォルトではディレクトリだけあって中身のファイルは空だった。ここに設定ファイルを追加していく。nginx.confから参照する。</p>
+<h2 class="wp-block-heading"><span id="toc11">ログ出力</span></h2>
+<p class="wp-block-paragraph">nginx.confファイルに書いてある。デフォルトでは</p>
+<ul class="wp-block-list">
+<li>access_log: /var/log/nginx/access.log;</li>
+<li>error_log: /var/log/nginx/error.log;</li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc12">ログにホスト名を出力する</span></h3>
+<p class="wp-block-paragraph">デフォルトではホスト名は出力されない。複数のドメインから同じサーバーにアクセスするときはホスト名があった方が便利。ホスト名を出力するときはnginx.confを以下のように変更する。ここではエラーログのフォーマットは変えない。</p>
+<pre class="wp-block-code"><code>	##
+	# Logging Settings
+	##
+	log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                 	'$status $body_bytes_sent "$http_referer" '
+                 	'"$http_user_agent" "$host" "$http_x_forwarded_for"';
+
+	access_log /var/log/nginx/access.log main;
+	error_log /var/log/nginx/error.log;</code></pre>
+<h2 class="wp-block-heading"><span id="toc13">エラー (詰まったところ)</span></h2>
+<h3 class="wp-block-heading"><span id="toc14">nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)</span></h3>
+<p class="wp-block-paragraph">参考: <a href="https://qiita.com/Yu-s/items/64c54def20e5fa64edd1" rel="noopener" target="_blank">他のプロセスがポートを占有してnginxを再起動できない – Qiita</a></p>
+<p class="wp-block-paragraph">$ sudo lsof -i | grep nginx で表示される古いプロセスをkillする。</p>
+<h3 class="wp-block-heading"><span id="toc15">CORSを許可する</span></h3>
+<p class="wp-block-paragraph">以下の5つの設定をしたらCORSが通るようになった。</p>
+<pre class="wp-block-code"><code>location / {
+        # CORS
+        add_header Access-Control-Allow-Origin "*";
+        add_header Access-Control-Allow-Methods "POST, GET, OPTIONS";
+        add_header Access-Control-Allow-Headers "Origin, Authorization, Accept";
+        add_header Access-Control-Allow-Credentials true;
+        proxy_hide_header 'Access-Control-Allow-Origin';
+        proxy_pass http://web:3000;
+    }</code></pre>
+<h4 class="wp-block-heading"><span id="toc16">参考サイト</span></h4>
+<ul class="wp-block-list">
+<li><a href="https://www.y-hakopro.com/entry/nginx_proxy_cors">Nginxをリバースプロキシで使う場合のCORS設定 – 箱のプログラミング日記。</a></li>
+<li><a href="https://serverfault.com/questions/162429/how-do-i-add-access-control-allow-origin-in-nginx">cors – How do I add Access-Control-Allow-Origin in NGINX? – Server Fault</a></li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc17">iframe内で使えるように</span></h3>
+<pre class="wp-block-code"><code>location / {
+    proxy_hide_header x-frame-options;
+}</code></pre>
+<h2 class="wp-block-heading"><span id="toc18">終わりに</span></h2>
+<p class="wp-block-paragraph">とりあえずの hello worldはできた。これから設定ファイルの書き方やディレクトリ構成がややこしそうなので、都度更新予定。</p>
+<h2 class="wp-block-heading"><span id="toc19">参考</span></h2>
+<ul class="wp-block-list">
+<li><a href="https://ja.wikipedia.org/wiki/Nginx" rel="noopener" target="_blank">nginx – Wikipedia</a></li>
+<li><a href="https://qiita.com/kamihork/items/296ee689a8d48c2bebcd" rel="noopener" target="_blank">Nginxのアーキテクチャを理解する – Qiita</a></li>
+<li><a href="https://qiita.com/kamihork/items/49e2a363da7d840a4149" rel="noopener" target="_blank">ApacheとNginxについて比較 – Qiita</a></li>
+<li><a href="https://www.youtube.com/watch?v=1ndlRiaYiWQ" rel="noopener" target="_blank">Nginx Tutorial | Learn Nginx Fundamentals | Deploy a Web Application Using Nginx | Edureka – YouTube</a></li>
+<li><a href="https://snowtree-injune.com/2020/10/30/nginx-static-dj014/#toc8" rel="noopener" target="_blank">Nginxでまず静的ファイルのみ表示してみる（Nginxその2） | Snow Tree in June</a></li>
+<li><a href="https://stackoverflow.com/questions/41528360/log-format-in-nginx-conf-being-ignored">log_format in nginx.conf being ignored – Stack Overflow</a></li>
+<li><a href="https://parudou3.com/nginx/616/">Nginxアクセスログのフォーマットにホスト名を入れてLogwatchにも対応させる</a></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc20">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

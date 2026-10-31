@@ -1,0 +1,24 @@
+<p class="wp-block-paragraph">よく使用するプログラミング言語の標準ライブラリは定期的に確認した方が良い。新しい気づきのまとめ。定期的に更新する予定。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">Python 標準ライブラリ</a></li><li><a href="#toc2" tabindex="0">使えそうなライブラリ</a><ol><li><a href="#toc3" tabindex="0">inspect 呼び出しもとの情報を取得する</a></li><li><a href="#toc4" tabindex="0">unittest</a></li><li><a href="#toc5" tabindex="0">pdb</a></li></ol></li><li><a href="#toc6" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">Python 標準ライブラリ</span></h2>
+<p class="wp-block-paragraph">参考サイト: <a data-id="https://docs.python.org/ja/3/library/index.html" data-type="URL" href="https://docs.python.org/ja/3/library/index.html" rel="noopener" target="_blank">Python 標準ライブラリ — Python 3.9.0 ドキュメント</a></p>
+<h2 class="wp-block-heading"><span id="toc2">使えそうなライブラリ</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">inspect 呼び出しもとの情報を取得する</span></h3>
+<p class="wp-block-paragraph">デバッグに便利。呼び出しもとの関数名やファイル名を取得できる。その他にも活動中のオブジェクトの様々な情報を取得できるらしい。詳しくはドキュメントで。<a data-id="https://docs.python.org/ja/3/library/inspect.html" data-type="URL" href="https://docs.python.org/ja/3/library/inspect.html" rel="noopener" target="_blank">inspect — 活動中のオブジェクトの情報を取得する — Python 3.9.0 ドキュメント</a></p>
+<pre class="wp-block-code"><code>import inspect
+
+def who_does_call_me():
+  print(inspect.stack()[1].filename)</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">unittest</span></h3>
+<p class="wp-block-paragraph"><a data-id="https://docs.python.org/ja/3/library/unittest.html#assert-methods" data-type="URL" href="https://docs.python.org/ja/3/library/unittest.html#assert-methods" rel="noopener" target="_blank">公式ドキュメント</a>。単体テストや結合テストに使える。</p>
+<h3 class="wp-block-heading"><span id="toc5">pdb</span></h3>
+<p class="wp-block-paragraph">↓でブレークポイントを入れることができる。</p>
+<pre class="wp-block-code"><code>import pdb; pdb.set_trace()</code></pre>
+<h2 class="wp-block-heading"><span id="toc6">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

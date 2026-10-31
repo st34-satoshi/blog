@@ -1,0 +1,55 @@
+<p class="wp-block-paragraph">ブログやホームページをサクッと作るならWordPressが簡単。各社いろんなプランがあり、安いプランだと月額1,000円以下でサクッと作れる。今回はさくらのレンタルサーバーを使ってみる。</p>
+<p class="wp-block-paragraph">今回は他社で取得したサブドメインを割り当てる(ちょっとめんどい)。</p>
+<p class="wp-block-paragraph">GCPだと月額50円くらいで作れるがGoogleは急にサービスを終了するかもしれないので使いたくない。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">さくらのレンタルサーバーを申し込む</a></li><li><a href="#toc2" tabindex="0">WordPressのインストール</a></li><li><a href="#toc3" tabindex="0">独自ドメインからアクセスする</a><ol><li><a href="#toc4" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc5" tabindex="0">SSLの設定</a></li><li><a href="#toc6" tabindex="0">サブディレクトリを削除する</a><ol><li><a href="#toc7" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc8" tabindex="0">httpからhttpsへリダイレクト</a><ol><li><a href="#toc9" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc10" tabindex="0">終わりに</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">さくらのレンタルサーバーを申し込む</span></h2>
+<p class="wp-block-paragraph"><a href="https://rs.sakura.ad.jp/plans.html">プラン比較 – レンタルサーバーはさくらインターネット</a> から申し込む。</p>
+<p class="wp-block-paragraph">今回はWordPressが使える中で一番安い425円/月のスタンダードプランを選択する。</p>
+<p class="wp-block-paragraph">初期ドメイン(.sakura.ne.jpの前)を決められるので好きな文字列を入力する。後から独自ドメインに変更する。</p>
+<p class="wp-block-paragraph">独自ドメインは他社で取得して管理しているのでさくらではレンタルサーバーだけを契約する。</p>
+<p class="wp-block-paragraph">月額425円は36ヶ月一括払いのときで、毎月支払いだと524円。ひとまず毎月支払いを選択する。長く使うようであれば他の支払い方法が良さそう。クーポンコードは持ってない。</p>
+<p class="wp-block-paragraph">規約に同意して申し込む。</p>
+<p class="wp-block-paragraph">アカウント名やサーバパスワードなどの詳細情報はメールで送られてくる。</p>
+<h2 class="wp-block-heading"><span id="toc2">WordPressのインストール</span></h2>
+<p class="wp-block-paragraph">マニュアルがあるのでその通り実行していく。動画もあってわかりやすい。<a href="https://help.sakura.ad.jp/rs/2161/">WordPressのインストール手順を知りたい | さくらのサポート情報</a></p>
+<ol class="wp-block-list">
+<li>手順通りにデータベースを作成する</li>
+<li>WordPressをクイックインストールする。パスワードなど必要な情報をマニュアル通りに入力する。</li>
+</ol>
+<p class="wp-block-paragraph">完成！とても簡単にできる。</p>
+<h2 class="wp-block-heading"><span id="toc3">独自ドメインからアクセスする</span></h2>
+<p class="wp-block-paragraph">他社で取得したドメインからサイトにアクセスできるようにする。Google Domainsでドメインを管理しているが他のドメイン管理でも同様にできるはず。</p>
+<p class="wp-block-paragraph">さくらのサーバー情報からIPv4のアドレスを確認する。</p>
+<p class="wp-block-paragraph">Google DomainsのDNSカスタムレコードでtypeはA, TTLは1hour, DataはIPv4のアドレスを指定する。wp.example.comとwww.wp.example.comからさくらのIPアドレスにアクセスできるようにする。後述のSSLの設定を行うためにwwwも設定する必要がある。</p>
+<p class="wp-block-paragraph">さくらの管理画面で「他社で取得したドメインを移管せずに使う」の設定を行う。</p>
+<h3 class="wp-block-heading"><span id="toc4">参考サイト</span></h3>
+<ul class="wp-block-list">
+<li><a href="https://qiita.com/h-ishi/items/c0e2e60f1460a2ed8810">Google Domainsで取得したドメインを、さくらのレンタルサーバで使用してWebサイトを公開する #GSuite – Qiita</a></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc5">SSLの設定</span></h2>
+<p class="wp-block-paragraph">独自ドメインを使用するとデフォルトのSSLが使えない。ドメイン/SSLからSSLの設定を選択しLet’s Encryptを選択して無料SSLを有効にする。ここでwwwのDNS設定をしていないとエラーになる。</p>
+<h2 class="wp-block-heading"><span id="toc6">サブディレクトリを削除する</span></h2>
+<p class="wp-block-paragraph">wp.example.com/でアクセスしたいが初期設定のままだとwp.example.com/wpにアクセスすることになっている。</p>
+<ol class="wp-block-list">
+<li>ドメイン/SSLの設定からWEB公開フォルダを/www/wpに変更する</li>
+<li>WordPressの管理画面の設定-&gt;一般設定からWordPressアドレスとサイトアドレスをhttp://wp.example.comに変更する。ここではhttpにする。</li>
+</ol>
+<p class="wp-block-paragraph">sslの設定が壊れるので修正する。WordPressのダッシュボード-&gt;サイトヘルスから「サイトを更新して、HTTPSを使用する」をクリックする。</p>
+<h3 class="wp-block-heading"><span id="toc7">参考サイト</span></h3>
+<ul class="wp-block-list">
+<li><a href="https://knowledge.sakura.ad.jp/25847/#WordPresshttpexamplecomwphttpexamplecom">予備知識がないとハマってしまう！？ WordPress公開URLの変更方法(シチュエーション別) | さくらのナレッジ</a></li>
+<li><a href="https://help.sakura.ad.jp/rs/2163/">WordPressのサイトをSSL化したい | さくらのサポート情報</a></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc8">httpからhttpsへリダイレクト</span></h2>
+<p class="wp-block-paragraph">さくらのコントロールパネル-&gt;ドメイン/SSLの設定からHTTPSに転送するを有効にする。</p>
+<h3 class="wp-block-heading"><span id="toc9">参考サイト</span></h3>
+<ul class="wp-block-list">
+<li><a href="https://help.sakura.ad.jp/rs/2163/">WordPressのサイトをSSL化したい | さくらのサポート情報</a></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc10">終わりに</span></h2>
+<p class="wp-block-paragraph">いろいろ調べながらやっていて2時間くらいでできた。慣れたらもっと早くできると思うが、インターネットに詳しくない人がやるのは大変だと思う。他社で取得したサブドメインを使うことがなければもっと簡単にできる。</p>
+<p class="wp-block-paragraph">月額500円くらいでサクッとWordPressサイトが作れるのはとてもありがたい！良いサイトを作っていきたい。</p>

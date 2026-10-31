@@ -1,0 +1,29 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">コマンド</a><ol><li><a href="#toc2" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc3" tabindex="0">トークンの作り方</a><ol><li><a href="#toc4" tabindex="0">参考サイト</a></li><li><a href="#toc5" tabindex="0">Scopes</a></li></ol></li><li><a href="#toc6" tabindex="0">トークンの有効期限が切れた後にpullする</a><ol><li><a href="#toc7" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc8" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">コマンド</span></h2>
+<pre class="wp-block-code"><code>git clone https://${GIT_USER}:${GIT_TOKEN}@github.com/${GIT_REPOSITORY}</code></pre>
+<p class="wp-block-paragraph">例えば</p>
+<pre class="wp-block-code"><code><meta charset="utf-8"/>git clone https://tanaka:random_token@github.com/tanaka/repo.git</code></pre>
+<p class="wp-block-paragraph">一度クローンすれば、あとは普通に pull できる。</p>
+<h3 class="wp-block-heading"><span id="toc2">参考サイト</span></h3>
+<ul class="wp-block-list"><li><a href="https://qiita.com/reflet/items/b7ed9979828819b2b42c" rel="noopener" target="_blank">githubからアクセストークンでcloneする – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc3">トークンの作り方</span></h2>
+<p class="wp-block-paragraph">personal access token (classic) を使用する。</p>
+<p class="wp-block-paragraph">右上のアイコンをクリック -&gt; Settings -&gt; 左のDeveloper settings -&gt; 左のPersonal access tokens -&gt; Tokens (classic) -&gt; Generate new token -&gt; Generate new token (classic)</p>
+<h3 class="wp-block-heading"><span id="toc4">参考サイト</span></h3>
+<ul class="wp-block-list"><li><a href="https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" rel="noopener" target="_blank">Creating a personal access token – GitHub Docs</a></li></ul>
+<h3 class="wp-block-heading"><span id="toc5">Scopes</span></h3>
+<p class="wp-block-paragraph">repoにしたらcloneできた。もう少し権限を少なくしたいが何がいいのかよくわからない</p>
+<h2 class="wp-block-heading"><span id="toc6">トークンの有効期限が切れた後にpullする</span></h2>
+<p class="wp-block-paragraph">トークンの有効期限が切れると <code>git pull </code>ができなくなる。</p>
+<p class="wp-block-paragraph">新しいトークンを作成し、remoteのurlを変更すれば良い。</p>
+<pre class="wp-block-code"><code>$ git remote set-url origin <meta charset="utf-8"/>https://${GIT_USER}:${GIT_TOKEN}@github.com/${GIT_REPOSITORY}</code></pre>
+<h3 class="wp-block-heading"><span id="toc7">参考サイト</span></h3>
+<ul class="wp-block-list"><li><a href="https://qiita.com/minoringo/items/917e325892733e0d606e" rel="noopener" target="_blank">gitのremote urlを変更する(レポジトリ移行時) – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc8">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

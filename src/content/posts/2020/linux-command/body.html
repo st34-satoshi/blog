@@ -1,0 +1,111 @@
+<p class="wp-block-paragraph">Linuxコマンドの備忘録。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">便利な操作</a><ol><li><a href="#toc2" tabindex="0">直前の末尾の引数を使用する !$</a></li><li><a href="#toc3" tabindex="0">コマンド履歴を後方検索 ctrl + r</a><ol><li><a href="#toc4" tabindex="0">fzf</a></li></ol></li></ol></li><li><a href="#toc5" tabindex="0">ls (ファイル一覧表示)</a><ol><li><a href="#toc6" tabindex="0">オプション</a></li></ol></li><li><a href="#toc7" tabindex="0">du (ディスクの使用量を表示する)</a><ol><li><a href="#toc8" tabindex="0">オプション</a></li></ol></li><li><a href="#toc9" tabindex="0">grep (文字列検索)</a><ol><li><a href="#toc10" tabindex="0">ファイルに含まれる文字列を検索する</a></li></ol></li><li><a href="#toc11" tabindex="0">sed 置換</a></li><li><a href="#toc12" tabindex="0">wc (word count 行数・単語数を数える)</a></li><li><a href="#toc13" tabindex="0">df (ディスク全体の空き容量を調べる)</a></li><li><a href="#toc14" tabindex="0">ssh (リモートマシンにログインする)</a></li><li><a href="#toc15" tabindex="0">ランダム文字列生成</a></li><li><a href="#toc16" tabindex="0">直前のコマンド引数を使用する</a></li><li><a href="#toc17" tabindex="0">od ファイルの中身を表示</a></li><li><a href="#toc18" tabindex="0">pbcopy クリップボードにコピーする</a></li><li><a href="#toc19" tabindex="0">top システム全体の負荷を調べる</a></li><li><a href="#toc20" tabindex="0">lscpu</a></li><li><a href="#toc21" tabindex="0">less ファイルの中身を確認する</a><ol><li><a href="#toc22" tabindex="0">オプション</a></li></ol></li><li><a href="#toc23" tabindex="0">cat ファイルの読み書き</a></li><li><a href="#toc24" tabindex="0">curl</a><ol><li><a href="#toc25" tabindex="0">DNSの設定をする</a></li></ol></li><li><a href="#toc26" tabindex="0">圧縮</a></li><li><a href="#toc27" tabindex="0">ログイン履歴を確認する last</a></li><li><a href="#toc28" tabindex="0">その他</a><ol><li><a href="#toc29" tabindex="0">nslookup IPアドレスを調べる</a></li><li><a href="#toc30" tabindex="0">ターミナルを録画する vhs</a></li></ol></li><li><a href="#toc31" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">便利な操作</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">直前の末尾の引数を使用する !$</span></h3>
+<p class="wp-block-paragraph">使い方</p>
+<ul class="wp-block-list">
+<li>$ git diff sample.txt</li>
+<li>$ git add !$ ( = git add sample.txt)</li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc3">コマンド履歴を後方検索 ctrl + r</span></h3>
+<p class="wp-block-paragraph">昔のコマンドと同じコマンドを使用したい時に使用する。</p>
+<p class="wp-block-paragraph">$ python main.py を実行した後に ctrl+r を入力が pyを入力すれば python main.pyを見つけることができる。</p>
+<h4 class="wp-block-heading"><span id="toc4">fzf</span></h4>
+<p class="wp-block-paragraph">fzfを使うとコマンドの曖昧検索ができるようになりとても便利。</p>
+<pre class="wp-block-code"><code>% brew install fzf
+% $(brew --prefix)/opt/fzf/install</code></pre>
+<h2 class="wp-block-heading"><span id="toc5">ls (ファイル一覧表示)</span></h2>
+<h3 class="wp-block-heading"><span id="toc6">オプション</span></h3>
+<ul class="wp-block-list">
+<li>-l: ファイル情報を出力する</li>
+<li>-lh: ファイルサイズを読みやすく表示。サイズはエントリサイズ。</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc7">du (ディスクの使用量を表示する)</span></h2>
+<h3 class="wp-block-heading"><span id="toc8">オプション</span></h3>
+<ul class="wp-block-list">
+<li>-s dir-name: サブディレクトリは非表示</li>
+<li>-k, -m, -g: サイズをK, M, Gにする</li>
+<li><code>$du -sh ./* </code> 再起的に使用量を調べて、直下のみ表示</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc9">grep (文字列検索)</span></h2>
+<h3 class="wp-block-heading"><span id="toc10">ファイルに含まれる文字列を検索する</span></h3>
+<pre class="wp-block-code"><code>$ grep str file_name</code></pre>
+<h2 class="wp-block-heading"><span id="toc11">sed 置換</span></h2>
+<ul class="wp-block-list">
+<li><code>$sed -e s/before_text/after_text/ -e s/before_2/after_2/ file_name</code></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc12">wc (word count 行数・単語数を数える)</span></h2>
+<ul class="wp-block-list">
+<li><code>$wc file_name</code>: 行数、単語数、バイト数 を表示する</li>
+<li><code>$wc -l file_name</code>: ファイルの行数を数える</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc13">df (ディスク全体の空き容量を調べる)</span></h2>
+<ul class="wp-block-list">
+<li><code>$df</code></li>
+<li><code>$df -h</code> : サイズを調整</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc14">ssh (リモートマシンにログインする)</span></h2>
+<ul class="wp-block-list">
+<li>$ssh user@ip_address -p port</li>
+<li>$ssh user@ip_address -i ssh_key</li>
+<li>~/.ssh/config: sshの設定ファイル<br/>参考:「<a data-id="https://qiita.com/0084ken/items/2e4e9ae44ec5e01328f1" data-type="URL" href="https://qiita.com/0084ken/items/2e4e9ae44ec5e01328f1" rel="noopener" target="_blank">.ssh/configファイルでSSH接続を管理する – Qiita</a>」</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc15">ランダム文字列生成</span></h2>
+<ul class="wp-block-list">
+<li><code>$openssl rand -hex 10</code></li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc16">直前のコマンド引数を使用する</span></h2>
+<p class="wp-block-paragraph">!$で直前の引数を使用できる。</p>
+<pre class="wp-block-code"><code>$ mkdir mydir
+$ cd !$</code></pre>
+<pre class="wp-block-code"><code>$ git diff diff-file
+$ git add !$</code></pre>
+<h2 class="wp-block-heading"><span id="toc17">od ファイルの中身を表示</span></h2>
+<p class="wp-block-paragraph">-c オプションで文字形式で出力。改行コード、タブ、スペースの数を数えるのに役立つ。</p>
+<pre class="wp-block-code"><code>$ od -c file_name</code></pre>
+<h2 class="wp-block-heading"><span id="toc18">pbcopy クリップボードにコピーする</span></h2>
+<pre class="wp-block-code"><code>$ cat file | pbcopy</code></pre>
+<h2 class="wp-block-heading"><span id="toc19">top システム全体の負荷を調べる</span></h2>
+<pre class="wp-block-code"><code>$ top -a</code></pre>
+<h2 class="wp-block-heading"><span id="toc20">lscpu</span></h2>
+<p class="wp-block-paragraph">cpuの情報を表示する</p>
+<h2 class="wp-block-heading"><span id="toc21">less ファイルの中身を確認する</span></h2>
+<p class="wp-block-paragraph">viみたいに使える。編集はできない？</p>
+<h3 class="wp-block-heading"><span id="toc22">オプション</span></h3>
+<ul class="wp-block-list">
+<li>-S: 折り返しをしない</li>
+<li>-N: 行番号表示</li>
+</ul>
+<h2 class="wp-block-heading"><span id="toc23">cat ファイルの読み書き</span></h2>
+<p class="wp-block-paragraph">ファイルの内容を表示</p>
+<pre class="wp-block-code"><code>cat file.txt</code></pre>
+<p class="wp-block-paragraph">キーボード入力をファイルに上書き保存</p>
+<pre class="wp-block-code"><code>cat &gt; file.txt</code></pre>
+<p class="wp-block-paragraph">キーボード入力をファイルの末尾に追記</p>
+<pre class="wp-block-code"><code>cat &gt;&gt; file.txt</code></pre>
+<p class="wp-block-paragraph">2つのファイルを順番に繋げる</p>
+<pre class="wp-block-code"><code>cat a.txt b.txt &gt; combined.txt</code></pre>
+<p class="wp-block-paragraph">入力やコピペをしたらEnter -&gt; Ctrl+Dで保存</p>
+<h2 class="wp-block-heading"><span id="toc24">curl</span></h2>
+<p class="wp-block-paragraph">httpでサーバーにアクセスする。</p>
+<h3 class="wp-block-heading"><span id="toc25">DNSの設定をする</span></h3>
+<p class="wp-block-paragraph">resolveオプションを使うことでDNSの設定をしなくてもdomainを指定してipにアクセスできる。サーバー側ではhostは指定したドメインになる。</p>
+<p class="wp-block-paragraph">curl –resolve example.com:80:127.0.0.1 http://example.com</p>
+<h2 class="wp-block-heading"><span id="toc26">圧縮</span></h2>
+<pre class="wp-block-code"><code>zgip file_name</code></pre>
+<p class="wp-block-paragraph">zgipで圧縮したファイルを解凍して中身を見る</p>
+<pre class="wp-block-code"><code>zcat file_name.gz | less</code></pre>
+<h2 class="wp-block-heading"><span id="toc27">ログイン履歴を確認する last</span></h2>
+<p class="wp-block-paragraph">-Fオプションで年を出力する</p>
+<pre class="wp-block-code"><code>last -F</code></pre>
+<h2 class="wp-block-heading"><span id="toc28">その他</span></h2>
+<h3 class="wp-block-heading"><span id="toc29">nslookup IPアドレスを調べる</span></h3>
+<p class="wp-block-paragraph"><a href="/nslookup/">nslookupでIPアドレスを調べる | Notes to Forget</a></p>
+<h3 class="wp-block-heading"><span id="toc30">ターミナルを録画する vhs</span></h3>
+<p class="wp-block-paragraph"><a href="https://zenn.dev/kou_pg_0131/articles/vhs-introduction">VHS でターミナルを録画する</a></p>
+<h2 class="wp-block-heading"><span id="toc31">関連記事</span></h2>
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp…</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>

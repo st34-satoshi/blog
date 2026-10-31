@@ -1,0 +1,54 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">gunicorn</a><ol><li><a href="#toc2" tabindex="0">停止</a></li></ol></li><li><a href="#toc3" tabindex="0">Nginx</a></li><li><a href="#toc4" tabindex="0">参考</a></li><li><a href="#toc5" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">gunicorn</span></h2>
+<p class="wp-block-paragraph">Dockerを使った方が良いと思うが、今回は簡単にサーバー上でバックグラウンドで実行する。</p>
+<pre class="wp-block-code"><code>gunicorn -b 127.0.0.1:8080 -k flask_sockets.worker server:app -D</code></pre>
+<p class="wp-block-paragraph">-Dオプションでバックグラウンド。nginxでローカルからのアクセスになるため、127.0.0.0だけを許可する。アプリケーション名は都度考える。</p>
+<h3 class="wp-block-heading"><span id="toc2">停止</span></h3>
+<p class="wp-block-paragraph">バックグラウンドで実行しているとctr+cでは止められない。$ps aux | grep gunicorn でプロセスidを確認して $ kill id で止める。</p>
+<h2 class="wp-block-heading"><span id="toc3">Nginx</span></h2>
+<pre class="wp-block-code"><code># for websocket
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	server_name example.com;
+
+	return 301 https://$host$request_uri;
+
+}
+
+server {
+	listen 443 ssl;
+
+	ssl_certificate     /etc/letsencrypt/live/example.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+	proxy_set_header Host $http_host;
+	proxy_set_header X-Forwarded-Proto $scheme;
+	proxy_http_version 1.1; # for websocket
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection $connection_upgrade;
+
+	server_name example.com;
+	charset UTF-8;
+
+	location / {
+		proxy_pass http://localhost:8080;
+	}
+}</code></pre>
+<p class="wp-block-paragraph"><meta charset="utf-8"/>proxy_pass http://localhost:8080; でローカルのアプリケーションにアクセスする。</p>
+<h2 class="wp-block-heading"><span id="toc4">参考</span></h2>
+<p class="wp-block-paragraph"><a href="https://qiita.com/mintak21/items/eeba4654a0db21abcb1c" rel="noopener" target="_blank">Nginx+gunicorn構成でFlaskを使う[ローカル環境編] – Qiita</a></p>
+<h2 class="wp-block-heading"><span id="toc5">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

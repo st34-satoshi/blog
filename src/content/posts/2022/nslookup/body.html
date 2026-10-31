@@ -1,0 +1,26 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">結論</a></li><li><a href="#toc2" tabindex="0">server can’t find google.com: REFUSED エラー</a></li><li><a href="#toc3" tabindex="0">終わりに</a></li><li><a href="#toc4" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">結論</span></h2>
+<pre class="wp-block-code"><code>% nslookup google.com 1.1.1.1
+Server:		1.1.1.1
+Address:	1.1.1.1#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 142.250.199.110</code></pre>
+<h2 class="wp-block-heading"><span id="toc2">server can’t find google.com: REFUSED エラー</span></h2>
+<pre class="wp-block-code"><code>nslookup google.com</code></pre>
+<p class="wp-block-paragraph">↑のコマンドだとエラーになる。DNSサーバーを指定する必要がある。</p>
+<p class="wp-block-paragraph">1.1.1.1は<a data-id="https://www.cloudflare.com/" data-type="URL" href="https://www.cloudflare.com/" rel="noopener" target="_blank">Cloudflare</a>のDNS。</p>
+<h2 class="wp-block-heading"><span id="toc3">終わりに</span></h2>
+<p class="wp-block-paragraph">DNSを指定しなくてもデフォルトでいい感じにやって欲しい気もする。</p>
+<h2 class="wp-block-heading"><span id="toc4">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/linux-command/" title="良く使うLinuxコマンド一覧"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="internal-blogcard-thumb-image" decoding="async" height="90" loading="lazy" src="/wp-content/uploads/2020/10/nothing-road-320x180.jpg" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">良く使うLinuxコマンド一覧</div><div class="blogcard-snippet internal-blogcard-snippet">良く使うLinuxコマンド一覧。</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2020.10.04</div></div></div></div></a>
+</div></figure>

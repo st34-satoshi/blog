@@ -1,0 +1,27 @@
+<p class="wp-block-paragraph">よくアクセスするWebページはブックマークに保存している。実際には、サイトの名前(編集可能)とそのURLを保存している。</p>
+<p class="wp-block-paragraph">アドレスバーに `javascript:alert(‘hello’);` と入力するとjsのコードが実行されることを利用して、ブックマークのURLにjsのコードを書くと、ブラウザ上で実行してくれる。</p>
+<p class="wp-block-paragraph"><a data-id="https://rs-techdev.com/archives/4340" data-type="URL" href="https://rs-techdev.com/archives/4340" rel="noopener" target="_blank">Amazonの購入履歴から総額を計算する</a>ときに、初めて使用して便利なことに気づいた。</p>
+<p class="wp-block-paragraph">※Chromeでしか試していないので他のブラウザでどうなるかは知らないです。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">ブックマークレットの作り方</a><ol><li><a href="#toc2" tabindex="0">自分だけの場合</a></li><li><a href="#toc3" tabindex="0">他の人にも使ってもらう場合</a></li></ol></li><li><a href="#toc4" tabindex="0">参考サイト</a></li><li><a href="#toc5" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">ブックマークレットの作り方</span></h2>
+<p class="wp-block-paragraph">JavaScriptのコードを書いて、ブックマークに保存すれば良い。</p>
+<p class="wp-block-paragraph">自分だけで使用する場合はそのままコピー&amp;ペーストで保存すれば良いが、他の人に使用してもらうには、クリックやドラッグ&amp;ドロップでブックマークに保存できた方が良い。</p>
+<h3 class="wp-block-heading"><span id="toc2">自分だけの場合</span></h3>
+<p class="wp-block-paragraph">ブックマークに適当なサイトを追加する。</p>
+<p class="wp-block-paragraph">編集ボタンから、名前とURLを変更する。</p>
+<p class="wp-block-paragraph">例えば、名前: helloのアラート、 URL: <code>javascript:alert('hello');</code> </p>
+<h3 class="wp-block-heading"><span id="toc3">他の人にも使ってもらう場合</span></h3>
+<p class="wp-block-paragraph"><a href="javascript:alert('hello');">helloのアラート</a></p>
+<p class="wp-block-paragraph">上のボタンをブックマークバーにドラッグ&amp;ドロップしてもらう。</p>
+<p class="wp-block-paragraph">コードは</p>
+<pre class="wp-block-code"><code>&lt;a href="javascript:alert('hello');"&gt;helloのアラート&lt;/a&gt;</code></pre>
+<h2 class="wp-block-heading"><span id="toc4">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://rs-techdev.com/archives/4340" rel="noopener" target="_blank">Amazon購入金額チェック</a></li><li><a href="https://qiita.com/aqril_1132/items/b5f9040ccb8cbc705d04#:~:text=%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88%20(Bookmarklet)%20%E3%81%A8%E3%81%AF,%E4%BD%BF%E3%82%8F%E3%82%8C%E3%82%8B%E3%81%93%E3%81%A8%E3%81%8C%E5%A4%9A%E3%81%84%E3%80%82" rel="noopener" target="_blank">ブックマークレットの登録方法 – Qiita</a></li><li><a href="https://qiita.com/kanaxx/items/63debe502aacd73c3cb8#%E3%82%B3%E3%83%B3%E3%83%91%E3%82%A4%E3%83%AB%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B" rel="noopener" target="_blank">Bookmarkletを作ろう(準備編） – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc5">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

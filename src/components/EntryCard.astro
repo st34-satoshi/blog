@@ -1,0 +1,88 @@
+---
+import type { Entry } from "../lib/content";
+import { postPath } from "../lib/content";
+import { date } from "../lib/site";
+const { post, compact = false } = Astro.props as {
+  post: Entry;
+  compact?: boolean;
+};
+const d = post.data;
+---
+
+<a
+  href={postPath(post)}
+  title={d.title}
+  class={
+    compact
+      ? "new-entry-card-link widget-entry-card-link a-wrap"
+      : "entry-card-wrap a-wrap border-element cf"
+  }
+>
+  <article
+    class={
+      compact
+        ? "new-entry-card widget-entry-card e-card cf"
+        : "entry-card e-card cf post type-post status-publish"
+    }
+  >
+    <figure
+      class={
+        compact
+          ? "new-entry-card-thumb widget-entry-card-thumb card-thumb"
+          : "entry-card-thumb card-thumb e-card-thumb"
+      }
+    >
+      <img
+        src={d.thumbnail || d.image}
+        alt=""
+        width="320"
+        height="180"
+        loading="lazy"
+        decoding="async"
+        class="entry-card-thumb-image card-thumb-image wp-post-image"
+      />
+      {!compact && d.categories[0] && (
+        <span class="cat-label">{d.categories[0]}</span>
+      )}
+    </figure>
+    <div
+      class={
+        compact
+          ? "new-entry-card-content widget-entry-card-content card-content"
+          : "entry-card-content card-content e-card-content"
+      }
+    >
+      {compact ? (
+        <div class="new-entry-card-title widget-entry-card-title card-title">
+          {d.title}
+        </div>
+      ) : (
+        <h2 class="entry-card-title card-title e-card-title">{d.title}</h2>
+      )}
+      {!compact && (
+        <div class="entry-card-snippet card-snippet e-card-snippet">
+          {d.description.slice(0, 120)}
+          {d.description.length > 120 ? "…" : ""}
+        </div>
+      )}
+      <div
+        class={
+          compact
+            ? "new-entry-card-meta widget-entry-card-meta card-meta display-none"
+            : "entry-card-meta card-meta e-card-meta"
+        }
+      >
+        <span class="post-date">
+          <span class="fa fa-clock-o" aria-hidden="true"></span>
+          <span class="entry-date">{date(d.publishedAt)}</span>
+        </span>
+        {d.updatedAt && d.updatedAt.getTime() > d.publishedAt.getTime() && (
+          <span class="post-update">
+            <span class="fa fa-history" aria-hidden="true"></span>
+            <span class="entry-date">{date(d.updatedAt)}</span>
+          </span>
+        )}
+      </div>
+    </div>
+  </article>
+</a>

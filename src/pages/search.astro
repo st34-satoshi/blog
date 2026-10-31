@@ -1,0 +1,69 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import { content } from "../lib/content";
+const { posts } = await content();
+const years = [
+  ...new Set(posts.map((p) => p.data.publishedAt.getUTCFullYear())),
+];
+---
+
+<SiteLayout title="サイト内検索">
+  <div id="content" class="content cf">
+    <div id="content-in" class="content-in wrap">
+      <main id="main" class="main">
+        <h1>サイト内検索</h1>
+        <form action="/search/" role="search">
+          <label for="search-query">検索キーワード</label>
+          <input id="search-query" name="s" type="search" />
+          <button type="submit">検索</button>
+        </form>
+        <p id="search-status" role="status"></p>
+        <ul id="search-results" data-years={JSON.stringify(years)}></ul>
+        <noscript>
+          検索にはJavaScriptを有効にしてください。
+          <a href="/sitemap/">記事一覧</a>も利用できます。
+        </noscript>
+      </main>
+      <Sidebar />
+    </div>
+  </div>
+</SiteLayout>
+<script>
+  const list = document.querySelector<HTMLUListElement>("#search-results")!;
+  const status = document.querySelector<HTMLElement>("#search-status")!;
+  const query = new URLSearchParams(location.search).get("s")?.trim() || "";
+  document.querySelector<HTMLInputElement>("#search-query")!.value = query;
+  if (query) {
+    status.textContent = "検索中…";
+    try {
+      const groups = await Promise.all(
+        (JSON.parse(list.dataset.years!) as number[]).map(async (year) => {
+          const r = await fetch(`/search-data/${year}.json`);
+          if (!r.ok) throw new Error("Search failed");
+          return r.json();
+        }),
+      );
+      const terms = query.toLocaleLowerCase().split(/\s+/);
+      const results = groups
+        .flat()
+        .filter((p) =>
+          terms.every((t) =>
+            (p.title + " " + p.text).toLocaleLowerCase().includes(t),
+          ),
+        );
+      for (const p of results) {
+        const li = document.createElement("li"),
+          a = document.createElement("a");
+        a.href = p.path;
+        a.textContent = p.title;
+        li.append(a);
+        list.append(li);
+      }
+      status.textContent = `${results.length}件の記事が見つかりました。`;
+    } catch {
+      status.textContent =
+        "検索データを読み込めませんでした。再読み込みしてください。";
+    }
+  } else status.textContent = "キーワードを入力してください。";
+</script>

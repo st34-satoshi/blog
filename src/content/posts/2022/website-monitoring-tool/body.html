@@ -1,0 +1,23 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">欲しいもの</a></li><li><a href="#toc2" tabindex="0">作ったもの</a></li><li><a href="#toc3" tabindex="0">できること</a></li><li><a href="#toc4" tabindex="0">アーキテクチャ</a></li><li><a href="#toc5" tabindex="0">終わりに</a></li><li><a href="#toc6" tabindex="0">関連サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">欲しいもの</span></h2>
+<p class="wp-block-paragraph"><span class="bold-green">webサイトが動いているか</span>定期的に確認してくれて、<span class="bold-red">動いてない</span>ときは<span class="bold-red">通知</span>してくれるプログラム。</p>
+<h2 class="wp-block-heading"><span id="toc2">作ったもの</span></h2>
+<p class="wp-block-paragraph"><a href="https://github.com/st34-satoshi/website-monitoring" rel="noopener" target="_blank">st34-satoshi/website-monitoring: Website Monitoring</a></p>
+<h2 class="wp-block-heading"><span id="toc3">できること</span></h2>
+<p class="wp-block-paragraph">指定した<span class="bold-green">urlにアクセス</span>して、response.bodyの中に期待する文字列があるか確認する。</p>
+<p class="wp-block-paragraph">期待する文字列がなければSlackに<span class="bold-green">通知</span>する。設定で全てのサイトに問題がないときでもSlackに通知できる。</p>
+<h2 class="wp-block-heading"><span id="toc4">アーキテクチャ</span></h2>
+<p class="wp-block-paragraph"><span class="bold-blue">pythonでurlにリクエスト</span>を送って期待する文字列が含まれるか確かめる。エラーの通知などもpythonで行う。pythonの実行環境は<span class="bold-blue">dockerコンテナ</span>に閉じ込める。</p>
+<p class="wp-block-paragraph"><span class="bold-blue">Linuxのcronで定期的に実行する</span>。webサイトの監視は1時間ごとに行う。正常のメッセージを送るのは1日に１回実行する。</p>
+<p class="wp-block-paragraph">cronの設定方法: <a href="/cron/">Cronを使用して定期的にプログラムを実行する | Notes to Forget</a></p>
+<h2 class="wp-block-heading"><span id="toc5">終わりに</span></h2>
+<p class="wp-block-paragraph">2022年の1月くらいにいつか作ろうと思って実際にできたのは11月だった。</p>
+<p class="wp-block-paragraph">あったらいいけどなくても困っていないものを作るのはモチベーションが続かなくて大変。実際の作業時間は20時間くらいだったと思う。</p>
+<h2 class="wp-block-heading"><span id="toc6">関連サイト</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/product-list/" title="[随時更新] 製作物・プロダクト 一覧"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">[随時更新] 製作物・プロダクト 一覧</div><div class="blogcard-snippet internal-blogcard-snippet">作ったアプリなどの紹介。</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2020.12.27</div></div></div></div></a>
+</div></figure>

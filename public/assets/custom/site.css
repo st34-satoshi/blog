@@ -1,0 +1,6 @@
+/* Keep the comment status visible while retaining existing #respond links. */
+#respond.comment-status {
+  position: static;
+  inset: auto;
+  visibility: visible;
+}

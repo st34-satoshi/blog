@@ -1,0 +1,33 @@
+<p class="wp-block-paragraph">Unityの設定やXcodeの設定がたくさんあって訳がわからない。基本的には他のブログに頼るが困ったところの解決策を記録する。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">基本的な流れ</a><ol><li><a href="#toc2" tabindex="0">Unityでやること</a></li><li><a href="#toc3" tabindex="0">Xcodeでやること</a></li><li><a href="#toc4" tabindex="0">App Storeでやること</a></li><li><a href="#toc5" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc6" tabindex="0">Unityの設定</a><ol><li><a href="#toc7" tabindex="0">Target SDK</a></li></ol></li><li><a href="#toc8" tabindex="0">エラー</a><ol><li><a href="#toc9" tabindex="0">Build Any iOS Device が選択できない</a></li><li><a href="#toc10" tabindex="0">“.app” uses custom architectures. Would you like to update to build with standard architectures?</a></li><li><a href="#toc11" tabindex="0">.xcodeproj Building for iOS, but the embedded framework ‘UnityFramework.framework’ is building for iOS Simulator. You may need to configure ‘UnityFramework.framework’ to build for iOS.</a></li></ol></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">基本的な流れ</span></h2>
+<p class="wp-block-paragraph">参考サイトをみれば普通は問題なくできるはず。</p>
+<h3 class="wp-block-heading"><span id="toc2">Unityでやること</span></h3>
+<ol class="wp-block-list"><li>アプリを完成させる</li><li>file –&gt; build settings</li><li>iOSを選択して Build。 このとき空のディレクトリを選択する。</li><li>選択したディレクトリにXcodeのプロジェクトが作られる。</li></ol>
+<h3 class="wp-block-heading"><span id="toc3">Xcodeでやること</span></h3>
+<ol class="wp-block-list"><li>`pod install` cocoapodがないとエラー(This will will likely result in a non-functional Xcode project.)が出る。Google AdModに必要なパッけーしをインストールしてくれる。</li><li>プロジェクトを開く。.xcworkspace ファイルをダブルクリック。</li><li>シミュレータを選択して、起動・動作確認</li><li>デプロイ: Signing &amp; Capabilitiesからチームを選択する</li></ol>
+<h3 class="wp-block-heading"><span id="toc4">App Storeでやること</span></h3>
+<p class="wp-block-paragraph">こちらの記事がとても参考になる。<a href="https://qiita.com/Labi/items/3b71b8f5ef065904c1de" rel="noopener" target="_blank">【2020年度版】 iOSアプリをApp Storeに公開する手順を簡潔に解説 – Qiita</a></p>
+<p class="wp-block-paragraph"></p>
+<h3 class="wp-block-heading"><span id="toc5">参考サイト</span></h3>
+<ul class="wp-block-list"><li><a href="http://www.monobitengine.com/doc/mun/contents/Platform/Build_iOS.htm" rel="noopener" target="_blank">iOS 版のビルド、および実行手順</a></li><li><a href="https://qiita.com/Labi/items/3b71b8f5ef065904c1de" rel="noopener" target="_blank">【2020年度版】 iOSアプリをApp Storeに公開する手順を簡潔に解説 – Qiita</a></li><li><a href="https://matsunosuke.jp/iphone-size/" rel="noopener" target="_blank">iPhoneの大きさ・サイズ・重さの比較まとめ！歴代を網羅 – The Goal</a></li><li><a href="https://qiita.com/Hiroki_Kawakami/items/94f012d20afdb692df20" rel="noopener" target="_blank">個人開発者がAppStore用にプライバシーポリシーを書く – Qiita</a></li><li><a href="https://app-privacy-policy-generator.firebaseapp.com/" rel="noopener" target="_blank">App Privacy Policy Generator</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc6">Unityの設定</span></h2>
+<p class="wp-block-paragraph">多くの項目はデフォルトのままで良いが、間違いやすい項目。</p>
+<h3 class="wp-block-heading"><span id="toc7">Target SDK</span></h3>
+<p class="wp-block-paragraph">Player Settings –&gt; Player –&gt; Other Settings –&gt; Configuration –&gt; Target SDKから変更できる。</p>
+<p class="wp-block-paragraph">シミュレーションをするときは Simulator SDK, デプロイするときは Device SDK。(M1macの人だけかな？) </p>
+<p class="wp-block-paragraph">スクリーンショットを撮るときとデプロイするときでビルドし直すのは面倒。</p>
+<h2 class="wp-block-heading"><span id="toc8">エラー</span></h2>
+<h3 class="wp-block-heading"><span id="toc9">Build Any iOS Device が選択できない</span></h3>
+<p class="wp-block-paragraph">Product –&gt; Archive を選択するには 「Any iOS Device」を選択する必要があるが、そもそも表示されていない。</p>
+<p class="wp-block-paragraph">プロジェクトを選択 –&gt; Build Settings –&gt; Architectures –&gt; Base SDK (Supported Platforms) でiOSを選択すると解決する。</p>
+<h3 class="wp-block-heading"><span id="toc10">“.app” uses custom architectures. Would you like to update to build with standard architectures?</span></h3>
+<p class="wp-block-paragraph">Update and Build を選択する。</p>
+<h3 class="wp-block-heading"><span id="toc11">.xcodeproj Building for iOS, but the embedded framework ‘UnityFramework.framework’ is building for iOS Simulator. You may need to configure ‘UnityFramework.framework’ to build for iOS.</span></h3>
+<p class="wp-block-paragraph">プロジェクトを選択 –&gt; Build Settings –&gt; Combined と All を選択 –&gt; Building Options –&gt; Validate Wordspace を Noにする。一度Yesにしてもう一度Noにするとうまくいくこともあるらしい。</p>
+<p class="wp-block-paragraph">参考</p>
+<ul class="wp-block-list"><li><a href="https://stackoverflow.com/questions/63267897/building-for-ios-simulator-but-the-linked-framework-framework-was-built" rel="noopener" target="_blank">xcode – Building for iOS Simulator, but the linked framework ‘****.framework’ was built for iOS – Stack Overflow</a></li><li><a href="https://web-y.dev/2021/05/25/ios-xcode-build-error-linked-framework/" rel="noopener" target="_blank">[iOS][Xcode] error: Building for iOS Simulator, but the linked framework ‘Hoge.framework’ was built for iOS.というエラーが出たときの対処法 – Web-y.dev</a></li></ul>

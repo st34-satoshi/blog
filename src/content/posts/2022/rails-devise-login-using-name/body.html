@@ -1,0 +1,41 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">背景</a></li><li><a href="#toc2" tabindex="0">emailをnameに変更する</a><ol><li><a href="#toc3" tabindex="0">設定</a></li><li><a href="#toc4" tabindex="0">controller</a></li><li><a href="#toc5" tabindex="0">view</a></li></ol></li><li><a href="#toc6" tabindex="0">つまったところ</a><ol><li><a href="#toc7" tabindex="0">Unpermitted parameter: :name が解決できない</a></li></ol></li><li><a href="#toc8" tabindex="0">参考</a></li><li><a href="#toc9" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">背景</span></h2>
+<p class="wp-block-paragraph">Railsでdeviseを使用してユーザー認証をするときに<span class="bold-green">emailの代わりにname</span>を使用する。</p>
+<p class="wp-block-paragraph">その変更の過程で<code> <em>Unpermitted parameter: :name</em></code> が発生して解決するのが大変だったので解決のメモ。</p>
+<h2 class="wp-block-heading"><span id="toc2">emailをnameに変更する</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">設定</span></h3>
+<p class="wp-block-paragraph">config/initializers/devise.rbの以下の三箇所を:nameに変更する。</p>
+<pre class="wp-block-code"><code>config.authentication_keys = [:name]
+config.case_insensitive_keys = [:name]
+config.strip_whitespace_keys = [:name]</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">controller</span></h3>
+<p class="wp-block-paragraph"><span class="bold-blue">rails g devise:controllers users</span> でコントローラを作成する。</p>
+<p class="wp-block-paragraph">app/controllers/users/registrations_controller.rbで以下のように変更する。:nameをパラメータとして許可する。</p>
+<pre class="wp-block-code"><code>class Users::RegistrationsController &lt; Devise::RegistrationsController
+  before_action :configure_sign_up_params, only: [:create]
+  protected
+
+  # If you have extra params to permit, append them to the sanitizer.
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
+end</code></pre>
+<h3 class="wp-block-heading"><span id="toc5">view</span></h3>
+<p class="wp-block-paragraph"><span class="bold-blue">rails g devise:views users</span> でビューを作成する。</p>
+<p class="wp-block-paragraph">formのfieldのemailの箇所をnameに変更する。</p>
+<h2 class="wp-block-heading"><span id="toc6">つまったところ</span></h2>
+<h3 class="wp-block-heading"><span id="toc7">Unpermitted parameter: :name が解決できない</span></h3>
+<p class="wp-block-paragraph">コントローラを変更して:nameパラメータを許可してもこのエラーが出る。</p>
+<p class="wp-block-paragraph">devise.rbを以下のように変更するとエラーが出なくなった。</p>
+<pre class="wp-block-code"><code>config.case_insensitive_keys = [:name]
+config.strip_whitespace_keys = [:name]</code></pre>
+<h2 class="wp-block-heading"><span id="toc8">参考</span></h2>
+<ul class="wp-block-list"><li><a href="https://qiita.com/hirokihello/items/a1ddf68d35f3cb7f2779">deviseでnameとpasswordのみでユーザー登録とログインできるように、初心者がdeviseをカスタマイズ！〜徹底的にゆっくり解説〜 – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc9">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

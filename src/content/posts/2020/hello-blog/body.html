@@ -1,0 +1,38 @@
+<p class="wp-block-paragraph">このブログを作成するために行った事のまとめ。この通りに進めれば、このサイトと同じものが作れるはずです。独自ドメインで、サーバを借りてWordPressを使用します。(完全無料ではない)</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">ドメインの取得</a></li><li><a href="#toc2" tabindex="0">レンタルサーバ</a></li><li><a href="#toc3" tabindex="0">GCPでWordPressを始める</a><ol><li><a href="#toc4" tabindex="0">ドメインの設定</a></li><li><a href="#toc5" tabindex="0">ssl対応</a></li></ol></li><li><a href="#toc6" tabindex="0">WordPressの設定</a><ol><li><a href="#toc7" tabindex="0">user idの変更</a></li><li><a href="#toc8" tabindex="0">テーマの選択</a></li><li><a href="#toc9" tabindex="0">パーマリンクからindex.phpを消す</a></li><li><a href="#toc10" tabindex="0">その他</a></li></ol></li><li><a href="#toc11" tabindex="0">終わりに</a></li><li><a href="#toc12" tabindex="0">参考</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">ドメインの取得</span></h2>
+<p class="wp-block-paragraph">Google Domains で独自ドメインを取得する。</p>
+<p class="wp-block-paragraph">特に難しいことはなく取得できた。ドメインを取得する方法は他にもあるが、信頼して長く使えそうなので、Google Domainsにした。</p>
+<h2 class="wp-block-heading"><span id="toc2">レンタルサーバ</span></h2>
+<p class="wp-block-paragraph">GCPを使用する。Google アカウントがあれば、GCPを使用することが可能。</p>
+<h2 class="wp-block-heading"><span id="toc3">GCPでWordPressを始める</span></h2>
+<p class="wp-block-paragraph">こちらの記事 「<a data-id="https://qiita.com/sakkaonline/items/95daa42f97b9d55c345f" data-type="URL" href="https://qiita.com/sakkaonline/items/95daa42f97b9d55c345f" rel="noopener" target="_blank">GCP(Google Cloud Platform)でWordPressスタート</a>」が参考になる。</p>
+<h3 class="wp-block-heading"><span id="toc4">ドメインの設定</span></h3>
+<p class="wp-block-paragraph">独自ドメインを使用する。こちらの記事「<a data-id="https://qiita.com/Yuya_Nishizaki/items/4a24bc0e152cae9cbc6b" data-type="URL" href="https://qiita.com/Yuya_Nishizaki/items/4a24bc0e152cae9cbc6b" rel="noopener" target="_blank">GCPで作成したWordpressのドメイン設定方法</a>」が参考になる。<s>Google Cloudの説明である「<a data-id="https://cloud.google.com/dns/docs/tutorials/create-domain-tutorial?hl=ja#set-up-domain" data-type="URL" href="https://cloud.google.com/dns/docs/tutorials/create-domain-tutorial?hl=ja#set-up-domain" rel="noopener" target="_blank">Cloud DNS を使用してドメインを設定する</a>」も参考になります。</s>加筆:最初はGCPのCloud DNSを使用してドメインの設定をしたが、Google DomainsのDNSで設定した方が、ドメインを一括で管理できわかりやすい。wwwの設定も可能。</p>
+<h3 class="wp-block-heading"><span id="toc5">ssl対応</span></h3>
+<p class="wp-block-paragraph">こちらの記事「<a data-id="https://qiita.com/Yuya_Nishizaki/items/4a2413fc2c07aca5d193" data-type="URL" href="https://qiita.com/Yuya_Nishizaki/items/4a2413fc2c07aca5d193">GC</a><a data-id="https://qiita.com/Yuya_Nishizaki/items/4a2413fc2c07aca5d193" data-type="URL" href="https://qiita.com/Yuya_Nishizaki/items/4a2413fc2c07aca5d193" rel="noopener" target="_blank">Pで作成したWordpressのSSL対応</a>」が参考になる。</p>
+<div class="wp-block-group"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph"><code>Detail: DNS problem: SERVFAIL looking up CAA for your-domain.com - the domain's nameservers may be malfunctioning</code></p>
+</div></div>
+<p class="wp-block-paragraph">上記のようなエラーが出たら、DNSで作成したゾーンにCAAレコードを追加する必要がある。</p>
+<h2 class="wp-block-heading"><span id="toc6">WordPressの設定</span></h2>
+<h3 class="wp-block-heading"><span id="toc7">user idの変更</span></h3>
+<p class="wp-block-paragraph">adminを使い続けることも可能だが、user id を変更することができる。「Username Changer」というプラグインを使用することで変更できる。</p>
+<h3 class="wp-block-heading"><span id="toc8">テーマの選択</span></h3>
+<p class="wp-block-paragraph"><a data-id="https://wp-cocoon.com/" data-type="URL" href="https://wp-cocoon.com/" rel="noopener" target="_blank">Cocoon</a>をインストールする。インストール方法はこちらの記事「<a href="https://techacademy.jp/magazine/1371" rel="noopener" target="_blank">WordPressのテーマをインストールする方法【WordPress初心者向け】</a>」も参考になる。</p>
+<p class="wp-block-paragraph">他テーマとの比較はあまりできていないが、使いやすそう、多くのブログで使用されている、解説記事も多くある、などの理由からCocoonにした。</p>
+<h3 class="wp-block-heading"><span id="toc9">パーマリンクからindex.phpを消す</span></h3>
+<p class="wp-block-paragraph">入っていても特に問題はないが、ない方が綺麗なので消す。どうやったかを忘れましたが、「WordPress index.php 消す」とかで検索して方法を探したはずです。</p>
+<h3 class="wp-block-heading"><span id="toc10">その他</span></h3>
+<p class="wp-block-paragraph">その他にもいろいろな設定がありますが、細かい設定は<a data-id="/wordpress-setting/" data-type="URL" href="/wordpress-setting/" target="_blank">こちら</a>の記事で紹介しています。<a data-id="/wordpress-setting/" data-type="URL" href="/wordpress-setting/" target="_blank">WordPressのおすすめ設定・プラグイン</a></p>
+<h2 class="wp-block-heading"><span id="toc11">終わりに</span></h2>
+<p class="wp-block-paragraph">ブログサイトを作るのは調べるのに数時間かかりますが、そんなに難しくないです。Google Domains や GCPは使いやすい印象。ブログサイトを作るより、中身を書く方が重要で大変そうです。</p>
+<p class="wp-block-paragraph">何かコメントがあればなんでも書いてください。</p>
+<h2 class="wp-block-heading"><span id="toc12">参考</span></h2>
+<p class="wp-block-paragraph">ブログを始める上で参考になるサイト。インターネットやサーバなど詳しくない人にもわかりやすく紹介されている。</p>
+<ul class="wp-block-list"><li>YouTubeの動画再生リスト: 両学長 リベラルアーツ大学 <a data-id="https://www.youtube.com/playlist?list=PLpwLNivKud-gAJAgveJjARv5M4uAVrQHK" data-type="URL" href="https://www.youtube.com/playlist?list=PLpwLNivKud-gAJAgveJjARv5M4uAVrQHK" rel="noopener" target="_blank">(1) ✏️ブログ/アフィリエイト</a></li><li>多くのサイトで引用されているサイト: <a data-id="https://hitodeblog.com/" data-type="URL" href="https://hitodeblog.com/" rel="noopener" target="_blank">hitodeblog｜完全初心者のためのブログの始め方</a></li></ul>
+<p class="wp-block-paragraph"></p>

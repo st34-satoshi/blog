@@ -1,11 +1,6 @@
 ---
-import markup from './header.html?raw';
-let header = Astro.url.pathname === '/'
-  ? markup
-  : markup.replace(' current-menu-item page_item page-item-9 current_page_item', '');
-if (Astro.url.pathname === '/about/') {
-  header = header.replace('menu-item-object-page menu-item-has-no-description"><a href="/about/"',
-    'menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-has-no-description"><a href="/about/" aria-current="page"');
-}
+import markup from "./header.html?raw";
+import { navigation } from "../lib/navigation";
 ---
-<Fragment set:html={header} />
+
+<Fragment set:html={navigation(markup, Astro.url.pathname)} />

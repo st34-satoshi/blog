@@ -1,0 +1,15 @@
+---
+import markup from "./sidebar.html?raw";
+import { content, postPath } from "../lib/content";
+import { escape } from "../lib/site";
+const { posts } = await content();
+const recent = `<aside id="recent-posts-2" class="widget widget-sidebar widget-sidebar-standard widget_recent_entries"><h3 class="widget-sidebar-title widget-title">最近の投稿</h3><ul>${posts
+  .slice(0, 5)
+  .map(
+    (p) =>
+      `<li><a href="${escape(postPath(p))}">${escape(p.data.title)}</a></li>`,
+  )
+  .join("")}</ul></aside>`;
+---
+
+<Fragment set:html={markup.replace("<!-- RECENT -->", recent)} />

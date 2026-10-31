@@ -1,0 +1,26 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">install yarn</a><ol><li><a href="#toc2" tabindex="0">参考サイト</a></li></ol></li><li><a href="#toc3" tabindex="0">install bootstrap and jquery</a><ol><li><a href="#toc4" tabindex="0">application.js</a></li><li><a href="#toc5" tabindex="0">application.css</a></li><li><a href="#toc6" tabindex="0">参考</a></li></ol></li><li><a href="#toc7" tabindex="0">その他の方法</a></li><li><a href="#toc8" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">install yarn</span></h2>
+<p class="wp-block-paragraph">yarnが入ってなければインストールする</p>
+<h3 class="wp-block-heading"><span id="toc2">参考サイト</span></h3>
+<ul class="wp-block-list"><li><a href="https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable">Installation | Yarn</a></li><li><a href="https://qiita.com/MasatoraAtarashi/items/3f0317cd648ff63fa92c">dockerイメージ内にyarnをインストールする – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc3">install bootstrap and jquery</span></h2>
+<pre class="wp-block-code"><code>$ yarn add jquery
+$ yarn add bootstrap</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">application.js</span></h3>
+<pre class="wp-block-code"><code>//= require jquery/dist/jquery.js
+//= require bootstrap/dist/js/bootstrap.js</code></pre>
+<h3 class="wp-block-heading"><span id="toc5">application.css</span></h3>
+<pre class="wp-block-code"><code> *= require bootstrap/dist/css/bootstrap</code></pre>
+<h3 class="wp-block-heading"><span id="toc6">参考</span></h3>
+<ul class="wp-block-list"><li><a href="https://www.sejuku.net/blog/72222">【Rails入門】YarnでjQueryとBootstrapを使うには！？ | 侍エンジニアブログ</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc7">その他の方法</span></h2>
+<p class="wp-block-paragraph">Rails 7だと –css bootstrapでできるらしいがエラーが出てうまくできなかった。</p>
+<p class="wp-block-paragraph">gemでもインストールできるが、自分で書いたcssが効かなくなったりしてcssの読み込みの順番がよくわからなかった。</p>
+<h2 class="wp-block-heading"><span id="toc8">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

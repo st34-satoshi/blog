@@ -1,0 +1,69 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">概要</a></li><li><a href="#toc2" tabindex="0">実際に試す</a><ol><li><a href="#toc3" tabindex="0">テキストから判定する</a></li></ol></li><li><a href="#toc4" tabindex="0">コード</a></li><li><a href="#toc5" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">概要</span></h2>
+<p class="wp-block-paragraph">Webサイトを作っているとUserAgentでブラウザとOSを判定したいことがよくある。</p>
+<h2 class="wp-block-heading"><span id="toc2">実際に試す</span></h2>
+<p class="wp-block-paragraph"><button id="currentBrowserButton">現在使用しているOSとブラウザ</button></p>
+<h3 class="wp-block-heading"><span id="toc3">テキストから判定する</span></h3>
+<p>
+ua: <input id="uaInput" style="width:300px" type="text"/>
+</p>
+<p><button id="uaButton">OSとブラウザを判定</button></p>
+<h2 class="wp-block-heading"><span id="toc4">コード</span></h2>
+<pre class="wp-block-code"><code>function getOS(ua){
+  let os = 'Unknown';
+
+  if(ua.indexOf("windows nt") !== -1) {
+    os = 'Microsoft Windows';
+  } else if(ua.indexOf("android") !== -1) {
+    os = "Android";
+  } else if(ua.indexOf("iphone") !== -1 || ua.indexOf("ipad") !== -1) {
+    os = 'iOS';
+  } else if(ua.indexOf("mac os x") !== -1) {
+    os = 'macOS';
+  }
+  return os;
+}
+
+function getBrowser(ua){
+  let browser = 'Unknown';
+
+  if(ua.indexOf("edge") !== -1 || ua.indexOf("edga") !== -1 || ua.indexOf("edgios") !== -1) {
+    browser = "Microsoft Edge";
+  } else if (ua.indexOf("opera") !== -1 || ua.indexOf("opr") !== -1) {
+    browser = "Opera";
+  } else if (ua.indexOf("samsungbrowser") !== -1) {
+    browser = "Samsung Internet Browser";
+  } else if (ua.indexOf("ucbrowser") !== -1) {
+    browser = "UC Browser";
+  } else if(ua.indexOf("chrome") !== -1 || ua.indexOf("crios") !== -1) {
+    browser = "Google Chrome";
+  } else if(ua.indexOf("firefox") !== -1 || ua.indexOf("fxios") !== -1) {
+    browser = "Mozilla Firefox";
+  } else if(ua.indexOf("safari") !== -1) {
+    browser = "Safari";
+  } else if (ua.indexOf("msie") !== -1 || ua.indexOf("trident") !== -1) {
+    browser = "Internet Explorer";
+  }
+  return browser;
+}
+
+document.getElementById("currentBrowserButton").onclick = function() {
+  const ua = window.navigator.userAgent.toLowerCase();
+  console.log(ua);
+  let os = getOS(ua);
+  let browser = getBrowser(ua);
+  alert(`OS=${os}, ブラウザ=${browser}`);
+};
+
+document.getElementById("uaButton").onclick = function() {
+  const ua = document.getElementById("uaInput").value;
+  let os = getOS(ua);
+  let browser = getBrowser(ua);
+  alert(`OS=${os}, ブラウザ=${browser}`);
+};</code></pre>
+<h2 class="wp-block-heading"><span id="toc5">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://qiita.com/TD12734/items/671064e8fce75faea98d#:~:text=JavaScript%E3%81%A7%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%80%81OS%E3%82%92,window.navigator.">JavaScriptでブラウザとOSを判定する2つの方法 – Qiita</a></li><li><a href="/combination-calculator/">Combination (nCr) Calculator using JavaScript | Notes to Forget</a></li></ul>

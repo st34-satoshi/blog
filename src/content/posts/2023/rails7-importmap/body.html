@@ -1,0 +1,22 @@
+<p class="wp-block-paragraph">Rails 7で新規プロジェクトを作成するとデフォルトでimportmapを使うことになる。</p>
+<p class="wp-block-paragraph">Rails 5を使っていた既存のプロジェクトで、Rails 7に変更してimportmapを使ってみた備忘録。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">importmapのインストール</a></li><li><a href="#toc2" tabindex="0">javascript_importmap_tagsを使う</a></li><li><a href="#toc3" tabindex="0">エラー</a><ol><li><a href="#toc4" tabindex="0">Could not find a JavaScript runtime</a></li></ol></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">importmapのインストール</span></h2>
+<p class="wp-block-paragraph"><a href="https://github.com/rails/importmap-rails">rails/importmap-rails: Use ESM with importmap to manage modern JavaScript in Rails without transpiling or bundling.</a></p>
+<p class="wp-block-paragraph">githubのページを参考にインストールする。</p>
+<pre class="wp-block-code"><code>./bin/bundle add importmap-rails
+./bin/rails importmap:install</code></pre>
+<h2 class="wp-block-heading"><span id="toc2">javascript_importmap_tagsを使う</span></h2>
+<p class="wp-block-paragraph">.erbでjavascript_importmap_tagsを使うと以下のエラーが出た。</p>
+<pre class="wp-block-code"><code>Sprockets::Rails::Helper::AssetNotPrecompiledError
+
+Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( player/show.js )` to `config/initializers/assets.rb` and restart your server</code></pre>
+<p class="wp-block-paragraph">メッセージ通りassets.rbを修正するとエラーは解決する。</p>
+<h2 class="wp-block-heading"><span id="toc3">エラー</span></h2>
+<h3 class="wp-block-heading"><span id="toc4">Could not find a JavaScript runtime</span></h3>
+<p class="wp-block-paragraph">productionで実行したら発生した。javascriptの環境がないらしい…</p>

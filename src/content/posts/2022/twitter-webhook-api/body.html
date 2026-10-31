@@ -1,0 +1,50 @@
+<p class="wp-block-paragraph">Twitterでいいねやリプの通知を受けっとて何かするためには<span class="bold-blue">Webhook</span>を使う。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">やること</a><ol><li><a href="#toc2" tabindex="0">開発者アクセスに申し込む</a></li><li><a href="#toc3" tabindex="0">アプリの作成</a></li><li><a href="#toc4" tabindex="0">サーバーを用意する</a></li><li><a href="#toc5" tabindex="0">アプリの開発</a><ol><li><a href="#toc6" tabindex="0">Challenge Response Check (CRC)</a></li><li><a href="#toc7" tabindex="0">postメソッドでもメッセージを受け取る</a></li></ol></li><li><a href="#toc8" tabindex="0">Webhookの登録</a></li><li><a href="#toc9" tabindex="0">ユーザーの登録</a></li></ol></li><li><a href="#toc10" tabindex="0">登録を削除する</a></li><li><a href="#toc11" tabindex="0">参考サイト</a></li><li><a href="#toc12" tabindex="0">終わりに</a></li><li><a href="#toc13" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">やること</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">開発者アクセスに申し込む</span></h3>
+<p class="wp-block-paragraph">「<a href="https://developer.twitter.com/ja/docs/tutorials/getting-started-with-the-account-activity-api" rel="noopener" target="_blank">アカウントアクティビティAPIの概要 | Docs | Twitter Developer Platform</a>」 から開発者用のアカウントを作成して、<span class="bold-blue">トークンを発行</span>する。</p>
+<ul class="wp-block-list"><li>電話番号を登録する必要がある</li><li>メールで確認コードが送られてくる</li><li>keyは再び表示することはできないので安全な場所に保存する</li></ul>
+<p class="wp-block-paragraph">開発者アカウントを発行してkeyを保存したら、Developer Dashboard画面に遷移する。</p>
+<h3 class="wp-block-heading"><span id="toc3">アプリの作成</span></h3>
+<p class="wp-block-paragraph">開発者アカウントを作成したら、プロジェクトからアプリを作成する。この時アプリについての説明が必要になる。</p>
+<p class="wp-block-paragraph">Access LevelをEssentialから<span class="bold-blue">Elevatedにする</span>。</p>
+<p class="wp-block-paragraph">参考: <a href="https://qiita.com/SNQ-2001/items/1d2773d3ef513f817d0c" rel="noopener" target="_blank">Account Activity APIを使えるようにする – Qiita</a></p>
+<h3 class="wp-block-heading"><span id="toc4">サーバーを用意する</span></h3>
+<p class="wp-block-paragraph">webhookを受け取るサーバーを用意する。今回はVPSを使用する。自分のドメイン名が必要。</p>
+<h3 class="wp-block-heading"><span id="toc5">アプリの開発</span></h3>
+<p class="wp-block-paragraph">サーバーで実際に動かすアプリケーションを開発する。</p>
+<h4 class="wp-block-heading"><span id="toc6">Challenge Response Check (CRC)</span></h4>
+<p class="wp-block-paragraph">twitterから送られてくるチャレンジに通過する。</p>
+<p class="wp-block-paragraph">指定したURLにcrc_tokenが送られてくる。適切に変換して、response_tokenを返す。</p>
+<p class="wp-block-paragraph">チャレンジは登録した時から24時間ごとくらいにくる。</p>
+<p class="wp-block-paragraph">こちらのサイトを参考にする。<a href="https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/guides/securing-webhooks" rel="noopener" target="_blank">Securing webhooks | Docs | Twitter Developer Platform</a></p>
+<h4 class="wp-block-heading"><span id="toc7">postメソッドでもメッセージを受け取る</span></h4>
+<p class="wp-block-paragraph">CRCのチャレンジはgetメソッドで、実際にwebhookで使われるのはpostメソッド。</p>
+<p class="wp-block-paragraph">postメソッドでイベントを受け取れるようにする。</p>
+<p class="wp-block-paragraph">参考: <a href="https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/guides/account-activity-data-objects" rel="noopener" target="_blank">Account Activity data objects | Docs | Twitter Developer Platform</a></p>
+<h3 class="wp-block-heading"><span id="toc8">Webhookの登録</span></h3>
+<p class="wp-block-paragraph">※難しかった。Twitter公式を見てそのままcURLをポストしてもうまくいかなかった。</p>
+<p class="wp-block-paragraph">こちらを参考にする。<a href="https://github.com/twitterdev/account-activity-dashboard" rel="noopener" target="_blank">twitterdev/account-activity-dashboard: Sample web app and helper scripts to get started with the premium Account Activity API</a></p>
+<p class="wp-block-paragraph">keyを全て登録して、<a data-id="https://github.com/twitterdev/account-activity-dashboard#using-the-command-line-example-scripts" data-type="URL" href="https://github.com/twitterdev/account-activity-dashboard#using-the-command-line-example-scripts" rel="noopener" target="_blank">Using the command line example scripts</a> を実行すると登録できる。</p>
+<h3 class="wp-block-heading"><span id="toc9">ユーザーの登録</span></h3>
+<p class="wp-block-paragraph">イベントを受け取るユーザーを登録する。開発者ではなくても、認証がうまくできれば登録できる(やったことないけどおそらくできる)。</p>
+<p class="wp-block-paragraph"><a data-id="https://github.com/twitterdev/account-activity-dashboard#using-the-command-line-example-scripts" data-type="URL" href="https://github.com/twitterdev/account-activity-dashboard#using-the-command-line-example-scripts" rel="noopener" target="_blank">Using the command line example scripts</a> の2.Add a user subscription for the user that owns the app.で登録できる。</p>
+<p class="wp-block-paragraph">ここまでできれば用意したサーバーにイベントが飛んでくる。</p>
+<h2 class="wp-block-heading"><span id="toc10">登録を削除する</span></h2>
+<p class="wp-block-paragraph">webhookを使用しなくなったとき。</p>
+<pre class="wp-block-code"><code>node example_scripts/webhook_management/delete-webhook-config.js -e &lt;environment&gt;</code></pre>
+<p class="wp-block-paragraph">参考: <a href="https://github.com/twitterdev/account-activity-dashboard/tree/master/example_scripts" rel="noopener" target="_blank">node example_scripts/webhook_management/delete-webhook-config.js -e &lt;environment&gt;</a></p>
+<h2 class="wp-block-heading"><span id="toc11">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://developer.twitter.com/ja/docs/tutorials/getting-started-with-the-account-activity-api" rel="noopener" target="_blank">アカウントアクティビティAPIの概要 | Docs | Twitter Developer Platform</a></li><li><a href="https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/guides/getting-started-with-webhooks" rel="noopener" target="_blank">Getting started with webhooks | Docs | Twitter Developer Platform</a></li><li><a href="https://developer.twitter.com/en/docs/twitter-api/enterprise/account-activity-api/guides/securing-webhooks" rel="noopener" target="_blank">Securing webhooks | Docs | Twitter Developer Platform</a></li><li><a href="https://qiita.com/SNQ-2001/items/1d2773d3ef513f817d0c" rel="noopener" target="_blank">Account Activity APIを使えるようにする – Qiita</a></li><li><a href="https://github.com/twitterdev/account-activity-dashboard" rel="noopener" target="_blank">twitterdev/account-activity-dashboard: Sample web app and helper scripts to get started with the premium Account Activity API</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc12">終わりに</span></h2>
+<p class="wp-block-paragraph">Webhookで通知がサーバーに来るのは面白い。</p>
+<p class="wp-block-paragraph">Webhookの登録が一番大変だった。公式のやり方とか他のサイトの解説ではうまくできなかった。</p>
+<p class="wp-block-paragraph">Webhookのイベントの意味がよくわからないのもあるが、使いたいイベントだけ取れれば十分。</p>
+<h2 class="wp-block-heading"><span id="toc13">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

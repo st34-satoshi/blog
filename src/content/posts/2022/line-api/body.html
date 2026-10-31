@@ -1,0 +1,34 @@
+<p class="wp-block-paragraph">サーバーからメッセージーを送信したり、ユーザーとのチャットボットを作る方法としてLINE APIを試してみる。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">LINE APIとは</a><ol><li><a href="#toc2" tabindex="0">参考</a></li></ol></li><li><a href="#toc3" tabindex="0">ユーザーのメッセージを受け取る</a><ol><li><a href="#toc4" tabindex="0">チャネルの作成</a></li><li><a href="#toc5" tabindex="0">サーバーの用意</a></li><li><a href="#toc6" tabindex="0">アプリケーションの実装</a></li><li><a href="#toc7" tabindex="0">Webhook URLの設定</a></li></ol></li><li><a href="#toc8" tabindex="0">参考サイト</a></li><li><a href="#toc9" tabindex="0">TODO</a></li><li><a href="#toc10" tabindex="0">終わりに</a></li><li><a href="#toc11" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">LINE APIとは</span></h2>
+<p class="wp-block-paragraph">公式ラインを作ることでメッセージのやり取りができるらしい。ユーザーがメッセージを送信すると、LINEのサーバーから、登録した(自分の)サーバーにメッセージが送信される。これのレスポンスがユーザーへの返信となる。任意のタイミングでサーバーからユーザーにメッセージを送信することもできる。</p>
+<h3 class="wp-block-heading"><span id="toc2">参考</span></h3>
+<ul class="wp-block-list"><li><a href="https://developers.line.biz/ja/docs/messaging-api/overview/" rel="noopener" target="_blank">Messaging APIの概要 | LINE Developers</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc3">ユーザーのメッセージを受け取る</span></h2>
+<h3 class="wp-block-heading"><span id="toc4">チャネルの作成</span></h3>
+<p class="wp-block-paragraph"><a href="https://developers.line.biz/ja/docs/messaging-api/getting-started/#using-console" rel="noopener" target="_blank">Messaging APIを始めよう | LINE Developers</a></p>
+<p class="wp-block-paragraph">ぽちぽち進めて行き、チャネルの作成まで終わると、公式アカウントが作成される。</p>
+<p class="wp-block-paragraph">公式アカウントを友だち登録すると、「こんにちは」メッセージが自動で送信されるようになっている。任意のメッセージに対して、「個別の問い合わせを受け付けておりません。」が返信される。</p>
+<h3 class="wp-block-heading"><span id="toc5">サーバーの用意</span></h3>
+<p class="wp-block-paragraph">webhookの先となるサーバーを用意する。GCP・AWS・レンタルサーバーのVPS・自宅サーバーなど固定IPのものであればなんでも良い。</p>
+<h3 class="wp-block-heading"><span id="toc6">アプリケーションの実装</span></h3>
+<p class="wp-block-paragraph">LINEから送信されるリクエストに対して正しくレスポンスするアプリケーションを作成する。<a data-id="https://developers.line.biz/ja/docs/messaging-api/building-sample-bot-with-heroku/" data-type="URL" href="https://developers.line.biz/ja/docs/messaging-api/building-sample-bot-with-heroku/" rel="noopener" target="_blank">いろいろな言語の実装例</a>が用意されている。</p>
+<p class="wp-block-paragraph">アプリケーションがサーバ上で動くようにする。</p>
+<p class="wp-block-paragraph">実際に作ったアプリケーション: <a href="https://github.com/st34-satoshi/fastapi-line-bot" rel="noopener" target="_blank">st34-satoshi/fastapi-line-bot: line bot</a></p>
+<h3 class="wp-block-heading"><span id="toc7">Webhook URLの設定</span></h3>
+<p class="wp-block-paragraph">LINE Developersからプロジェクトを選択し、Messaging APIのWebhook URLに作成したアプリケーションにアクセスするURLを載せる。</p>
+<p class="wp-block-paragraph">Use webhookをオンにする。</p>
+<h2 class="wp-block-heading"><span id="toc8">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://developers.line.biz/ja/docs/messaging-api/overview/" rel="noopener" target="_blank">Messaging APIの概要 | LINE Developers</a></li><li><a href="https://developers.line.biz/ja/docs/messaging-api/building-sample-bot-with-heroku/" rel="noopener" target="_blank">Herokuでサンプルボットを作成する | LINE Developers</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc9">TODO</span></h2>
+<ul class="wp-block-list"><li>メッセージに返信する</li><li>メッセージを送信する</li></ul>
+<h2 class="wp-block-heading"><span id="toc10">終わりに</span></h2>
+<p class="wp-block-paragraph"><a data-id="https://ngrok.com/" data-type="URL" href="https://ngrok.com/" rel="noopener" target="_blank">ngrok</a>というサービスを使うとローカルホストで開発しながらLINEからのWebhookイベントを受け取れて開発が行いやすい。</p>
+<h2 class="wp-block-heading"><span id="toc11">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

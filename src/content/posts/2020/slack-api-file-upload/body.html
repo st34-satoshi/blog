@@ -1,0 +1,47 @@
+<p class="wp-block-paragraph">slackにメッセージを送信するのはこちらの記事が参考になる。<a data-id="https://qiita.com/stu345/items/24790710abc571aae3ea" data-type="URL" href="https://qiita.com/stu345/items/24790710abc571aae3ea" rel="noopener" target="_blank">Slackにpythonからメッセージを送信する – Qiita</a></p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">前提</a></li><li><a href="#toc2" tabindex="0">pythonでapiを叩く</a><ol><li><a href="#toc3" tabindex="0">pythonコード</a></li><li><a href="#toc4" tabindex="0">注意するエラー</a><ol><li><a href="#toc5" tabindex="0">okが返ってきているがslackに送信されていない</a></li><li><a href="#toc6" tabindex="0">invalid_form_data エラー</a></li></ol></li></ol></li><li><a href="#toc7" tabindex="0">参考サイト</a></li><li><a href="#toc8" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">前提</span></h2>
+<p class="wp-block-paragraph">今回はAPIのトークンが取得できていることを前提とする。前提ができていない人はこちらの記事が参考になる。<a href="https://qiita.com/stu345/items/24790710abc571aae3ea" rel="noopener" target="_blank">Slackにpythonからメッセージを送信する – Qiita</a></p>
+<ul class="wp-block-list"><li>slackのワークスペースの作成</li><li>slack-appの作成・tokenの取得</li><li>slack appをチャネルに追加</li></ul>
+<h2 class="wp-block-heading"><span id="toc2">pythonでapiを叩く</span></h2>
+<p class="wp-block-paragraph">ファイルをアップロードするときはfile.upload apiを使用する。apiの詳細については公式サイトの説明がわかりやすい。<a data-id="https://api.slack.com/methods/files.upload" data-type="URL" href="https://api.slack.com/methods/files.upload" rel="noopener" target="_blank">files.upload method | Slack</a></p>
+<p class="wp-block-paragraph">pythonでのサンプルコードがなかったので、エラーでつまずかないための注意点も記録する。</p>
+<h3 class="wp-block-heading"><span id="toc3">pythonコード</span></h3>
+<p class="wp-block-paragraph">実際のコードは以下になる。token、ファイルパス、チャネル名を正しく設定する必要がある。</p>
+<pre class="wp-block-code"><code>import requests
+
+
+class SlackDriver:
+
+    def __init__(self, _token):
+        self._token = _token  # api_token
+
+    def send_image(self, file_path, message, channel):
+        files = {'file': open(file_path, 'rb')}
+        params = {"token": self._token, 'channels': channel, 'initial_comment': message}
+
+        r = requests.post('https://slack.com/api/files.upload',
+                          params=params,
+                          files=files)
+        print("return ", r.json())
+
+
+if __name__ == '__main__':
+    token = ''  # TODO your token.
+    slack = SlackDriver(token)
+    slack.send_image("image.png", "This is the comment of the image", "#random")</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">注意するエラー</span></h3>
+<h4 class="wp-block-heading"><span id="toc5">okが返ってきているがslackに送信されていない</span></h4>
+<p class="wp-block-paragraph">チャネル名があっているか確かめる。パラメータとしてchannel<strong>s</strong>を設定することにも注意する「s」が必要である。</p>
+<h4 class="wp-block-heading"><span id="toc6">invalid_form_data エラー</span></h4>
+<p class="wp-block-paragraph">headersを指定するとinvalid_form_data エラーとなる。<strong>content types</strong>の指定(multipart/form-dataなど)は不要！</p>
+<h2 class="wp-block-heading"><span id="toc7">参考サイト</span></h2>
+<ul class="wp-block-list"><li>Github: <a href="https://github.com/st34-satoshi/slack-api">st34-satoshi/slack-api: slack apiをpythonでたたく</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc8">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

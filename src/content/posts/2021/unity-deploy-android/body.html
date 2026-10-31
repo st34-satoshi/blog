@@ -1,0 +1,17 @@
+<p class="wp-block-paragraph">何回やっても忘れそうなので、流れをメモしておく。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">基本的な流れ</a><ol><li><a href="#toc2" tabindex="0">Unityでやること</a><ol><li><a href="#toc3" tabindex="0">参考</a></li></ol></li></ol></li><li><a href="#toc4" tabindex="0">Google Play Console でやること</a></li><li><a href="#toc5" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">基本的な流れ</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">Unityでやること</span></h3>
+<ol class="wp-block-list"><li>アプリを作る</li><li>keystoreを作成する <a data-id="https://qiita.com/ptkyoku/items/3fb1ae542ff04423c781" data-type="URL" href="https://qiita.com/ptkyoku/items/3fb1ae542ff04423c781" rel="noopener" target="_blank">参考</a> 絶対に<span class="bold-blue"><strong>keyとパスワードは忘れない</strong></span>ようにする</li><li>*Androidを選択してビルドする</li></ol>
+<p class="wp-block-paragraph">ビルドの設定はいろいろあり複雑。注意すべき点だけ簡単に説明する。</p>
+<ul class="wp-block-list"><li>Build App Bundleをチェック (aabで出力するため)</li><li>Player Settings から Company Nameを自分のものにする。*keysotreを作る前に設定する方が良い。</li><li>Sscript BackendはIL2CPP, ARM64にチェック、x86のチェックは外す</li><li>version codeはインクリメントする。versionとは別に必要なので注意する。</li></ul>
+<h4 class="wp-block-heading"><span id="toc3">参考</span></h4>
+<ul class="wp-block-list"><li><a href="https://qiita.com/tanakaPH/items/6843c2b0308b7cd4907b" rel="noopener" target="_blank">個人開発のUnityアプリをGoogle Playに公開するまで – Qiita</a></li><li><a href="https://zenn.dev/trpla226/articles/85c134606f6b2bda962a" rel="noopener" target="_blank">UnityでAndroid向けにAABファイルをビルドしてリリースする設定メモ</a></li><li><a href="https://qiita.com/nonkapibara/items/a708b856a496a96ccec5" rel="noopener" target="_blank">【Unity】Google Play の 64 ビット要件に準拠していません – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc4">Google Play Console でやること</span></h2>
+<ol class="wp-block-list"><li>ログインする</li><li>アプリの作成 ==&gt; タイトルなどを決めて規約に同意する</li><li>製品版 ==&gt; リリースの作成 から アプリのアップロード</li><li>説明を書いて保存</li><li>ダッシュボードに書いてある手順に従う</li><li>レビュー</li></ol>
+<h2 class="wp-block-heading"><span id="toc5">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://qiita.com/ptkyoku/items/3fb1ae542ff04423c781" rel="noopener" target="_blank">[Unity]KeyStore作成メモー – Qiita</a></li><li><a href="https://qiita.com/tanakaPH/items/6843c2b0308b7cd4907b" rel="noopener" target="_blank">個人開発のUnityアプリをGoogle Playに公開するまで – Qiita</a></li><li><a href="https://zenn.dev/trpla226/articles/85c134606f6b2bda962a" rel="noopener" target="_blank">UnityでAndroid向けにAABファイルをビルドしてリリースする設定メモ</a></li><li><a href="https://qiita.com/nonkapibara/items/a708b856a496a96ccec5" rel="noopener" target="_blank">【Unity】Google Play の 64 ビット要件に準拠していません – Qiita</a></li></ul>

@@ -1,0 +1,31 @@
+<p class="wp-block-paragraph">株の売買をする上で注目すべき点を紹介する。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">決算書</a><ol><li><a href="#toc2" tabindex="0">SaaS企業</a></li></ol></li><li><a href="#toc3" tabindex="0">チャート</a><ol><li><a href="#toc4" tabindex="0">SMA 単純移動平均</a></li><li><a href="#toc5" tabindex="0">EMA 指数平滑移動平均</a></li><li><a href="#toc6" tabindex="0">MACD 移動平均収束発散法</a></li></ol></li><li><a href="#toc7" tabindex="0">板</a></li><li><a href="#toc8" tabindex="0">信用データ</a></li><li><a href="#toc9" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">決算書</span></h2>
+<p class="wp-block-paragraph">利益がどれくらい出ているかや、今後どうなるかなど個別銘柄を調べる上で一番重要。</p>
+<h3 class="wp-block-heading"><span id="toc2">SaaS企業</span></h3>
+<ul class="wp-block-list"><li>チャーンレート</li></ul>
+<h2 class="wp-block-heading"><span id="toc3">チャート</span></h2>
+<p class="wp-block-paragraph"></p>
+<p class="wp-block-paragraph">株価の推移は今後の予測をする上でわかりやすい。過去のチャートが今後にどのような影響を与えるかわからないが、多くの人は見ている。<a data-id="https://jp.tradingview.com/" data-type="URL" href="https://jp.tradingview.com/" rel="noopener" target="_blank">TradingView</a>は無料で使えて見やすい。</p>
+<h3 class="wp-block-heading"><span id="toc4">SMA 単純移動平均</span></h3>
+<p class="wp-block-paragraph">SMA(Simple Moving Average)は単純だが使うことはなさそう。</p>
+<p class="wp-block-paragraph">$$SMA(n日) = \frac{\Sigma{i\text{日前の終値}}}{n}$$</p>
+<h3 class="wp-block-heading"><span id="toc5">EMA 指数平滑移動平均</span></h3>
+<p class="wp-block-paragraph">EMA(Exponentially Moving Average)はSMAを進化させたもの(smoothing=2とする)。前日のEMAをn-1倍、当日の終値を2倍して、n+1で割る。SMAより近い日の重みが大きくなる。1日前の重みは(n-1)/(n+1)。i日前の重みはそのi乗となる。</p>
+<p class="wp-block-paragraph">$$EMA(n日)_{today} = \frac{EMA_{yesterday}*(n-1)+Value_{today}*2}{n+1}$$</p>
+<h3 class="wp-block-heading"><span id="toc6">MACD 移動平均収束発散法</span></h3>
+<p class="wp-block-paragraph">MACD(Moving Average Convergence Divergence)は短期のEMAと長期のEMAを比較したもの。</p>
+<p class="wp-block-paragraph">短期は12、長期は26日とするのが一般的。</p>
+<p class="wp-block-paragraph">$$MACD = EMA_{12} – EMA_{26}$$</p>
+<h2 class="wp-block-heading"><span id="toc7">板</span></h2>
+<p class="wp-block-paragraph">株の売買の注文数がわかる。</p>
+<h2 class="wp-block-heading"><span id="toc8">信用データ</span></h2>
+<p class="wp-block-paragraph">信用取引の買と売の数。いずれは売買されるため、どちらかの数字が極端に大きいと注意が必要！</p>
+<h2 class="wp-block-heading"><span id="toc9">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-money/" title="お金関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/02/dmitry-demidko-eBWzFKahEaU-unsplash-160x90.jpg" srcset="/wp-content/uploads/2021/02/dmitry-demidko-eBWzFKahEaU-unsplash-160x90.jpg 160w, /wp-content/uploads/2021/02/dmitry-demidko-eBWzFKahEaU-unsplash-120x68.jpg 120w, /wp-content/uploads/2021/02/dmitry-demidko-eBWzFKahEaU-unsplash-320x180.jpg 320w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">お金関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">税金・投資などのお金関連の記事。難しいこともあるので忘れても簡単に思い出せるように備忘録。株・投資経済税金関係社会保険など決済サービスクレジットカードAmazon MasterCard クラシック | Notes to ForgetJRE ...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.11.12</div></div></div></div></a>
+</div></figure>

@@ -1,0 +1,44 @@
+---
+import type { Entry } from "../lib/content";
+import { postPath } from "../lib/content";
+const { previous, next } = Astro.props as { previous?: Entry; next?: Entry };
+---
+
+<nav
+  id="pager-post-navi"
+  class="pager-post-navi post-navi-default cf"
+  aria-label="前後の記事"
+>
+  {[
+    ["prev", previous],
+    ["next", next],
+  ].map(([direction, p]) => {
+    const post = p as Entry | undefined;
+    return (
+      post && (
+        <a
+          class={`${direction}-post a-wrap border-element cf`}
+          href={postPath(post)}
+          title={post.data.title}
+        >
+          <div
+            class={`fa fa-chevron-${direction === "prev" ? "left" : "right"} iconfont`}
+            aria-hidden="true"
+          ></div>
+          <figure class={`${direction}-post-thumb card-thumb`}>
+            <img
+              src={post.data.image}
+              alt=""
+              width="240"
+              height="135"
+              loading="lazy"
+              decoding="async"
+              class="attachment-thumb240 size-thumb240 wp-post-image"
+            />
+          </figure>
+          <div class={`${direction}-post-title`}>{post.data.title}</div>
+        </a>
+      )
+    );
+  })}
+</nav>

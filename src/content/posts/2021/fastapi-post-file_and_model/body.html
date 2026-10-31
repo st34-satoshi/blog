@@ -1,0 +1,73 @@
+<p class="wp-block-paragraph">fastAPIで<span class="bold-blue">fileのアップロード</span>とBaseModelを継承した<span class="bold-blue">クラスのポスト</span>を同時にやろうとすると<span class="bold-red"><span class="red">422エラー</span></span>になってつまずいたので、その解決策の備忘録。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">ファイルとモデルを同時にポストする (失敗)</a><ol><li><a href="#toc2" tabindex="0">コード</a></li><li><a href="#toc3" tabindex="0">実行結果</a></li></ol></li><li><a href="#toc4" tabindex="0"> ファイルとモデルを同時にポストする (成功)</a><ol><li><a href="#toc5" tabindex="0">コード</a></li><li><a href="#toc6" tabindex="0">ポイント</a></li></ol></li><li><a href="#toc7" tabindex="0">参考</a></li><li><a href="#toc8" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">ファイルとモデルを同時にポストする (失敗)</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">コード</span></h3>
+<pre class="wp-block-code"><code>from fastapi import FastAPI, File, UploadFile
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str = "Toshi"
+
+@app.post("/uploadfile/")
+async def upload_file(user: User, file: UploadFile = File(...)):
+    return {"filename": file.filename, 'user': user}</code></pre>
+<h3 class="wp-block-heading"><span id="toc3">実行結果</span></h3>
+<p class="wp-block-paragraph">/docs から実行すると、<code>422 Error: Unprocessable Entity</code> 。Response bodyは以下。</p>
+<pre class="wp-block-code"><code>{
+  "detail": [
+    {
+      "loc": [
+        "body",
+        "user"
+      ],
+      "msg": "value is not a valid dict",
+      "type": "type_error.dict"
+    }
+  ]
+}
+</code></pre>
+<p class="wp-block-paragraph">Response headers</p>
+<pre class="wp-block-code"><code>content-length: 95 
+ content-type: application/json 
+ date: Tue,31 Aug 2021 14:11:22 GMT 
+ server: uvicorn </code></pre>
+<h2 class="wp-block-heading"><span id="toc4"> ファイルとモデルを同時にポストする (成功)</span></h2>
+<h3 class="wp-block-heading"><span id="toc5">コード</span></h3>
+<pre class="wp-block-code"><code>from fastapi import FastAPI, File, UploadFile, Body
+from pydantic import BaseModel
+import json
+
+app = FastAPI()
+
+class User(BaseModel):
+    name: str = "Toshi"
+
+    <span class="bold-green">@classmethod
+    def __get_validators__(cls):
+        yield cls.validate_to_json
+
+    @classmethod
+    def validate_to_json(cls, value):
+        if isinstance(value, str):
+            return cls(**json.loads(value))
+        return value</span>
+
+@app.post("/uploadfile/")
+async def upload_file(user: User = <span class="bold-green">Body(...)</span>, file: UploadFile = File(...)):
+    return {"filename": file.filename, 'user': user}
+</code></pre>
+<h3 class="wp-block-heading"><span id="toc6">ポイント</span></h3>
+<p class="wp-block-paragraph">BaseModelを継承したクラスをポストするときは application/x-www-form-urlencoded (curl の -d　オプション)になる。ファイルをアップロードするときは multipart/form-data (curl の -f オプション)になる。<code><span class="bold-green">User = Body(...)</span></code>とすることで -f にそろえる。</p>
+<p class="wp-block-paragraph">Userモデルでstringの入力をjson形式に変換する処理を記述する。</p>
+<h2 class="wp-block-heading"><span id="toc7">参考</span></h2>
+<ul class="wp-block-list"><li><a href="https://fastapi.tiangolo.com/tutorial/first-steps/" rel="noopener" target="_blank">First Steps – FastAPI</a></li><li><a href="https://github.com/tiangolo/fastapi/issues/2257" rel="noopener" target="_blank">Using UploadFile and Pydantic model in one request · Issue #2257 · tiangolo/fastapi</a></li><li><a href="https://qiita.com/att55/items/04e8080d1c441837ad42" rel="noopener" target="_blank">curl の POST オプション -d と -F の違いから、改めて MIME type を学ぶ – Qiita</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc8">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

@@ -1,30 +1,41 @@
 ---
-import Header from '../components/Header.astro';
-import footer from '../components/footer.html?raw';
-
-interface Props {
-  head: string;
-  tail: string;
-  bodyAttributes: Record<string, string | boolean>;
-}
-const { head, tail, bodyAttributes } = Astro.props;
-const pageTail = Astro.url.pathname === '/about/'
-  ? tail.replace(' current-menu-item page_item page-item-9 current_page_item', '')
-      .replace(' aria-current="page"', '')
-      .replace('menu-item-object-page menu-item-19', 'menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-19')
-      .replace('href="/about/"', 'href="/about/" aria-current="page"')
-  : tail;
+import Header from "../components/Header.astro";
+import Head from "../components/Head.astro";
+import footer from "../components/footer.html?raw";
+import tail from "../components/page-tail.html?raw";
+import { navigation } from "../lib/navigation";
+import { production } from "../lib/site";
+const {
+  title,
+  seoTitle,
+  description,
+  image,
+  publishedAt,
+  updatedAt,
+  bodyClass = "body public-page page-body ff-hiragino fz-18px fw-400 hlt-center-logo-wrap ect-entry-card-wrap rect-entry-card-wrap scrollable-sidebar no-scrollable-main sidebar-right mblt-footer-mobile-buttons scrollable-mobile-buttons mobile-button-fmb no-mobile-sidebar font-awesome-4 thumb-wide",
+} = Astro.props;
 ---
+
 <!doctype html>
 <html lang="ja">
-  <head><Fragment set:html={head} /></head>
-  <body {...bodyAttributes}>
+  <head>
+    <Head {title} {seoTitle} {description} {image} {publishedAt} {updatedAt} />
+  </head>
+  <body class={bodyClass} itemscope itemtype="https://schema.org/WebPage">
     <div id="container" class="container cf">
-      <a class="skip-link" href="#main">コンテンツへスキップ</a>
+      <a class="skip-link" href="#main">
+        コンテンツへスキップ
+      </a>
       <Header />
       <slot />
       <Fragment set:html={footer} />
     </div>
-    <Fragment set:html={pageTail} />
+    <Fragment set:html={navigation(tail, Astro.url.pathname)} />
+    <script src="../scripts/site.ts"></script>
+    {production && <script is:inline>
+      document.querySelectorAll("ins.adsbygoogle").forEach(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    </script>}
   </body>
 </html>
