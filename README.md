@@ -81,10 +81,13 @@ Cloudflare Workers BuildsでGitHubリポジトリを接続し、以下を設定�
 | Production branch | `main` |
 | Root directory | リポジトリのルート |
 | Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
+| Deploy command（main） | `npx wrangler deploy` |
+| Non-production deploy command | `npx wrangler preview` |
 | Node.js | `.nvmrc` の24を使用 |
 
 依存パッケージはCloudflareがインストールします。接続後はmain更新時に自動デプロイされ、`https://blog.<アカウントのサブドメイン>.workers.dev` で閲覧できます。GitHub連携の認証はCloudflare側で設定します。
+
+`main` 以外のブランチはPreviewに公開します。`wrangler preview` に必要な `previews: {}` を `wrangler.jsonc` に設定し、アセットや互換性設定はトップレベルで共用します。
 
 Cloudflareと同じ配信環境でローカル確認するには:
 
