@@ -122,18 +122,6 @@ npm run deploy
 
 [Workers Buildsの公式設定ガイド](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
 
-## 公開環境と確認
-
-既定はプレビュー環境です。全ページにnoindexを付け、robots.txtでクロールを禁止し、GA・広告の配信を停止します。
-
-本番ビルドでは次の環境変数を設定します。設定変更後は再ビルドが必要です。
-
-- `SITE_ENV=production`
-- `SITE_URL`: 公開先のHTTPSオリジン（末尾スラッシュなし）。canonical・OGP・サイトマップ・RSSに使用します。
-- `GA_MEASUREMENT_ID`: 既存のGoogle Analytics測定ID。未設定なら送信しません。
-- `GOOGLE_SITE_VERIFICATION`: Search ConsoleでHTMLタグ認証を使用する場合の既存確認コード。DNS認証なら不要です。
-
-広告の発行者IDとads.txtは既存設定を使用しています。mainへのデプロイだけでは本番計測は有効になりません。Workers Buildsでは `WORKERS_CI_BRANCH` がmain以外なら、`SITE_ENV=production` が設定されていても計測・広告を停止し、noindexにします。
 
 記事一覧・カテゴリー・タグ・日付別一覧・ページ送り・新着記事は記事メタ情報から生成します。検索はこのサイト内の検索データを使います。既存コメントは表示のみで、新規コメントとお問い合わせフォームの受付は停止しています。
 
