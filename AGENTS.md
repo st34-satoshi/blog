@@ -54,7 +54,7 @@ draft: true
 ## 確認とGit
 
 - Node.js 24・npmを使い、依存関係はpackage-lock.jsonで管理する。
-- `npm run check:files` でサイズ上限を確認する。
+- `npm run check:files` で未コミットの追加・変更ファイル（未追跡も含む）のサイズ上限を確認する。
 - `npm run build` を実行し、対象URL、本文、画像、リンク、記事一覧からの導線を確認する。
 - 表示に影響する変更はPCとスマートフォンで確認する。
 - 下書きが公開出力に含まれないことを確認する。
