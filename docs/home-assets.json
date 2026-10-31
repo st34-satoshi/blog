@@ -1,117 +1,117 @@
 [
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.woff?v=2.7.0.2",
-    "path": "/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.woff",
+    "path": "/assets/theme/webfonts/icomoon/fonts/icomoon.woff",
     "bytes": 20204
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.woff2",
+    "path": "/assets/theme/webfonts/fontawesome/fonts/fontawesome-webfont.woff2",
     "bytes": 77160
   },
   {
     "source": "https://blog.stu345.com/wp-includes/css/dist/block-library/style.min.css?ver=7.1.4&fver=20260917081731",
-    "path": "/wp-includes/css/dist/block-library/style.min.css",
+    "path": "/assets/vendor/css/dist/block-library/style.min.css",
     "bytes": 140829
   },
   {
     "source": "https://blog.stu345.com/wp-content/plugins/metronet-profile-picture/dist/blocks.style.build.css?ver=2.6.4&fver=20260903122715",
-    "path": "/wp-content/plugins/metronet-profile-picture/dist/blocks.style.build.css",
+    "path": "/assets/plugins/metronet-profile-picture/dist/blocks.style.build.css",
     "bytes": 27760
   },
   {
     "source": "https://blog.stu345.com/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.7&fver=20260911025317",
-    "path": "/wp-content/plugins/contact-form-7/includes/css/styles.css",
+    "path": "/assets/plugins/contact-form-7/includes/css/styles.css",
     "bytes": 2979
   },
   {
     "source": "https://blog.stu345.com/wp-content/plugins/username-changer/assets/css/frontend.css?ver=3.3.1&fver=20260903122718",
-    "path": "/wp-content/plugins/username-changer/assets/css/frontend.css",
+    "path": "/assets/plugins/username-changer/assets/css/frontend.css",
     "bytes": 214
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/style.css?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/style.css",
+    "path": "/assets/theme/style.css",
     "bytes": 264859
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/images/youtube-play.png",
-    "path": "/wp-content/themes/cocoon-master/images/youtube-play.png",
+    "path": "/assets/theme/images/youtube-play.png",
     "bytes": 1925
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/keyframes.css?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/keyframes.css",
+    "path": "/assets/theme/keyframes.css",
     "bytes": 291
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/css/font-awesome.min.css?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/css/font-awesome.min.css",
+    "path": "/assets/theme/webfonts/fontawesome/css/font-awesome.min.css",
     "bytes": 31018
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.eot?v=4.7.0",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.eot",
+    "path": "/assets/theme/webfonts/fontawesome/fonts/fontawesome-webfont.eot",
     "bytes": 165742
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.woff?v=4.7.0",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.woff",
+    "path": "/assets/theme/webfonts/fontawesome/fonts/fontawesome-webfont.woff",
     "bytes": 98024
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.ttf?v=4.7.0",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.ttf",
+    "path": "/assets/theme/webfonts/fontawesome/fonts/fontawesome-webfont.ttf",
     "bytes": 165548
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular",
-    "path": "/wp-content/themes/cocoon-master/webfonts/fontawesome/fonts/fontawesome-webfont.svg",
+    "path": "/assets/theme/webfonts/fontawesome/fonts/fontawesome-webfont.svg",
     "bytes": 444379
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/icomoon/style.css?v=2.7.0.2&ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/webfonts/icomoon/style.css",
+    "path": "/assets/theme/webfonts/icomoon/style.css",
     "bytes": 4566
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.eot?rpma26",
-    "path": "/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.eot",
+    "path": "/assets/theme/webfonts/icomoon/fonts/icomoon.eot",
     "bytes": 20290
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.ttf?rpma26",
-    "path": "/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.ttf",
+    "path": "/assets/theme/webfonts/icomoon/fonts/icomoon.ttf",
     "bytes": 20124
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.svg?rpma26#icomoon",
-    "path": "/wp-content/themes/cocoon-master/webfonts/icomoon/fonts/icomoon.svg",
+    "path": "/assets/theme/webfonts/icomoon/fonts/icomoon.svg",
     "bytes": 86092
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/plugins/baguettebox/dist/baguetteBox.min.css?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/plugins/baguettebox/dist/baguetteBox.min.css",
+    "path": "/assets/theme/plugins/baguettebox/dist/baguetteBox.min.css",
     "bytes": 3611
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-child-master/style.css?ver=7.1.4&fver=20210317123911",
-    "path": "/wp-content/themes/cocoon-child-master/style.css",
+    "path": "/assets/custom/style.css",
     "bytes": 1172
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-child-master/keyframes.css?ver=7.1.4&fver=20200725032246",
-    "path": "/wp-content/themes/cocoon-child-master/keyframes.css",
+    "path": "/assets/custom/keyframes.css",
     "bytes": 130
   },
   {
     "source": "https://blog.stu345.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1&fver=20231118020418",
-    "path": "/wp-includes/js/jquery/jquery.min.js",
+    "path": "/assets/vendor/js/jquery/jquery.min.js",
     "bytes": 87553
   },
   {
     "source": "https://blog.stu345.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1&fver=20231118020418",
-    "path": "/wp-includes/js/jquery/jquery-migrate.min.js",
+    "path": "/assets/vendor/js/jquery/jquery-migrate.min.js",
     "bytes": 13577
   },
   {
@@ -301,22 +301,22 @@
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/plugins/baguettebox/dist/baguetteBox.min.js?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/plugins/baguettebox/dist/baguetteBox.min.js",
+    "path": "/assets/theme/plugins/baguettebox/dist/baguetteBox.min.js",
     "bytes": 9585
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/javascript.js?ver=7.1.4&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/javascript.js",
+    "path": "/assets/theme/javascript.js",
     "bytes": 15683
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-master/js/group-link.js?ver=1789095243&fver=20260911025403",
-    "path": "/wp-content/themes/cocoon-master/js/group-link.js",
+    "path": "/assets/theme/js/group-link.js",
     "bytes": 3444
   },
   {
     "source": "https://blog.stu345.com/wp-content/themes/cocoon-child-master/javascript.js?ver=7.1.4&fver=20200725032246",
-    "path": "/wp-content/themes/cocoon-child-master/javascript.js",
+    "path": "/assets/custom/javascript.js",
     "bytes": 298
   }
 ]

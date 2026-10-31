@@ -1,5 +1,10 @@
 ---
-// Trusted, checked-in WordPress HTML preserves the original DOM and theme styling.
-import home from "../content/home.html?raw";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import head from "../content/home/head.html?raw";
+import content from "../content/home/content.html?raw";
+import tail from "../content/home/tail.html?raw";
+import page from "../content/home/page.json";
 ---
-<Fragment set:html={home} />
+<SiteLayout head={head} tail={tail} bodyAttributes={page.bodyAttributes}>
+  <Fragment set:html={content} />
+</SiteLayout>

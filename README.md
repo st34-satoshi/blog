@@ -26,15 +26,27 @@ npm run preview
 
 静的ファイルは `dist/` に出力されます。
 
-## トップページの移行
+## 移行済みページ
 
-- `src/content/home.html`: 2026-10-31に取得した既存トップページのHTML。CocoonのDOM・クラス・インラインCSSを保持しています。
-- `src/pages/index.astro`: 保存したHTMLを静的出力するAstroページ。
-- `public/wp-content/`・`public/wp-includes/`: 元のパスを保持した画像・CSS・フォント・JavaScript。
-- `docs/home-assets.json`: ダウンロード元・保存先・ファイルサイズの一覧。
+- `/`: トップページ
+- `/powerpoint-font-noto-sans-jp/`: Powerpoint でNoto Sans JP フォントを使用する
 
-現時点ではトップページのみ移行しています。記事・About・Sitemap・Contact・検索は既存WordPressを参照します。人気記事と新着記事は取得時点の固定内容です。
+## ファイル構成
 
-ローカル検証用に `noindex, nofollow` を追加し、広告配信スクリプトと不要なWordPressプラグインのスクリプトを除外しています。広告枠のHTML・既存canonicalは保持しています。GA・広告の本番設定は公開準備時に対応します。
+- `src/layouts/SiteLayout.astro`: 共通のHTML骨格とヘッダー・フッターの配置。
+- `src/components/`: 共通ヘッダーとフッター。元のDOMとクラス名を維持。
+- `src/content/home/`: トップページの表示データ。
+- `src/content/powerpoint-font-noto-sans-jp/body.html`: 記事本文。既存のHTML表現を保持して編集できます。
+- 同ディレクトリの `content.html`: 記事の枠・サイドバー・関連記事。`ARTICLE_BODY`の位置に本文を挿入します。
+- 各ページの `head.html`・`page.json`・`tail.html`: ページ固有のメタ情報・body属性・モバイルメニューとスクリプト。
+- `public/assets/`: 共通CSS・JavaScript・フォント。WordPressの実行環境は不要です。
+- `public/wp-content/uploads/`: 過去の画像。既存の画像URLを維持するため、この配置を保持します。
+- `docs/*-assets.json`: 取得ファイルの出所・保存先・サイズ。
 
-取得したファイルは合計約2.3 MB、最大約445 KBです。恒久的なサイズ上限とCIチェックは別タスクで追加します。配布元のCSS内のライセンス表記は保持しています。
+ページは2026-10-31に取得したHTMLを基にしています。移行済みページ同士はローカルで遷移し、それ以外の記事・カテゴリー・検索などは既存ブログへリンクします。人気記事・関連記事・新着記事は取得時点の固定内容です。
+
+ローカル検証用に `noindex, nofollow` を追加し、広告配信とWordPressアクセス集計・不要なプラグインスクリプトを除外しています。広告枠・canonical・構造化データは保持し、GA・広告の有効化は公開準備時に対応します。
+
+コメント投稿は静的サイト内では処理せず、既存記事のコメント欄へリンクします。本番移行時には別途扱いを決めます。
+
+恒久的なファイルサイズ上限とCIは別タスクで追加します。配布元のCSS・JavaScript内のライセンス表記は保持しています。
