@@ -1,7 +1,7 @@
 # blog
 blog.stu345.comに公開するブログ
 
-Astroで既存WordPressブログを移行する静的サイトです。
+Astroで構築する静的ブログです。
 
 ## 開発
 
@@ -14,7 +14,7 @@ npm ci
 npm run dev
 ```
 
-http://localhost:4321/ を開くと既存ブログのトップページが表示されます。
+http://localhost:4321/ を開くとブログのトップページが表示されます。
 ページは `src/pages/index.astro` で編集できます。
 
 ## ビルド・プレビュー
@@ -26,27 +26,44 @@ npm run preview
 
 静的ファイルは `dist/` に出力されます。
 
-## 移行済みページ
+## 記事の追加
 
-- `/`: トップページ
-- `/powerpoint-font-noto-sans-jp/`: Powerpoint でNoto Sans JP フォントを使用する
+`src/content/posts/YYYY/slug/index.md`を追加すると、`/<slug>/` が自動生成されます。YYYYは初回公開年（UTC）です。記事ごとのAstroルート作成は不要です。
 
-## ファイル構成
+```markdown
+---
+title: "記事タイトル"
+slug: new-post
+publishedAt: 2026-10-31T09:00:00+09:00
+description: "記事の概要"
+categories: [日記]
+tags: []
+draft: false
+---
 
-- `src/layouts/SiteLayout.astro`: 共通のHTML骨格とヘッダー・フッターの配置。
-- `src/components/`: 共通ヘッダーとフッター。元のDOMとクラス名を維持。
-- `src/content/home/`: トップページの表示データ。
-- `src/content/powerpoint-font-noto-sans-jp/body.html`: 記事本文。既存のHTML表現を保持して編集できます。
-- 同ディレクトリの `content.html`: 記事の枠・サイドバー・関連記事。`ARTICLE_BODY`の位置に本文を挿入します。
-- 各ページの `head.html`・`page.json`・`tail.html`: ページ固有のメタ情報・body属性・モバイルメニューとスクリプト。
-- `public/assets/`: 共通CSS・JavaScript・フォント。WordPressの実行環境は不要です。
-- `public/wp-content/uploads/`: 過去の画像。既存の画像URLを維持するため、この配置を保持します。
-- `docs/*-assets.json`: 取得ファイルの出所・保存先・サイズ。
+ここにMarkdownで本文を書きます。
+```
 
-ページは2026-10-31に取得したHTMLを基にしています。移行済みページ同士はローカルで遷移し、それ以外の記事・カテゴリー・検索などは既存ブログへリンクします。人気記事・関連記事・新着記事は取得時点の固定内容です。
+この例は `src/content/posts/2026/new-post/index.md` に保存します。新しい画像は `public/images/2026/new-post/` に置き、本文から `/images/2026/new-post/image.webp` として参照します。
 
-ローカル検証用に `noindex, nofollow` を追加し、広告配信とWordPressアクセス集計・不要なプラグインスクリプトを除外しています。広告枠・canonical・構造化データは保持し、GA・広告の有効化は公開準備時に対応します。
+HTML形式の記事では `format: html` を指定し、同じフォルダの `body.html` に本文を書きます。通常の記事はMarkdownを使用します。
 
-コメント投稿は静的サイト内では処理せず、既存記事のコメント欄へリンクします。本番移行時には別途扱いを決めます。
+## ディレクトリ構成
 
-恒久的なファイルサイズ上限とCIは別タスクで追加します。配布元のCSS・JavaScript内のライセンス表記は保持しています。
+```text
+src/
+├── content.config.ts
+├── content/
+│   ├── pages/home/
+│   └── posts/YYYY/slug/
+│       └── index.md
+├── components/
+├── layouts/
+│   ├── SiteLayout.astro
+│   └── PostLayout.astro
+└── pages/
+    ├── index.astro
+    └── [...slug].astro
+```
+
+詳細な追加・更新・検証ルールは [AGENTS.md](AGENTS.md) を参照してください。

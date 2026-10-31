@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PostLayout from '../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  const slugs = new Set<string>();
+  for (const post of posts) {
+    const [year, folder] = post.id.split('/');
+    if (year !== String(post.data.publishedAt.getUTCFullYear()) || folder !== post.data.slug) {
+      throw new Error(`Article directory must match publication year and slug: ${post.id}`);
+    }
+    if (slugs.has(post.data.slug) || ['assets', 'images', 'wp-content'].includes(post.data.slug)) {
+      throw new Error(`Duplicate or reserved slug: ${post.data.slug}`);
+    }
+    slugs.add(post.data.slug);
+  }
+  return posts.filter(post => !post.data.draft).map(post => ({
+    params: { slug: post.data.slug }, props: { post },
+  }));
+}
+
+interface Props { post: CollectionEntry<'posts'> }
+const { post } = Astro.props;
+const bodies = import.meta.glob('../content/posts/**/body.html', { query: '?raw', import: 'default' });
+const legacyFiles = import.meta.glob('../layouts/legacy/**/*.{html,json}', { query: '?raw', import: 'default' });
+const rawBody = post.data.format === 'html'
+  ? await bodies[`../content/posts/${post.id}/body.html`]?.() as string | undefined
+  : undefined;
+if (post.data.format === 'html' && rawBody === undefined) throw new Error(`Missing body.html: ${post.id}`);
+const { Content } = await render(post);
+async function legacyFile(name: string) {
+  const load = legacyFiles[`../layouts/legacy/${post.data.legacyLayout}/${name}`];
+  if (!load) throw new Error(`Missing legacy layout file: ${name}`);
+  return await load() as string;
+}
+const legacy = post.data.legacyLayout ? {
+  head: await legacyFile('head.html'),
+  content: await legacyFile('content.html'),
+  tail: await legacyFile('tail.html'),
+  page: JSON.parse(await legacyFile('page.json')),
+} : null;
+if (legacy && post.data.format !== 'html') throw new Error('Legacy layouts require format: html');
+---
+{legacy ? (
+  <SiteLayout head={legacy.head} tail={legacy.tail} bodyAttributes={legacy.page.bodyAttributes}>
+    <Fragment set:html={legacy.content.replace('<!-- ARTICLE_BODY -->', rawBody!)} />
+  </SiteLayout>
+) : (
+  <PostLayout post={post}>
+    {rawBody !== undefined ? <Fragment set:html={rawBody} /> : <Content />}
+  </PostLayout>
+)}
