@@ -95,7 +95,7 @@ CloudflareのWorkers & PagesからGitHubのリポジトリを接続した。主�
 
 トップページやサイドバーの新着記事は、記事データから生成するようにした。これで記事を追加するたびに、一覧のHTMLを手で直す必要がなくなる。
 
-静的サイト内で使える検索も用意した。既存のコメントは残し、新しいコメントの受付は停止した。お問い合わせは、もともとのGoogleフォームを引き続き使っている。
+静的サイト内で使える検索も用意した。お問い合わせは、もともとのGoogleフォームを引き続き使っている。
 
 移行後はビルドだけでなく、内部リンクや画像、見出しへのリンクが切れていないかも検査した。
 
@@ -118,7 +118,6 @@ npm run check:site
 | `SITE_ENV` | 本番では `production` |
 | `SITE_URL` | 本番サイトのHTTPS URL。末尾のスラッシュは不要 |
 | `GA_MEASUREMENT_ID` | 既存のGA4測定ID |
-| `GOOGLE_SITE_VERIFICATION` | Search ConsoleでHTMLタグ認証を使う場合の確認コード |
 
 これらはこのリポジトリで使う設定名。Astroがビルド時に読み取るので、Cloudflareの **Settings → Build → Build Variables and Secrets** に設定し、mainを再ビルドする。通常の実行時変数に追加するだけでは反映されない。
 
