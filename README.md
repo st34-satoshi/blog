@@ -76,7 +76,7 @@ Cloudflare Workers BuildsでGitHubリポジトリを接続し、以下を設定�
 
 | 設定 | 値 |
 | --- | --- |
-| Worker名 | `stu345-blog`（wrangler.jsoncと一致させる） |
+| Worker名 | `blog`（wrangler.jsoncと一致させる） |
 | リポジトリ | `st34-satoshi/blog` |
 | Production branch | `main` |
 | Root directory | リポジトリのルート |
@@ -84,7 +84,7 @@ Cloudflare Workers BuildsでGitHubリポジトリを接続し、以下を設定�
 | Deploy command | `npx wrangler deploy` |
 | Node.js | `.nvmrc` の24を使用 |
 
-依存パッケージはCloudflareがインストールします。接続後はmain更新時に自動デプロイされ、`https://stu345-blog.<アカウントのサブドメイン>.workers.dev` で閲覧できます。GitHub連携の認証はCloudflare側で設定します。
+依存パッケージはCloudflareがインストールします。接続後はmain更新時に自動デプロイされ、`https://blog.<アカウントのサブドメイン>.workers.dev` で閲覧できます。GitHub連携の認証はCloudflare側で設定します。
 
 Cloudflareと同じ配信環境でローカル確認するには:
 
