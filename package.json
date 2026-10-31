@@ -12,7 +12,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "preview:cloudflare": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "check:files": "node scripts/check-file-sizes.mjs"
   },
   "dependencies": {
     "astro": "^7.4.4"

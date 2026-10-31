@@ -1,0 +1,21 @@
+name: File sizes
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  file-sizes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+      - run: npm run check:files
+        env:
+          FILE_SIZE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
