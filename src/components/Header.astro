@@ -1,0 +1,7 @@
+---
+import markup from './header.html?raw';
+const header = Astro.url.pathname === '/'
+  ? markup
+  : markup.replace(' current-menu-item page_item page-item-9 current_page_item', '');
+---
+<Fragment set:html={header} />

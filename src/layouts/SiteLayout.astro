@@ -1,0 +1,24 @@
+---
+import Header from '../components/Header.astro';
+import footer from '../components/footer.html?raw';
+
+interface Props {
+  head: string;
+  tail: string;
+  bodyAttributes: Record<string, string | boolean>;
+}
+const { head, tail, bodyAttributes } = Astro.props;
+---
+<!doctype html>
+<html lang="ja">
+  <head><Fragment set:html={head} /></head>
+  <body {...bodyAttributes}>
+    <div id="container" class="container cf">
+      <a class="skip-link" href="#main">コンテンツへスキップ</a>
+      <Header />
+      <slot />
+      <Fragment set:html={footer} />
+    </div>
+    <Fragment set:html={tail} />
+  </body>
+</html>

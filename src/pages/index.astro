@@ -1,0 +1,10 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import head from "../content/pages/home/head.html?raw";
+import content from "../content/pages/home/content.html?raw";
+import tail from "../content/pages/home/tail.html?raw";
+import page from "../content/pages/home/page.json";
+---
+<SiteLayout head={head} tail={tail} bodyAttributes={page.bodyAttributes}>
+  <Fragment set:html={content} />
+</SiteLayout>
