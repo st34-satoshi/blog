@@ -67,3 +67,36 @@ src/
 ```
 
 詳細な追加・更新・検証ルールは [AGENTS.md](AGENTS.md) を参照してください。
+
+## Cloudflareへのデプロイ
+
+Cloudflare WorkersのStatic Assetsで `dist/` を配信します。設定は `wrangler.jsonc` で管理します。記事URLは末尾スラッシュ付きで配信され、存在しないURLは404を返します。
+
+Cloudflare Workers BuildsでGitHubリポジトリを接続し、以下を設定します。
+
+| 設定 | 値 |
+| --- | --- |
+| Worker名 | `stu345-blog`（wrangler.jsoncと一致させる） |
+| リポジトリ | `st34-satoshi/blog` |
+| Production branch | `main` |
+| Root directory | リポジトリのルート |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Node.js | `.nvmrc` の24を使用 |
+
+依存パッケージはCloudflareがインストールします。接続後はmain更新時に自動デプロイされ、`https://stu345-blog.<アカウントのサブドメイン>.workers.dev` で閲覧できます。GitHub連携の認証はCloudflare側で設定します。
+
+Cloudflareと同じ配信環境でローカル確認するには:
+
+```sh
+npm run preview:cloudflare
+```
+
+CLIから手動で公開する場合はCloudflareへログインしてから実行します。
+
+```sh
+npx wrangler login
+npm run deploy
+```
+
+[Workers Buildsの公式設定ガイド](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
