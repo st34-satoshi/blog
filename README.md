@@ -1,7 +1,8 @@
 # blog
-Notes to Forgetの静的ブログ
 
-Astroで構築する静的ブログです。
+個人ブログ「Notes to Forget」のリポジトリです。Astroで構築し、Cloudflare Workersで配信しています。
+
+サイト：[Notes to Forget](https://blog.stu345.com/)
 
 ## 開発
 
