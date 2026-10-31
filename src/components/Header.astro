@@ -1,7 +1,11 @@
 ---
 import markup from './header.html?raw';
-const header = Astro.url.pathname === '/'
+let header = Astro.url.pathname === '/'
   ? markup
   : markup.replace(' current-menu-item page_item page-item-9 current_page_item', '');
+if (Astro.url.pathname === '/about/') {
+  header = header.replace('menu-item-object-page menu-item-has-no-description"><a href="/about/"',
+    'menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-has-no-description"><a href="/about/" aria-current="page"');
+}
 ---
 <Fragment set:html={header} />

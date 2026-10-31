@@ -1,8 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "stu345-blog",
+  "name": "blog",
   "compatibility_date": "2026-10-30",
   "workers_dev": true,
+  "previews": {},
   "assets": {
     "directory": "./dist",
     "html_handling": "force-trailing-slash",

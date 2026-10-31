@@ -12,7 +12,7 @@ export async function getStaticPaths() {
     if (year !== String(post.data.publishedAt.getUTCFullYear()) || folder !== post.data.slug) {
       throw new Error(`Article directory must match publication year and slug: ${post.id}`);
     }
-    if (slugs.has(post.data.slug) || ['assets', 'images', 'wp-content'].includes(post.data.slug)) {
+    if (slugs.has(post.data.slug) || ['about', 'assets', 'images', 'wp-content'].includes(post.data.slug)) {
       throw new Error(`Duplicate or reserved slug: ${post.data.slug}`);
     }
     slugs.add(post.data.slug);
