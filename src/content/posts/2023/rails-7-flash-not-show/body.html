@@ -1,0 +1,24 @@
+<p class="wp-block-paragraph">Rails 7でflashやflash.nowが表示されなくなったので、その原因と解決方法。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">発生した問題</a></li><li><a href="#toc2" tabindex="0">解決法</a><ol><li><a href="#toc3" tabindex="0">他の解決方法</a></li></ol></li><li><a href="#toc4" tabindex="0">原因</a><ol><li><a href="#toc5" tabindex="0">ログの調査</a></li></ol></li><li><a href="#toc6" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">発生した問題</span></h2>
+<p class="wp-block-paragraph">Rails 7でflashやflash.nowが表示されない。</p>
+<p class="wp-block-paragraph">pathによっては表示される場合もある。</p>
+<h2 class="wp-block-heading"><span id="toc2">解決法</span></h2>
+<p class="wp-block-paragraph">turbo-railsを削除する。</p>
+<p class="wp-block-paragraph">必要があれば関連するjsファイルなどを削除する。</p>
+<h3 class="wp-block-heading"><span id="toc3">他の解決方法</span></h3>
+<p class="wp-block-paragraph">turboを使いたい場合は、そのやり方もあるが、今回は解説しない。</p>
+<p class="wp-block-paragraph">参考サイト: </p>
+<p class="wp-block-paragraph"><a href="https://qiita.com/yuppymam/items/c2be0410f33cf0fd562f">Rails7 Hotwireを使用してフラッシュメッセージを機能させる！Turbo Rails Tutorial をやってみた（7章） – Qiita</a></p>
+<p class="wp-block-paragraph"><a href="https://bramjetten.dev/articles/flash-messages-with-hotwire-and-turbo-streams">Flash messages with Hotwire and Turbo Streams</a></p>
+<h2 class="wp-block-heading"><span id="toc4">原因</span></h2>
+<p class="wp-block-paragraph">turbo-railsを使うとリクエストが1回だけではなく2回になってflashメッセージが表示されなくなるっぽい。</p>
+<p class="wp-block-paragraph">pathによってflashが表示されたりされなかったりするのは、jsファイルを使っているかどうかによる。</p>
+<h3 class="wp-block-heading"><span id="toc5">ログの調査</span></h3>
+<p class="wp-block-paragraph">Railsのログを見るとリクエストが２回入っている。おそらくこれが原因でflashが表示できない。</p>
+<h2 class="wp-block-heading"><span id="toc6">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://zenn.dev/shita1112/books/cat-hotwire-turbo/viewer/abstract#turbo-rails%E3%81%A8%E3%81%AF%EF%BC%9F">Hotwireとは？｜猫でもわかるHotwire入門 Turbo編</a></li><li><a href="https://stackoverflow.com/questions/70921317/how-can-i-disable-hotwire-turbo-the-turbolinks-replacement-for-all-forms-in">How can I disable Hotwire / Turbo (the Turbolinks replacement) for all forms in a Rails application? – Stack Overflow</a></li><li><a href="https://qiita.com/yuppymam/items/c2be0410f33cf0fd562f">Rails7 Hotwireを使用してフラッシュメッセージを機能させる！Turbo Rails Tutorial をやってみた（7章） – Qiita</a></li><li><a href="https://qiita.com/d0ne1s/items/ac50363cd2e6027e53e1">【Rails】redirect_toで変数やflashを渡す – Qiita</a></li></ul>

@@ -1,0 +1,28 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">概要</a></li><li><a href="#toc2" tabindex="0">解決策</a></li><li><a href="#toc3" tabindex="0">原因</a><ol><li><a href="#toc4" tabindex="0">chart-js-railsを使わないでchart.jsをインストールした</a></li><li><a href="#toc5" tabindex="0">jsのコンパイラとしてUglifierを使用していた</a></li></ol></li><li><a href="#toc6" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">概要</span></h2>
+<p class="wp-block-paragraph">Railsで<a data-id="https://www.npmjs.com/package/chart.js?activeTab=readme" data-type="URL" href="https://www.npmjs.com/package/chart.js?activeTab=readme" rel="noopener" target="_blank">chart.js</a>を使おうとして、</p>
+<pre class="wp-block-code"><code>bundle exec rails assets:precompile</code></pre>
+<p class="wp-block-paragraph">を実行すると <span class="marker-red"><span class="bold-red">Uglifier::Error:</span></span> が発生する。</p>
+<p class="wp-block-paragraph">production環境だとエラーだが、<span class="bold-green">develop環境</span>だとエラーなく<span class="bold-green">使える</span>。</p>
+<h2 class="wp-block-heading"><span id="toc2">解決策</span></h2>
+<p class="wp-block-paragraph">config/environments/production.rb で<span class="bold-green">コンパイラ</span>を<span class="bold-green">terser</span>にする。</p>
+<pre class="wp-block-code"><code>config.assets.js_compressor = :terser</code></pre>
+<p class="wp-block-paragraph">terserのインストール方法は <a href="https://github.com/ahorek/terser-ruby">ahorek/terser-ruby</a></p>
+<h2 class="wp-block-heading"><span id="toc3">原因</span></h2>
+<h3 class="wp-block-heading"><span id="toc4">chart-js-railsを使わないでchart.jsをインストールした</span></h3>
+<p class="wp-block-paragraph"><a href="https://rubygems.org/gems/chart-js-rails/versions/0.1.0?locale=ja">chart-js-rails</a>を使用すれば、この問題は発生せずにchart.jsを使用できる。今回は余計なgemを使いたくなかったので、<span class="bold-red">chart-js-railsを使用しなかった</span>が、これが失敗の原因の一つだった。</p>
+<p class="wp-block-paragraph">chart.jsは yarn add chart.jsでインストールし、app/assets/javascripts/application.jsに</p>
+<pre class="wp-block-code"><code>//= require chart.js/dist/chart.min.js</code></pre>
+<p class="wp-block-paragraph">を追加して、インストールした。</p>
+<h3 class="wp-block-heading"><span id="toc5">jsのコンパイラとしてUglifierを使用していた</span></h3>
+<p class="wp-block-paragraph">よくわかっていないが、<span class="bold-green">terserを使ったらうまくいった</span>。</p>
+<p class="wp-block-paragraph">エラーになる <meta charset="utf-8"/>config/environments/production.rb の設定</p>
+<pre class="wp-block-code"><code>config.assets.js_compressor = <span class="bold-red">Uglifier.new(harmony: true)</span></code></pre>
+<h2 class="wp-block-heading"><span id="toc6">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

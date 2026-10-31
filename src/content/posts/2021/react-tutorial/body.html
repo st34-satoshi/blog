@@ -1,0 +1,37 @@
+<p class="wp-block-paragraph">オンラインのボードゲーム(OXゲーム)とかを作りたいと思って、Unityで作ったが、Chromeやモバイルで動かないので、Reactで作りたくなった。<a data-id="https://ja.reactjs.org/tutorial/tutorial.html" data-type="URL" href="https://ja.reactjs.org/tutorial/tutorial.html" rel="noopener" target="_blank">Reactのチュートリアル</a>がちょうどOXゲームを作るものだったのでやってみる。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">1日目</a></li><li><a href="#toc2" tabindex="0">2日目</a><ol><li><a href="#toc3" tabindex="0">メモ: 関数コンポーネントとクラスコンポーネント</a></li></ol></li><li><a href="#toc4" tabindex="0">3日目</a></li><li><a href="#toc5" tabindex="0">今後</a></li><li><a href="#toc6" tabindex="0">終わりに</a></li><li><a href="#toc7" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">1日目</span></h2>
+<p class="wp-block-paragraph">コンセプトからひとつひとつ学んでいきたい人のためのガイド<a data-id="https://ja.reactjs.org/docs/hello-world.html" data-type="URL" href="https://ja.reactjs.org/docs/hello-world.html" rel="noopener" target="_blank">Hello World – React</a>を読んでみるが、途中で飽きて、読み飛ばすことにする。</p>
+<p class="wp-block-paragraph">開発をブラウザで行うか、ローカル環境で行うか選べるが、将来的にローカルで開発することを考えて、ローカル環境を構築する。<a data-id="https://ja.reactjs.org/tutorial/tutorial.html#setup-option-2-local-development-environment" data-type="URL" href="https://ja.reactjs.org/tutorial/tutorial.html#setup-option-2-local-development-environment" rel="noopener" target="_blank">チュートリアル</a>に従って問題なく環境構築できた。(Node.jsのインストールは<a data-id="https://qiita.com/kyosuke5_20/items/c5f68fc9d89b84c0df09" data-type="URL" href="https://qiita.com/kyosuke5_20/items/c5f68fc9d89b84c0df09" rel="noopener" target="_blank">MacにNode.jsをインストール – Qiita</a>を参考にした。)ローカル環境で実行できたので1日目は終了。</p>
+<p class="wp-block-paragraph">40分くらい。</p>
+<h2 class="wp-block-heading"><span id="toc2">2日目</span></h2>
+<p class="wp-block-paragraph"><a data-id="https://ja.reactjs.org/tutorial/tutorial.html#overview" data-type="URL" href="https://ja.reactjs.org/tutorial/tutorial.html#overview" rel="noopener" target="_blank">概要</a>と<a data-id="https://ja.reactjs.org/tutorial/tutorial.html#completing-the-game" data-type="URL" href="https://ja.reactjs.org/tutorial/tutorial.html#completing-the-game" rel="noopener" target="_blank">ゲームを完成させる</a>をやる。なんとなくReactがどんなものかわかってきた。</p>
+<p class="wp-block-paragraph">1時間くらい。</p>
+<h3 class="wp-block-heading"><span id="toc3">メモ: 関数コンポーネントとクラスコンポーネント</span></h3>
+<pre class="wp-block-code"><code>class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</code></pre>
+<p class="wp-block-paragraph">↑のthis.propsが何かわからないなら、<a data-id="https://ja.reactjs.org/docs/components-and-props.html#function-and-class-components" data-type="URL" href="https://ja.reactjs.org/docs/components-and-props.html#function-and-class-components" rel="noopener" target="_blank">ドキュメント</a>にわかりやすく書いてある。↑は↓と等価。</p>
+<pre class="wp-block-code"><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;
+}</code></pre>
+<p class="wp-block-paragraph">コンポーネントにはpropsとstateがあるらしい。 React Devtools 拡張機能を使用してブラウザから確認できる。</p>
+<h2 class="wp-block-heading"><span id="toc4">3日目</span></h2>
+<p class="wp-block-paragraph"><a data-id="https://ja.reactjs.org/tutorial/tutorial.html#adding-time-travel" data-type="URL" href="https://ja.reactjs.org/tutorial/tutorial.html#adding-time-travel" rel="noopener" target="_blank">タイムトラベル機能の追加</a>を行う。Reactについてなんとなくわかった気がする。</p>
+<p class="wp-block-paragraph">30分くらい。</p>
+<h2 class="wp-block-heading"><span id="toc5">今後</span></h2>
+<p class="wp-block-paragraph">サーバと通信できるOXゲームに改良する。</p>
+<h2 class="wp-block-heading"><span id="toc6">終わりに</span></h2>
+<p class="wp-block-paragraph">初めてReactを試した。</p>
+<p class="wp-block-paragraph">JavaScriptと比べて良さがいまいちわからなかった。</p>
+<p class="wp-block-paragraph">チュートリアルとしてはとてもわかりやすかったので、今後また使うことがあれば、もう一度このチュートリアルをやるのは良さそう。</p>
+<h2 class="wp-block-heading"><span id="toc7">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

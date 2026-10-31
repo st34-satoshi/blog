@@ -1,0 +1,58 @@
+<p class="wp-block-paragraph">Stable Diffusionのimg2imgを使ったサービスが人気がありそうなので作ってみる。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">ゴール</a></li><li><a href="#toc2" tabindex="0">GCPの環境構築</a><ol><li><a href="#toc3" tabindex="0">GCPでプロジェクトの作成</a></li><li><a href="#toc4" tabindex="0">gcloudコマンドが使えるようにする</a></li><li><a href="#toc5" tabindex="0">Deep Learning VMの作成</a></li><li><a href="#toc6" tabindex="0">sshする</a></li></ol></li><li><a href="#toc7" tabindex="0">FastAPIでHello World</a><ol><li><a href="#toc8" tabindex="0">FastAPIプロジェクトの作成</a></li><li><a href="#toc9" tabindex="0">GCPにクローンする</a></li><li><a href="#toc10" tabindex="0">GCPのインスタンスでサーバーを起動</a></li><li><a href="#toc11" tabindex="0">外部からアクセス可能にする</a><ol><li><a href="#toc12" tabindex="0">http, httpsを許可</a></li><li><a href="#toc13" tabindex="0">nginxをインストール</a></li></ol></li><li><a href="#toc14" tabindex="0">外部からのアクセスを内部のFastAPIに繋げる</a></li><li><a href="#toc15" tabindex="0">ssl</a></li></ol></li><li><a href="#toc16" tabindex="0">Stable Diffusionのimg2imgを使ってみる</a></li><li><a href="#toc17" tabindex="0">終わりに</a></li><li><a href="#toc18" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">ゴール</span></h2>
+<p class="wp-block-paragraph">顔画像をポストして似顔絵イラストが複数枚返ってくるAPIを作る。</p>
+<p class="wp-block-paragraph">画像生成に時間がかかるようなら、tokenを返して、そのtokenを使用して生成された画像にアクセスできるようにする。</p>
+<h2 class="wp-block-heading"><span id="toc2">GCPの環境構築</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">GCPでプロジェクトの作成</span></h3>
+<p class="wp-block-paragraph">プロジェクト一覧から新しいプロジェクトを選択して適当に名前をつけて作成する</p>
+<h3 class="wp-block-heading"><span id="toc4">gcloudコマンドが使えるようにする</span></h3>
+<p class="wp-block-paragraph"><a href="https://cloud.google.com/sdk/docs/install?hl=ja">gcloud CLI をインストールする  |  Google Cloud</a></p>
+<h3 class="wp-block-heading"><span id="toc5">Deep Learning VMの作成</span></h3>
+<p class="wp-block-paragraph">結構大変。デフォルト設定のままぽちぽち進めると、「 GPU グローバル割り当てを GPU 1 個超過しています 」って怒られる。</p>
+<p class="wp-block-paragraph">IAMと管理-&gt;割り当て からgpuでフィルタして使用するregionのgpuの上限数を増やせば解決する。</p>
+<h3 class="wp-block-heading"><span id="toc6">sshする</span></h3>
+<p class="wp-block-paragraph">VMインスタンスを選択するとsshが上に表示される。ブラウザでsshしても良いのたが、gcloudコマンドラインを使用してターミナルからsshする。</p>
+<p class="wp-block-paragraph">一応、lscpu, lspciコマンドでcpuとgpuの情報を確認しとく。</p>
+<h2 class="wp-block-heading"><span id="toc7">FastAPIでHello World</span></h2>
+<p class="wp-block-paragraph">とりあえずFastAPIにする。今回はHTMLが送れてimg2imgが動けば問題ない。Pythonサーバーは必要そうなのでFastAPIにする。</p>
+<h3 class="wp-block-heading"><span id="toc8">FastAPIプロジェクトの作成</span></h3>
+<p class="wp-block-paragraph">Githubでプロジェクトを作って、FastAPIのHello Worldを表示する。localhostでできたらcommitしてpushする。</p>
+<h3 class="wp-block-heading"><span id="toc9">GCPにクローンする</span></h3>
+<p class="wp-block-paragraph">GitHubのリポジトリをprivateで作っていたらトークンを発行してGCP上にプロジェクトをクローンする。GitHubにログインしても良いがトークンを発行する方が好き。</p>
+<p class="wp-block-paragraph">参考: <a href="/github-clone_using_token/">Githubのリポジトリにトークンを使ってアクセスする | Notes to Forget</a></p>
+<p class="wp-block-paragraph">/var/wwwディレクトリを作成して権限を777にしてクローンする。</p>
+<h3 class="wp-block-heading"><span id="toc10">GCPのインスタンスでサーバーを起動</span></h3>
+<p class="wp-block-paragraph">最初はlocalhostで起動する。起動するプロセスと起動を確認するプロセスが必要なのでtmuxを使用する。一つ目のウィンドウでFastAPIを起動し(uvicorn main:app –reload)、 二つ目のウィンドウでFastAPIの起動を確認する(curl http://localhost:8000)。</p>
+<h3 class="wp-block-heading"><span id="toc11">外部からアクセス可能にする</span></h3>
+<p class="wp-block-paragraph">localhostだけではどうしようもないので外部からもアクセス可能にする。</p>
+<h4 class="wp-block-heading"><span id="toc12">http, httpsを許可</span></h4>
+<p class="wp-block-paragraph">デフォルトではHTTP, HTTPSが許可されてないようなので、GCPのインスタンスを選択して編集からAllow HTTP trafficとAllow HTTPS trafficを許可する。</p>
+<h4 class="wp-block-heading"><span id="toc13">nginxをインストール</span></h4>
+<p class="wp-block-paragraph">osを確認(cat /etc/os-release)したらDebianだった。nginxのインストール方法を調べてインストールする(sudo apt install nginx)。</p>
+<p class="wp-block-paragraph">nginxを起動(sudo service nginx start)して、ipアドレスにアクセスするとWelcome to nginx!が表示される。</p>
+<p class="wp-block-paragraph">参考: <a href="/hello-nginx/">Hello Nginx | Notes to Forget</a></p>
+<p class="wp-block-paragraph">IPアドレスはGCPのVMインスタンスのネットワーク インターフェースに書いてある。エフェメラル(固定IP)に勝手になっていて嬉しい。</p>
+<p class="wp-block-paragraph">ドメインを持っていればDNSの設定をする。</p>
+<h3 class="wp-block-heading"><span id="toc14">外部からのアクセスを内部のFastAPIに繋げる</span></h3>
+<p class="wp-block-paragraph">nginxのconf.d/portrait-ai-api.confを作成して繋げる。今回は簡単のために proxy_pass http://localhost:8000; みたいにportを指定する。時間があればソケットでやった方が良いと思う。</p>
+<h3 class="wp-block-heading"><span id="toc15">ssl</span></h3>
+<p class="wp-block-paragraph">httpsでアクセスできるようにする。</p>
+<p class="wp-block-paragraph">参考サイト: <a href="/server-ssl/">sudo systemctl status certbot.timer</a></p>
+<h2 class="wp-block-heading"><span id="toc16">Stable Diffusionのimg2imgを使ってみる</span></h2>
+<p class="wp-block-paragraph">やっと環境構築などが終わったのでStable Diffusionを使ってみる。</p>
+<p class="wp-block-paragraph"><a href="https://github.com/CompVis/stable-diffusion">CompVis/stable-diffusion: A latent text-to-image diffusion model</a> GitHubのReadmeを忠実に実行する。モデルはwgetコマンドで取得する。</p>
+<p class="wp-block-paragraph">img2imgを実行すると以下のエラーが出る。</p>
+<pre class="wp-block-code"><code>RuntimeError: CUDA out of memory. Tried to allocate 8.00: If reserved memory is &gt;&gt; allocated memory try setting max_split_size_mb to avoid fragmentation. See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF</code></pre>
+<p class="wp-block-paragraph">pythonの実行の前に、PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:100をつけると解決するって書いてある記事もあったが解決しない。</p>
+<p class="wp-block-paragraph">結論、画像のサイズが大きすぎるとエラーになるみたい。512*256だと動いたが、1024*512だとメモリが足りなかった。256*128だと画像サイズが小さすぎて出力される画像が意味わからんものになった。</p>
+<h2 class="wp-block-heading"><span id="toc17">終わりに</span></h2>
+<p class="wp-block-paragraph">途中までで完成しなかったので、いつか完成させる。</p>
+<h2 class="wp-block-heading"><span id="toc18">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-web-service/" title="Webアプリ開発関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" src="/wp-content/uploads/2020/11/programming-145x90.jpg" width="145"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">Webアプリ開発関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">製作物・プロダクト一覧開発時に役立つサイトサーバー構築nginxでunix sockを使用してリクエストを受け付ける | Notes to Forgethttp-serverで1分でサーバーをたてる | Notes to Forget1分で...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2023.01.24</div></div></div></div></a>
+</div></figure>

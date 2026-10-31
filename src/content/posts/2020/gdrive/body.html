@@ -1,0 +1,25 @@
+<p class="wp-block-paragraph">サーバを使用しているとき、Google Driveにサーバから直接アクセスしたいことがある。gdriveを使用した方法を説明する。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">Goのインストトール</a></li><li><a href="#toc2" tabindex="0">gdriveのインストール</a></li><li><a href="#toc3" tabindex="0">Google Driveの認証</a></li><li><a href="#toc4" tabindex="0">gdriveでよく使うコマンド</a></li><li><a href="#toc5" tabindex="0">参考</a></li><li><a href="#toc6" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">Goのインストトール</span></h2>
+<p class="wp-block-paragraph">gdriveはgoで書かれているためGoをインストールする。詳しくはこちらが参考になる。<a data-id="https://golang.org/doc/install" data-type="URL" href="https://golang.org/doc/install" rel="noopener" target="_blank">Getting Started – The Go Programming Language</a> 例えば、</p>
+<ol class="wp-block-list"><li><code>wget https://golang.org/dl/go1.15.linux-amd64.tar.gz</code></li><li><code>tar -C ./ -xzf go1.15.linux-amd64.tar.gz </code></li><li><code>export PATH=$PATH:/usr/local/go/bin</code></li></ol>
+<h2 class="wp-block-heading"><span id="toc2">gdriveのインストール</span></h2>
+<p class="wp-block-paragraph">こちらのgithubページが参考になる。<a href="https://github.com/prasmussen/gdrive">https://github.com/prasmussen/gdrive</a></p>
+<ol class="wp-block-list"><li><code>go get github.com/prasmussen/gdrive</code></li><li>$GOPATH/binのパスを通す <code>export PATH=$PATH:/path/to/go/bin</code></li></ol>
+<p class="wp-block-paragraph"><code>gdrive version</code>でバージョン情報が出力されればOK.</p>
+<h2 class="wp-block-heading"><span id="toc3">Google Driveの認証</span></h2>
+<p class="wp-block-paragraph">gdrive listから認証しようとすると「<em>このアプリでは「Google でログイン」機能が一時的に無効</em>」とエラーが出る。解決方法はこちらが参考になる。<a href="https://github.com/prasmussen/gdrive/issues/546#issuecomment-626208303" rel="noopener" target="_blank">https://github.com/prasmussen/gdrive/issues/546#issuecomment-626208303</a></p>
+<p class="wp-block-paragraph"><code>gdrive list</code>でファイルの一覧が表示されれば成功。</p>
+<h2 class="wp-block-heading"><span id="toc4">gdriveでよく使うコマンド</span></h2>
+<ul class="wp-block-list"><li>ファイルのダウンロード: <code>$ gdrive download file_id</code></li><li>ディレクトリのダウンロード: <code>$ gdrive download --recursive directory_id</code></li><li>ディレクトリのファイルリスト: <code>$ gdrive list --query " 'IdOfTheParentFolder' in parents"</code></li><li>ファイルのアップロード: <code>$ gdrive upload -p IdOfTheParentFolder filePath</code></li></ul>
+<h2 class="wp-block-heading"><span id="toc5">参考</span></h2>
+<p class="wp-block-paragraph">こちらも参考にしました。</p>
+<ul class="wp-block-list"><li><a data-id="https://qiita.com/kumasun/items/5973ccefbffdbc243abc" data-type="URL" href="https://qiita.com/kumasun/items/5973ccefbffdbc243abc" rel="noopener" target="_blank">Google Driveをコマンドラインから扱う(Gdrive使用)</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc6">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

@@ -1,0 +1,44 @@
+<p class="wp-block-paragraph">expressを使用するととても簡単にwebサーバーを立てられる。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">やること</a><ol><li><a href="#toc2" tabindex="0">Foreverの使用</a></li></ol></li><li><a href="#toc3" tabindex="0">参考サイト</a></li><li><a href="#toc4" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">やること</span></h2>
+<ul class="wp-block-list"><li>$ mkdir myapp</li><li>$ cd myapp</li><li>$ npm init (全てそのままエンターで良い)</li><li>$ npm install express</li></ul>
+<p class="wp-block-paragraph">app.jsという名前で以下のファイルを作る</p>
+<pre class="wp-block-code"><code>const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) =&gt; {
+  res.send('Hello World!')
+})
+
+app.listen(port, () =&gt; {
+  console.log(`Example app listening at http://localhost:${port}`)
+})</code></pre>
+<ul class="wp-block-list"><li>$ node app.js</li><li>access http://localhost:3000/</li></ul>
+<p class="wp-block-paragraph">これで Hello World! が出力される。</p>
+<h3 class="wp-block-heading"><span id="toc2">Foreverの使用</span></h3>
+<p class="wp-block-paragraph">このままでも良いが、バックグラウンドで永続化できるようにforeverを使用する。</p>
+<ul class="wp-block-list"><li>$ npm install forever</li></ul>
+<p class="wp-block-paragraph">package.jsonに以下のScriptを追加する</p>
+<pre class="wp-block-code"><code>  "scripts": {
+    "start": "forever start app.js",
+    "stop": "forever stop app.js"
+  }</code></pre>
+<ul class="wp-block-list"><li>$ npm run start</li><li>access http://localhost:3000/</li><li>止めるときは $ npm run stop</li></ul>
+<p class="wp-block-paragraph">foreverをグローバルにインストールするのは不都合が多そうなので今回はやらない。</p>
+<h2 class="wp-block-heading"><span id="toc3">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://expressjs.com/ja/starter/hello-world.html">node app.js</a></li><li><a href="https://expressjs.com/ja/starter/installing.html">Express のインストール</a></li><li><a href="https://www.npmjs.com/package/forever">forever – npm</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc4">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/js-http-server/" title="http-serverで1分でサーバーをたてる"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/02/kids-4934084_640-160x90.jpg" srcset="/wp-content/uploads/2021/02/kids-4934084_640-160x90.jpg 160w, /wp-content/uploads/2021/02/kids-4934084_640-120x68.jpg 120w, /wp-content/uploads/2021/02/kids-4934084_640-320x180.jpg 320w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">http-serverで1分でサーバーをたてる</div><div class="blogcard-snippet internal-blogcard-snippet">静的サーバーをローカルでたてるならhttp-serverを使うのがとても簡単。やることhttp-serverのインストール$ npm init -y$ npm install http-serverファイルの作成sample.txthell...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.10.25</div></div></div></div></a>
+</div></figure>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/parcel-server/" title="1分でParcelを使ってローカルWebサーバーをたてる"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" loading="lazy" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/03/fizzbuzz-160x90.png" srcset="/wp-content/uploads/2021/03/fizzbuzz-160x90.png 160w, /wp-content/uploads/2021/03/fizzbuzz-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">1分でParcelを使ってローカルWebサーバーをたてる</div><div class="blogcard-snippet internal-blogcard-snippet">やることparcelのインストール$ npm init -y$ npm install parcel-bundlerhtmlの作成index.html&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello Parce...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.01.19</div></div></div></div></a>
+</div></figure>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" loading="lazy" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

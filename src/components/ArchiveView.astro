@@ -1,0 +1,72 @@
+---
+import type { Archive } from "../lib/content";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Sidebar from "./Sidebar.astro";
+import EntryCard from "./EntryCard.astro";
+const { archive } = Astro.props as { archive: Archive };
+const pageURL = (n: number) =>
+  n === 1 ? archive.base : `${archive.base}page/${n}/`;
+---
+
+<SiteLayout
+  title={`${archive.title}${archive.page > 1 ? ` | ${archive.page}ページ目` : ""}`}
+  description={archive.description}
+>
+  <div id="content" class="content cf">
+    <div id="content-in" class="content-in wrap">
+      <main id="main" class="main" itemscope itemtype="https://schema.org/Blog">
+        <div class="breadcrumb breadcrumb-category sbp-main-top">
+          <a href="/">ホーム</a>
+        </div>
+        <h1 id="archive-title" class="archive-title">
+          <span class="fa fa-folder-open" aria-hidden="true"></span>
+          {archive.title}
+        </h1>
+        {archive.description && (
+          <div class="category-description" set:html={archive.description} />
+        )}
+        <div id="list" class="list ect-entry-card front-page-type-index">
+          {archive.posts.map((post) => (
+            <EntryCard {post} />
+          ))}
+        </div>
+        <nav class="pagination" aria-label="ページ送り">
+          {archive.page > 1 && (
+            <a class="prev page-numbers" href={pageURL(archive.page - 1)}>
+              前へ
+            </a>
+          )}
+          {Array.from({ length: archive.total }, (_, i) => i + 1)
+            .filter(
+              (n) =>
+                n === 1 ||
+                n === archive.total ||
+                Math.abs(n - archive.page) <= 2,
+            )
+            .map((n, i, ns) => (
+              <>
+                {i > 0 && n - ns[i - 1] > 1 && (
+                  <span class="page-numbers dots">…</span>
+                )}
+                {n === archive.page ? (
+                  <span class="page-numbers current" aria-current="page">
+                    {n}
+                  </span>
+                ) : (
+                  <a class="page-numbers" href={pageURL(n)}>
+                    {n}
+                  </a>
+                )}
+              </>
+            ))}
+          {archive.page < archive.total && (
+            <a class="next page-numbers" href={pageURL(archive.page + 1)}>
+              次へ
+            </a>
+          )}
+        </nav>
+      </main>
+      <Sidebar />
+    </div>
+  </div>
+</SiteLayout>

@@ -1,0 +1,111 @@
+---
+import assets from "./head-assets.html?raw";
+import { production, absolute } from "../lib/site";
+const {
+  title,
+  seoTitle,
+  description = "",
+  image = "",
+  publishedAt,
+  updatedAt,
+} = Astro.props;
+const url = absolute(
+  Astro.url.pathname === "/404/" ? "/404.html" : Astro.url.pathname,
+);
+const ga = import.meta.env.GA_MEASUREMENT_ID;
+const verification = import.meta.env.GOOGLE_SITE_VERIFICATION;
+---
+
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+/>
+<meta name="referrer" content="no-referrer-when-downgrade" />
+<meta name="format-detection" content="telephone=no" />
+<title>{seoTitle || `${title} | Notes to Forget`}</title>
+<meta name="description" content={description} />
+<meta
+  name="robots"
+  content={
+    production && Astro.url.pathname !== "/404/"
+      ? "index, follow, max-image-preview:large"
+      : "noindex, nofollow"
+  }
+/>
+<link rel="canonical" href={url} />
+<meta property="og:type" content={publishedAt ? "article" : "website"} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:site_name" content="Notes to Forget" />
+<meta property="og:locale" content="ja_JP" />
+{image && (
+  <>
+    <meta property="og:image" content={absolute(image)} />
+    <meta name="twitter:image" content={absolute(image)} />
+  </>
+)}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@stu345_self" />
+{publishedAt && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: title,
+      description,
+      url,
+      image: absolute(image),
+      datePublished: publishedAt,
+      dateModified: updatedAt || publishedAt,
+      author: {
+        "@type": "Person",
+        name: "Satoshi",
+        url: absolute("/author/satoshi-admin/"),
+      },
+    }).replaceAll("<", "\\u003c")}
+  />
+)}
+{verification && (
+  <meta name="google-site-verification" content={verification} />
+)}
+<link rel="icon" href="/wp-content/uploads/2021/11/st-fabicon-48x48.png" />
+<link
+  rel="apple-touch-icon"
+  href="/wp-content/uploads/2021/11/st-fabicon-300x300.png"
+/>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="Notes to Forget"
+  href="/feed/"
+/>
+<Fragment set:html={assets} />
+<link rel="stylesheet" href="/assets/custom/site.css" />
+{production && ga && (
+  <>
+    <script
+      is:inline
+      async
+      src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga)}`}
+    ></script>
+    <script is:inline define:vars={{ ga }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", ga);
+    </script>
+  </>
+)}
+{production && (
+  <script
+    is:inline
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2065354794099570"
+    crossorigin="anonymous"
+  ></script>
+)}

@@ -1,0 +1,35 @@
+<p class="wp-block-paragraph">以前買ったWindows10のBTOパソコンを使用しなくなった。そこでUbuntu 20.04をインストールすることにした。WindowsとMac OSしか使用したことがなかったので、Linux系を使用するのはとても楽しみ。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">現在の状況</a></li><li><a href="#toc2" tabindex="0">ゴール</a></li><li><a href="#toc3" tabindex="0">やったこと</a><ol><li><a href="#toc4" tabindex="0">Windows PCの初期化</a></li><li><a href="#toc5" tabindex="0">ブートUSBの作成</a></li><li><a href="#toc6" tabindex="0">BIOS画面の起動</a></li><li><a href="#toc7" tabindex="0">BIOS画面でBoot Option Prioritiesを変更する</a></li><li><a href="#toc8" tabindex="0">初期設定</a></li></ol></li><li><a href="#toc9" tabindex="0">終わりに</a></li><li><a href="#toc10" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">現在の状況</span></h2>
+<p class="wp-block-paragraph">使用していないWindows 10のデスクトップパソコンがある。</p>
+<h2 class="wp-block-heading"><span id="toc2">ゴール</span></h2>
+<p class="wp-block-paragraph">デスクトップパソコンにUbuntu 20.04をインストールして使用する。</p>
+<p class="wp-block-paragraph">Windowsは使用できなくなり、パソコンにあるデータは全て消える。</p>
+<h2 class="wp-block-heading"><span id="toc3">やったこと</span></h2>
+<h3 class="wp-block-heading"><span id="toc4">Windows PCの初期化</span></h3>
+<p class="wp-block-paragraph">いつか使用するかもしれないデータなどは外付けHDDやクラウドに保存する。</p>
+<p class="wp-block-paragraph">必要ないかもしれないが、一応工場出荷状態に初期化する。</p>
+<h3 class="wp-block-heading"><span id="toc5">ブートUSBの作成</span></h3>
+<p class="wp-block-paragraph">普段使用しているパソコン(今回はMac)でブートUSBを作成する。</p>
+<p class="wp-block-paragraph">今回は <a data-id="https://www.balena.io/etcher/" data-type="URL" href="https://www.balena.io/etcher/" rel="noopener" target="_blank">Etcher</a> を使用した。</p>
+<p class="wp-block-paragraph">Ubuntuは <a data-id="http://ftp.kddilabs.jp/Linux/packages/ubuntu-jp/release-cd/releases/20.04/" data-type="URL" href="http://ftp.kddilabs.jp/Linux/packages/ubuntu-jp/release-cd/releases/20.04/" rel="noopener" target="_blank">Index of /Linux/packages/ubuntu-jp/release-cd/releases/20.04</a> からダウンロードした。</p>
+<h3 class="wp-block-heading"><span id="toc6">BIOS画面の起動</span></h3>
+<p class="wp-block-paragraph">パソコンを起動した直後にキーを押すとBIOS画面になるが、そのキーがパソコンごとに違う。今回は「ESC」キーだった。「F2」や「DEL」のこともあるらしい。</p>
+<p class="wp-block-paragraph">この時、ブートUSBは挿してから起動する。</p>
+<h3 class="wp-block-heading"><span id="toc7">BIOS画面でBoot Option Prioritiesを変更する</span></h3>
+<p class="wp-block-paragraph">BIOS画面になったら、Bootの優先順位を変更して、USBを最優先にする。</p>
+<p class="wp-block-paragraph">「F10」で保存して再起動。</p>
+<h3 class="wp-block-heading"><span id="toc8">初期設定</span></h3>
+<p class="wp-block-paragraph">Ubuntuが起動するので、名前やパスワードなど初期設定を行う。</p>
+<p class="wp-block-paragraph">「<a href="https://linuxfan.info/ubuntu-20-04-install-guide" rel="noopener" target="_blank">Ubuntu 20.04 LTSインストールガイド【スクリーンショットつき解説】 | LFI</a>」が参考になる。</p>
+<h2 class="wp-block-heading"><span id="toc9">終わりに</span></h2>
+<p class="wp-block-paragraph">Ubuntuをサーバとして使用したことはあったが、自分のパソコンにインストールしたのは初めて。これから使用するのが楽しみ。</p>
+<p class="wp-block-paragraph">躓くポイントはなく、簡単にできた。</p>
+<p class="wp-block-paragraph">最初は日本語設定にしたが、使用していくうちに英語設定に変えた。</p>
+<p class="wp-block-paragraph">vimやtmuxなどインストールした方がいいものはたくさんあるが、必要な時にインストールすれば良い。</p>
+<h2 class="wp-block-heading"><span id="toc10">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a data-id="https://qiita.com/seigot/items/faea0998e17c40b3a63e" data-type="URL" href="https://qiita.com/seigot/items/faea0998e17c40b3a63e" rel="noopener" target="_blank">Ubuntu20.04LTSのブートUSBをMacで作成する – Qiita</a></li><li><a data-id="https://www.dospara.co.jp/5info/cts_str_pc_bios" data-type="URL" href="https://www.dospara.co.jp/5info/cts_str_pc_bios" rel="noopener" target="_blank">BIOS（バイオス）とは？基本的な知識やBIOS設定画面の起動方法や操作方法などをご紹介｜ドスパラ通販【公式】</a></li><li><a data-id="https://www.passfab.jp/windows-tips/how-to-set-computer-boot-from-usb-drive.html" data-type="URL" href="https://www.passfab.jp/windows-tips/how-to-set-computer-boot-from-usb-drive.html" rel="noopener" target="_blank">【Windows 10】USBドライブからパソコンを起動（boot）する方法</a></li></ul>

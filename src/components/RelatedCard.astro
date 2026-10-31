@@ -1,0 +1,35 @@
+---
+import type { Entry } from "../lib/content";
+import { postPath } from "../lib/content";
+const { post } = Astro.props as { post: Entry };
+const d = post.data;
+---
+
+<a
+  class="related-entry-card-wrap a-wrap border-element cf"
+  href={postPath(post)}
+  title={d.title}
+>
+  <article class="related-entry-card e-card cf post type-post status-publish">
+    <figure class="related-entry-card-thumb card-thumb e-card-thumb">
+      <img
+        src={d.thumbnail || d.image}
+        alt=""
+        width="160"
+        height="90"
+        loading="lazy"
+        decoding="async"
+        class="related-entry-card-thumb-image card-thumb-image wp-post-image"
+      />
+      {d.categories[0] && <span class="cat-label">{d.categories[0]}</span>}
+    </figure>
+    <div class="related-entry-card-content card-content e-card-content">
+      <h3 class="related-entry-card-title card-title e-card-title">
+        {d.title}
+      </h3>
+      <div class="related-entry-card-snippet card-snippet e-card-snippet">
+        {d.description}
+      </div>
+    </div>
+  </article>
+</a>

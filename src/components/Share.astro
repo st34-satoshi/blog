@@ -1,0 +1,49 @@
+<div class="sns-share ss-col-3 bc-brand-color sbc-hide ss-bottom">
+  <div class="sns-share-message">シェアする</div>
+  <div class="sns-share-buttons sns-buttons">
+    {[
+      ["x", "X", "icon-x-corp"],
+      ["facebook", "Facebook", "icon-facebook"],
+      ["hatena", "はてブ", "icon-hatena"],
+      ["line", "LINE", "icon-line"],
+    ].map(([key, label, icon]) => (
+      <a
+        href="#"
+        data-share={key}
+        class={`sns-button share-button ${key === "x" ? "twitter" : key}-button`}
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        aria-label={`${label}でシェア`}
+      >
+        <span class={`social-icon ${icon}`}></span>
+        <span class="button-caption">{label}</span>
+      </a>
+    ))}
+    <button
+      type="button"
+      data-copy-url
+      class="sns-button share-button copy-button"
+    >
+      コピー
+    </button>
+  </div>
+</div>
+<div class="sns-follow bc-brand-color fbc-hide sf-bottom">
+  <div class="sns-follow-message">Follow me</div>
+  <div class="sns-follow-buttons sns-buttons">
+    <a
+      href="/"
+      class="sns-button follow-button website-button website-follow-button-sq"
+      aria-label="著者サイト"
+    >
+      <span class="icon-home-logo"></span>
+    </a>
+    <a
+      href="https://twitter.com/stu345_self"
+      class="sns-button follow-button twitter-button twitter-follow-button-sq x-corp-button x-corp-follow-button-sq"
+      aria-label="Xをフォロー"
+    >
+      <span class="icon-x-corp-logo"></span>
+    </a>
+  </div>
+</div>

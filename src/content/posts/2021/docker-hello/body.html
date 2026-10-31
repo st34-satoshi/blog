@@ -1,0 +1,38 @@
+<p class="wp-block-paragraph">Dockerの使い方をすぐに忘れるので備忘録。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">コマンド</a><ol><li><a href="#toc2" tabindex="0">ローカルにあるイメージのリスト</a></li><li><a href="#toc3" tabindex="0">イメージのダウンロード</a></li><li><a href="#toc4" tabindex="0">コンテナの起動</a><ol><li><a href="#toc5" tabindex="0">コンテナの中に入る</a></li></ol></li><li><a href="#toc6" tabindex="0">コンテナ一覧</a></li><li><a href="#toc7" tabindex="0">使用していないイメージ・コンテナの削除</a></li><li><a href="#toc8" tabindex="0">cpuやmemoryの使用率の確認</a></li></ol></li><li><a href="#toc9" tabindex="0">Dockerfileからイメージの作成</a></li><li><a href="#toc10" tabindex="0">Dockerfileの作成</a></li><li><a href="#toc11" tabindex="0">参考</a></li><li><a href="#toc12" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">コマンド</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">ローカルにあるイメージのリスト</span></h3>
+<pre class="wp-block-code"><code>docker images</code></pre>
+<h3 class="wp-block-heading"><span id="toc3">イメージのダウンロード</span></h3>
+<pre class="wp-block-code"><code>$ docker pull image_name(:tag)</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">コンテナの起動</span></h3>
+<pre class="wp-block-code"><code>$ docker run hello-world</code></pre>
+<h4 class="wp-block-heading"><span id="toc5">コンテナの中に入る</span></h4>
+<pre class="wp-block-code"><code>$ docker run -it ubuntu bash</code></pre>
+<h3 class="wp-block-heading"><span id="toc6">コンテナ一覧</span></h3>
+<pre class="wp-block-code"><code>$ docker ps -a</code></pre>
+<h3 class="wp-block-heading"><span id="toc7">使用していないイメージ・コンテナの削除</span></h3>
+<pre class="wp-block-code"><code>$ docker image prune -a
+$ docker container prune</code></pre>
+<h3 class="wp-block-heading"><span id="toc8">cpuやmemoryの使用率の確認</span></h3>
+<pre class="wp-block-code"><code>docker stats</code></pre>
+<h2 class="wp-block-heading"><span id="toc9">Dockerfileからイメージの作成</span></h2>
+<pre class="wp-block-code"><code>$ docker build ./path/to/Dockerfile</code></pre>
+<p class="wp-block-paragraph">-t オプションでイメージ名を指定。</p>
+<h2 class="wp-block-heading"><span id="toc10">Dockerfileの作成</span></h2>
+<p class="wp-block-paragraph">単純なDockerfile</p>
+<pre class="wp-block-code"><code>FROM ubuntu
+RUN echo "You run docker build"
+CMD echo "You run docker run"</code></pre>
+<p class="wp-block-paragraph">コンテナの中に入り、必要なファイルのインストールなどを行い、うまくいけばDockerfileの RUNに 記述していく。</p>
+<h2 class="wp-block-heading"><span id="toc11">参考</span></h2>
+<ul class="wp-block-list"><li><a data-id="https://qiita.com/zembutsu/items/24558f9d0d254e33088f" data-type="URL" href="https://qiita.com/zembutsu/items/24558f9d0d254e33088f" rel="noopener" target="_blank">Dockerイメージの理解を目指すチュートリアル – Qiita</a></li><li><a data-id="https://qiita.com/shin-ch13/items/1de829288db2670276e8" data-type="URL" href="https://qiita.com/shin-ch13/items/1de829288db2670276e8" rel="noopener" target="_blank">Dockerfileを書いてみる – Qiita</a></li></ul>
+<p class="wp-block-paragraph"></p>
+<h2 class="wp-block-heading"><span id="toc12">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

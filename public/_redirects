@@ -1,0 +1,3 @@
+/feed/ /feed/index.xml 200
+/wp-sitemap.xml /sitemap.xml 301
+/sitemap.html /sitemap/ 301

@@ -1,0 +1,43 @@
+<p class="wp-block-paragraph">チェスの大会に参加するようになってリーグ戦の<span class="bold-blue">対戦相手の決め方</span>や<span class="bold-blue">順位の決め方</span>を正確に知らなかったので、なるべく簡単にまとめる。</p>
+<p class="wp-block-paragraph">間違っているかもしれないのであんまり信頼しないでほしい。。。(間違いがあれば指摘していただけると助かります。)</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">順位の決め方</a><ol><li><a href="#toc2" tabindex="0">Score</a></li><li><a href="#toc3" tabindex="0">その他の順位の決め方</a></li></ol></li><li><a href="#toc4" tabindex="0">対戦相手の決め方</a><ol><li><a href="#toc5" tabindex="0">グループ内での対戦相手の決め方</a></li><li><a href="#toc6" tabindex="0">色(手番)の決め方</a></li></ol></li><li><a href="#toc7" tabindex="0">レーティングの計算方法</a></li><li><a href="#toc8" tabindex="0">終わりに</a></li><li><a href="#toc9" tabindex="0">参考サイト</a></li><li><a href="#toc10" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">順位の決め方</span></h2>
+<h3 class="wp-block-heading"><span id="toc2">Score</span></h3>
+<p class="wp-block-paragraph">順位を決める上で一番優先されるのが<span class="bold-blue">score</span>で、勝敗によって以下のように決まる。</p>
+<ul class="wp-block-list"><li><span class="bold-blue">勝ち: 1</span></li><li><span class="bold-blue">負け: 0</span></li><li><span class="bold-blue">引分: 1/2 (0.5)</span></li></ul>
+<p class="wp-block-paragraph">サッカーとかのリーグ戦だと引き分けは1/3だったと思が、チェスでは1/2になる。参加者の合計scoreは必ず対局数と同じになる。</p>
+<h3 class="wp-block-heading"><span id="toc3">その他の順位の決め方</span></h3>
+<p class="wp-block-paragraph">同じスコアのプレイヤーの順位の決め方。FIDEのページには見つからなかったが、NCSの大会の「<a data-id="https://japanchess.org/2021/09/japan-open-2021/" data-type="URL" href="https://japanchess.org/2021/09/japan-open-2021/">その他の規約</a>」に書いてあった。<span class="bold-blue">Buchholzシステム</span>を採用しているらしい。</p>
+<ul class="wp-block-list"><li>最低得点の対戦相手を除く、<span class="bold-blue">対戦相手の合計スコア</span></li><li><span class="bold-blue">対戦相手の合計スコア</span></li><li>勝った相手のスコアと、ドローだった相手の半分のスコア</li><li>対戦相手のレーティングの合計</li></ul>
+<p class="wp-block-paragraph">同じスコアのときは、大会で勝ちが多いプレイヤーと戦っていた方が有利になる。</p>
+<h2 class="wp-block-heading"><span id="toc4">対戦相手の決め方</span></h2>
+<p class="wp-block-paragraph"><span class="bold-blue">スコアが同じ人</span>でグループを作り、同じグループの人と対戦する。グループが奇数のときは一人が下のグループに所属する。</p>
+<h3 class="wp-block-heading"><span id="toc5">グループ内での対戦相手の決め方</span></h3>
+<p class="wp-block-paragraph"><span class="bold-blue">上位半分</span>と<span class="bold-blue">下位半分</span>のグループに分けて、<span class="bold-blue">別のグループ</span>の人と対戦する。</p>
+<p class="wp-block-paragraph">例えば、同じグループに9人いるとき、順位が1~4の人と5~9の人にグループが分かれ、1-5, 2-6, 3-7, 4-8でペアができ、９位の人は下のグループに移る。</p>
+<p class="wp-block-paragraph">1-5がすでに対戦済みだったら、1-6, 2-5とかになる。この辺のアルゴリズムは複雑で理解するのは難しい。</p>
+<p class="wp-block-paragraph">グループ内で対戦相手を決められなければ下のグループに移る。最後の方は同じスコアのプレイヤー全員と対戦済みなことがあり得る。</p>
+<h3 class="wp-block-heading"><span id="toc6">色(手番)の決め方</span></h3>
+<p class="wp-block-paragraph">対戦相手と比較して、<span class="bold-blue">少ない方の色</span>になる。</p>
+<p class="wp-block-paragraph">色のスコアをそれぞれのプレイヤーが保持してその色のスコアで比較する。色のスコアは白で+1, 黒で-1される。例えば5回戦って白が３回なら自分の色のスコアは+3-2で+1になる。色のスコアを相手と比較して、自分の方が大き(白が多)ければ自分が黒になる。</p>
+<p class="wp-block-paragraph">このほかにも２回連続で 白/黒 だと次は 黒/白 になったりする。</p>
+<p class="wp-block-paragraph"><span class="bold-blue">そもそも色のスコアが 高い/低い プレイヤー同士はマッチングしない</span>(+2くらいだと必ずマイナスのプレイヤーとマッチするはずだが、詳細はよくわかってない)。</p>
+<h2 class="wp-block-heading"><span id="toc7">レーティングの計算方法</span></h2>
+<p class="wp-block-paragraph"><a href="https://japanchess.org/wp-content/uploads/2021/01/Rating%E8%A6%8F%E7%A8%8B2021%E5%B9%B42%E6%9C%88.pdf" rel="noopener" target="_blank">Rating規程2021年2月.pdf</a></p>
+<p class="wp-block-paragraph">こちら↑のサイトに詳しく載っている。対局ごとに、<code><span class="bold-blue">C = (R - PD) * K</span></code> で計算される。C=変動、R=結果(勝=1, 引分=0.5,負=0)、PD=得点の期待値(同じレートなら0.5でレーティングが高い方が1に近づく)、k=20(対局数が少ないと40)。</p>
+<p class="wp-block-paragraph">同じくらいのレーティングの人に勝てば+10, とても強い人に勝てば+18くらいになる。</p>
+<p class="wp-block-paragraph">毎月ごとにまとめて対局ごとにCが計算され、Cの合計が加算される。</p>
+<p class="wp-block-paragraph">思ったより簡単なので自分のレーティングも毎回計算できそうである。</p>
+<h2 class="wp-block-heading"><span id="toc8">終わりに</span></h2>
+<p class="wp-block-paragraph">基本的には対戦相手や順位の決め方は深く考えず、大会の運営に任せて問題ない。</p>
+<p class="wp-block-paragraph">最後の方は引き分けでも勝ちでも良かったりする可能性があるが、あまり深く考えずその対局で最高のパフォーマンスをすることに集中した方が良い気もする。</p>
+<h2 class="wp-block-heading"><span id="toc9">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://chess.swips.eu/" rel="noopener" target="_blank">Swiss system</a></li><li><a href="https://handbook.fide.com/chapter/C0403" rel="noopener" target="_blank">FIDE Handbook C. General Rules and Technical Recommendations for Tournaments / 04. FIDE Swiss Rules / C.04.3 FIDE (Dutch) System /</a></li><li><a href="https://japanchess.org/2021/09/japan-open-2021/" rel="noopener" target="_blank">ジャパンオープン 2021 | National Chess Society of Japan – NCS</a></li></ul>
+<h2 class="wp-block-heading"><span id="toc10">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-chess/" title="チェス関連の記事"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2022/09/pexels-pixabay-139392-160x90.jpg" srcset="/wp-content/uploads/2022/09/pexels-pixabay-139392-160x90.jpg 160w, /wp-content/uploads/2022/09/pexels-pixabay-139392-120x68.jpg 120w, /wp-content/uploads/2022/09/pexels-pixabay-139392-320x180.jpg 320w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">チェス関連の記事</div><div class="blogcard-snippet internal-blogcard-snippet">関連記事</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.09.03</div></div></div></div></a>
+</div></figure>

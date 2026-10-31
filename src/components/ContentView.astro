@@ -1,0 +1,65 @@
+---
+import { render } from "astro:content";
+import type { Entry } from "../lib/content";
+import { content, postPath } from "../lib/content";
+import PostLayout from "../layouts/PostLayout.astro";
+import EntryCard from "./EntryCard.astro";
+const { post } = Astro.props as { post: Entry };
+const files = import.meta.glob("../content/**/body.html", {
+  query: "?raw",
+  import: "default",
+});
+const commentFiles = import.meta.glob("../content/**/comments.html", {
+  query: "?raw",
+  import: "default",
+});
+const prefix = `../content/${post.collection}/${post.id}`;
+const body =
+  post.data.format === "html"
+    ? ((await files[`${prefix}/body.html`]?.()) as string | undefined)
+    : undefined;
+if (post.data.format === "html" && body === undefined)
+  throw new Error(`Missing body: ${post.id}`);
+const comments = post.data.hasComments
+  ? ((await commentFiles[`${prefix}/comments.html`]?.()) as string)
+  : "";
+if (post.data.hasComments && !comments)
+  throw new Error(`Missing comments: ${post.id}`);
+const { Content } = await render(post);
+const { posts, pages } = await content();
+const parts = body?.split("<!-- RECENT_POSTS -->");
+---
+
+<PostLayout {post} {comments}>
+  {post.collection === "pages" && post.data.slug === "sitemap" ? (
+    <>
+      <Fragment set:html={body} />
+      {pages.map((p) => (
+        <p>
+          <a href={postPath(p)}>{p.data.title}</a>
+        </p>
+      ))}
+      <ul>
+        {posts.map((p) => (
+          <li>
+            <a href={postPath(p)}>{p.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
+  ) : parts && parts.length > 1 ? (
+    <>
+      <Fragment set:html={parts[0]} />
+      <div class="new-entry-cards widget-entry-cards no-icon cf">
+        {posts.slice(0, 5).map((p) => (
+          <EntryCard post={p} compact />
+        ))}
+      </div>
+      <Fragment set:html={parts.slice(1).join("")} />
+    </>
+  ) : body !== undefined ? (
+    <Fragment set:html={body} />
+  ) : (
+    <Content />
+  )}
+</PostLayout>

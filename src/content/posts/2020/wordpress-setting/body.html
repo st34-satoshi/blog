@@ -1,0 +1,91 @@
+<p class="wp-block-paragraph">このブログの設定やプラグインのまとめ。WordPressを使いたい人の参考になるはずです。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">バックアップ</a><ol><li><a href="#toc2" tabindex="0">GCPでスナップショット</a></li><li><a href="#toc3" tabindex="0">All-in-One WP Migrationを使用してWordPressのバックアップを作成</a></li><li><a href="#toc4" tabindex="0">標準のツールを使う</a></li></ol></li><li><a href="#toc5" tabindex="0">見た目・書き方</a><ol><li><a href="#toc6" tabindex="0">記事一覧を表示する</a></li><li><a href="#toc7" tabindex="0">メタ情報を非表示にする</a></li></ol></li><li><a href="#toc8" tabindex="0">記事 作成・編集</a><ol><li><a href="#toc9" tabindex="0">ショートコード</a></li><li><a href="#toc10" tabindex="0">MathJax-LaTeX</a></li><li><a href="#toc11" tabindex="0">いいね(投票) ボタンをつける</a></li><li><a href="#toc12" tabindex="0">見出しのスタイルを変更</a></li></ol></li><li><a href="#toc13" tabindex="0">SEO</a><ol><li><a href="#toc14" tabindex="0">Google XML Sitemaps</a></li><li><a href="#toc15" tabindex="0">WebSub/PubSubHubbub</a></li></ol></li><li><a href="#toc16" tabindex="0">セキュリティ対策</a><ol><li><a href="#toc17" tabindex="0">SiteGuard QP Plugin</a></li></ol></li><li><a href="#toc18" tabindex="0">広告</a><ol><li><a href="#toc19" tabindex="0">Google AdSense</a><ol><li><a href="#toc20" tabindex="0">要注意 – 収益に重大な影響が出ないよう、ads.txt ファイルの問題を修正してください。の対応</a></li><li><a href="#toc21" tabindex="0">Error in console says “adsbygoogle.push() error: Only one AdSense head tag supported per page.” の対応</a></li></ol></li><li><a href="#toc22" tabindex="0">Amazon アソシエイト</a></li></ol></li><li><a href="#toc23" tabindex="0">アクセス解析</a><ol><li><a href="#toc24" tabindex="0">Google Search Console</a></li><li><a href="#toc25" tabindex="0">Google Analytics</a></li><li><a href="#toc26" tabindex="0">WP Statistics</a></li></ol></li><li><a href="#toc27" tabindex="0">メール送信・お問い合わせ・プロフィール</a><ol><li><a href="#toc28" tabindex="0">Contact Form 7</a></li><li><a href="#toc29" tabindex="0">WP Mail SMTP プラグイン</a><ol><li><a href="#toc30" tabindex="0">認証がうまくできないとき</a></li></ol></li><li><a href="#toc31" tabindex="0">User Profile Picture</a></li></ol></li><li><a href="#toc32" tabindex="0">終わりに</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">バックアップ</span></h2>
+<p class="wp-block-paragraph">GCPでスナップショットをとる方法とWordPressのバックアップをとる方法を紹介する。</p>
+<h3 class="wp-block-heading"><span id="toc2">GCPでスナップショット</span></h3>
+<p class="wp-block-paragraph">GCPではスナップショットをとったり、スケジュールを決めて自動でスナップショットをとることができる。こちらの記事が参考になる。<a href="https://stpost.net/se/web-se/server/gcp-snapshot" rel="noopener" target="_blank">【WordPress移行】GCPでスナップショットを作成</a> 。ブログを頻繁に更新するわけではないので、期間は一週間にした。</p>
+<p class="wp-block-paragraph">復元するには、インスタンスを新たに立ち上げる必要があるらしい。DNSの設定をしたり、簡単には復元できなそう。</p>
+<h3 class="wp-block-heading"><span id="toc3">All-in-One WP Migrationを使用してWordPressのバックアップを作成</span></h3>
+<p class="wp-block-paragraph">All-in-One WP Migrationというプラグインを使用することで簡単にバックアップを作成したり、復元できる。無料版だと容量に制限があるため、復元するときは有料版が必要になりそう。詳しくはこちらの記事が参考になる。<a data-id="https://lunalunadesign.net/2019/09/48/" data-type="URL" href="https://lunalunadesign.net/2019/09/48/" rel="noopener" target="_blank">【バックアップ編 〜 まとめ】「ワードプレスをワンクリックで爆速お引っ越し！」その3 【 All-in-One WP Migration 】</a></p>
+<h3 class="wp-block-heading"><span id="toc4">標準のツールを使う</span></h3>
+<p class="wp-block-paragraph">ツール-&gt;エクスポートから記事の中身を.xmlファイルでエクスポートできる。</p>
+<p class="wp-block-paragraph">ツール-&gt;インポートで.xmlファイルを読み込める。</p>
+<p class="wp-block-paragraph">インポートするときはphp.iniを編集してupload_max_filesizeを更新する必要がある。</p>
+<p class="wp-block-paragraph">これだとプラグイン・テーマ・画像などは保存できない。最低限書いた内容の記事は保存できる。</p>
+<h2 class="wp-block-heading"><span id="toc5">見た目・書き方</span></h2>
+<h3 class="wp-block-heading"><span id="toc6">記事一覧を表示する</span></h3>
+<p class="wp-block-paragraph">Cocoonというテーマを使用していると、便利なショートコードを使用することができる。new_list というショートコードを使用することで記事一覧を表示することができる。メインページなどでよく使用される。詳しくはこちらの記事が参考になる。<a data-id="https://wp-cocoon.com/new_list/#toc3" data-type="URL" href="https://wp-cocoon.com/new_list/#toc3" rel="noopener" target="_blank">新着記事一覧を表示するショートコードの利用方法</a></p>
+<p class="wp-block-paragraph">人気記事一覧はpopular_list</p>
+<h3 class="wp-block-heading"><span id="toc7">メタ情報を非表示にする</span></h3>
+<p class="wp-block-paragraph">デフォルトでは、メタ情報(ログインボタンとか)がサイドバーに表示される。見る人にとっては関係なく、ログインページにアクセスできてしまうのは良くないので、非表示にした方が良さそう。</p>
+<p class="wp-block-paragraph">WordPressの外観-ウィジェットから設定できる。「サイドバースクロール追従」にあるメタ情報を削除することで、非表示にできた。</p>
+<p class="wp-block-paragraph">参考: <a href="https://mechalog.com/metainfo#:~:text=WordPress%E7%AE%A1%E7%90%86%E7%94%BB%E9%9D%A2%E3%81%8B%E3%82%89%E3%80%8C%E5%A4%96%E8%A6%B3,%E8%A8%AD%E5%AE%9A%E3%81%95%E3%81%9B%E3%82%8C%E3%81%B0OK%E3%80%82" rel="noopener" target="_blank">WordPressで表示されてしまう「メタ情報」を非表示にする方法 | Mechalog</a></p>
+<h2 class="wp-block-heading"><span id="toc8">記事 作成・編集</span></h2>
+<h3 class="wp-block-heading"><span id="toc9">ショートコード</span></h3>
+<p class="wp-block-paragraph">WordPressではショートコードを使用することで便利な機能を使うことができる。</p>
+<p class="wp-block-paragraph">ショートコードは[]で囲む。ショートコードを無効にする良い方法がわからないが、<strong>太字</strong>にすることで無効にできる(もっといい方法がないか探し中)。</p>
+<h3 class="wp-block-heading"><span id="toc10">MathJax-LaTeX</span></h3>
+<p class="wp-block-paragraph">LaTex記述の数式を使用できるプラグイン。記事の中にショートコード[<strong>mathjax</strong>]と入力することで、その記事内で利用可能になる。<code>$$\frac{1}{3}$$</code>で$$\frac{1}{3}$$となる。</p>
+<p class="wp-block-paragraph">そのほかのコマンドはこちらが参考になる。<a href="http://www.eng.niigata-u.ac.jp/~nomoto/download/mathjax.pdf" rel="noopener" target="_blank">http://www.eng.niigata-u.ac.jp/~nomoto/download/mathjax.pdf</a></p>
+<h3 class="wp-block-heading"><span id="toc11">いいね(投票) ボタンをつける</span></h3>
+<p class="wp-block-paragraph">[ratings id=”blog”]</p>
+<p class="wp-block-paragraph">WP-PostRatings プラグインを使用する。プラグインの説明にある通り、ボタンをつけたい場所にショートコードである[<strong>ratings</strong>]を書く。phpを編集して、テーマ全体にボタンをつける方法もあるらしい。以下参考になるサイト。</p>
+<ul class="wp-block-list">
+<li><a data-id="https://deep-blog.jp/engineer/plugin-wp-postratings/" data-type="URL" href="https://deep-blog.jp/engineer/plugin-wp-postratings/" rel="noopener" target="_blank">【WordPress】WP-PostRatingsで「いいね」ボタンを設置 | エンジニア足立のコーディング日記</a></li>
+<li><a data-id="https://naifix.com/like-button/" data-type="URL" href="https://naifix.com/like-button/" rel="noopener" target="_blank">WordPressブログにSNSと連携しない独自のいいねボタンを設置する方法 – Naifix</a></li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc12">見出しのスタイルを変更</span></h3>
+<p class="wp-block-paragraph">WordPressの 外観 –&gt; テーマエディタからcssの編集ができる。</p>
+<p class="wp-block-paragraph">詳細は「<a data-id="https://ikuzoblog.com/heading-customize" data-type="URL" href="https://ikuzoblog.com/heading-customize" rel="noopener" target="_blank">【Cocoon】初心者でも簡単！見出しデザインのカスタマイズ</a>」</p>
+<h2 class="wp-block-heading"><span id="toc13">SEO</span></h2>
+<p class="wp-block-paragraph">sitemap.xmlを自動生成する。</p>
+<h3 class="wp-block-heading"><span id="toc14">Google XML Sitemaps</span></h3>
+<p class="wp-block-paragraph">優先度の設定だけ，優先順位を自動的に計算しない，に変更する。</p>
+<p class="wp-block-paragraph">Google Search consoleからドメインを検索して，ドメインをGoogleに登録する。Google Domainを使用していれば簡単にできる。</p>
+<h3 class="wp-block-heading"><span id="toc15">WebSub/PubSubHubbub</span></h3>
+<p class="wp-block-paragraph">記事を書いたときにインデックスする。</p>
+<h2 class="wp-block-heading"><span id="toc16">セキュリティ対策</span></h2>
+<h3 class="wp-block-heading"><span id="toc17">SiteGuard QP Plugin</span></h3>
+<p class="wp-block-paragraph">ログインするURLを変更する。詳しくは、<a data-id="https://www.kagoya.jp/howto/wordpress/wordpress_siteguard-wp-plugin/" data-type="URL" href="https://www.kagoya.jp/howto/wordpress/wordpress_siteguard-wp-plugin/" rel="noopener" target="_blank">SiteGuard WP Pluginでサイトを守る！設定と注意事項 | カゴヤのサーバー研究室</a> が参考になる。</p>
+<h2 class="wp-block-heading"><span id="toc18">広告</span></h2>
+<h3 class="wp-block-heading"><span id="toc19">Google AdSense</span></h3>
+<p class="wp-block-paragraph"><a data-id="https://www.google.com/intl/ja_jp/adsense/start/" data-type="URL" href="https://www.google.com/intl/ja_jp/adsense/start/" rel="noopener" target="_blank">Google AdSense – ウェブサイトを収益化</a> ←のページから簡単に申し込みができる。WordPressを使用していれば、認証コードを貼り付けるのも簡単。</p>
+<p class="wp-block-paragraph">サブドメインは使用できないことに注意が必要。例えば，blog.example.comは使用できない。example.comからblog.example.comにリダイレクトすれば申請はできる。</p>
+<p class="wp-block-paragraph">cocoonを使用している場合はこちらのサイトが参考になる。<a data-id="https://applired.net/cocoon-adsense/" data-type="URL" href="https://applired.net/cocoon-adsense/" rel="noopener" target="_blank">WordPressの無料テーマ「Cocoon」でアドセンス広告（Google AdSense）を設定する方法[初心者向け] | Ringo</a></p>
+<h4 class="wp-block-heading"><span id="toc20">要注意 – 収益に重大な影響が出ないよう、ads.txt ファイルの問題を修正してください。の対応</span></h4>
+<p class="wp-block-paragraph">domain/ads.txtにアドセンスのキーを指定する必要がある。domain/ads.txtにアクセスしたときにGoogle Analysisから取得したads.txtファイルを出力すれば良い。Wordpressを使用している場合、rootディレクトリ直下に直接ads.txtファイルをおけば良い。GCPを使用している場合は、<strong>/var/www/html/</strong>がルートディレクトリとなる。GCPのインスタンスを指定して、sshで接続し、直接書き込む。</p>
+<h4 class="wp-block-heading"><span id="toc21">Error in console says “adsbygoogle.push() error: Only one AdSense head tag supported per page.” の対応</span></h4>
+<p class="wp-block-paragraph">1ページに二つの広告があることが原因と思われる。こちらのページが参考になった。<a href="https://support.google.com/adsense/thread/45813877?hl=en" rel="noopener" target="_blank">https://support.google.com/adsense/thread/45813877?hl=en</a></p>
+<h3 class="wp-block-heading"><span id="toc22">Amazon アソシエイト</span></h3>
+<p class="wp-block-paragraph">公式サイトはこちら。<a data-id="https://affiliate.amazon.co.jp/" data-type="URL" href="https://affiliate.amazon.co.jp/" rel="noopener" target="_blank">アソシエイト・セントラル</a> , 説明や登録ができる。180日間の間に3つ売らないと審査されないらしい。</p>
+<h2 class="wp-block-heading"><span id="toc23">アクセス解析</span></h2>
+<h3 class="wp-block-heading"><span id="toc24">Google Search Console</span></h3>
+<h3 class="wp-block-heading"><span id="toc25">Google Analytics</span></h3>
+<p class="wp-block-paragraph">どこからアクセスがあったかの解析ができる。cocoonでの設定方法などは以下のサイトが参考になる。</p>
+<ul class="wp-block-list">
+<li><a data-id="https://wp-cocoon.com/google-analytics/" data-type="URL" href="https://wp-cocoon.com/google-analytics/" rel="noopener" target="_blank">Google Analyticsでアクセス解析する方法 | Cocoon</a></li>
+<li><a data-id="https://wacul-ai.com/blog/access-analysis/google-analytics-method/what-is-google-analytics/" data-type="URL" href="https://wacul-ai.com/blog/access-analysis/google-analytics-method/what-is-google-analytics/" rel="noopener" target="_blank">【今さら聞けない】Googleアナリティクスとは？導入手順から使い方まで5分で理解！｜アクセス解析ツール「AIアナリスト」ブログ</a></li>
+</ul>
+<h3 class="wp-block-heading"><span id="toc26">WP Statistics</span></h3>
+<p class="wp-block-paragraph">cocoonを使っていると自動でアクセス数を集計してくれるが、他のプラグインだと集計されないこともある。<a data-id="https://wordpress.org/plugins/wp-statistics/" data-type="link" href="https://wordpress.org/plugins/wp-statistics/">WP Statistics</a>を使うとシンプルでみやすくアクセス情報などの統計情報を表示することができる。</p>
+<h2 class="wp-block-heading"><span id="toc27">メール送信・お問い合わせ・プロフィール</span></h2>
+<p class="wp-block-paragraph">問い合わせを受け取れるようにし、問い合わせが来たときにメールで通知する。</p>
+<h3 class="wp-block-heading"><span id="toc28">Contact Form 7</span></h3>
+<p class="wp-block-paragraph">問い合わせフォームを作成するのに便利なプラグイン</p>
+<h3 class="wp-block-heading"><span id="toc29">WP Mail SMTP プラグイン</span></h3>
+<p class="wp-block-paragraph">Gmailを使うのは認証がうまくいかないことがあるので、そんなにおすすめはできない。</p>
+<p class="wp-block-paragraph">Contact Form 7と組み合わせることで、問い合わせが来たときに自分にメールを送信することができる。設定方法は以下のサイトが参考になる。</p>
+<ul class="wp-block-list">
+<li><a data-id="https://www.adminweb.jp/wordpress-plugin/function/index12.html" data-type="URL" href="https://www.adminweb.jp/wordpress-plugin/function/index12.html" rel="noopener" target="_blank">Contact Form 7プラグインでGmailのSMTPサーバを使ってメール送信 – WordPressおすすめプラグイン一覧</a></li>
+<li><a data-id="https://jajaaan.co.jp/app/business-tools/wordpress-gmail-gsuite/" data-type="URL" href="https://jajaaan.co.jp/app/business-tools/wordpress-gmail-gsuite/" rel="noopener" target="_blank">WordPressのメール送信にGmail(Gsuite)を使う方法【2020年最新】 | JAJAAAN</a></li>
+</ul>
+<h4 class="wp-block-heading"><span id="toc30">認証がうまくできないとき</span></h4>
+<p class="wp-block-paragraph">GCPの設定をするときは複数アカウントでログインしていると、別アカウントに切り替わるので注意が必要！承認済みのリダイレクト URIが正しく設定されているか確認する。</p>
+<h3 class="wp-block-heading"><span id="toc31">User Profile Picture</span></h3>
+<p class="wp-block-paragraph">プロフィール画像の設定ができる。Gravatarを使用すればプロフィール画像を設定できるが、「User Profile Picture」を使った方がわかりやすい。</p>
+<h2 class="wp-block-heading"><span id="toc32">終わりに</span></h2>
+<p class="wp-block-paragraph">他にも便利なプラグインはたくさんありそう。これから随時更新予定！</p>

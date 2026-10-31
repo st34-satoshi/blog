@@ -1,0 +1,53 @@
+<p class="wp-block-paragraph">他の人のパソコンとかssh先とかでファイルを自分のために保存したいことはちょくちょくある。usbメモリやメールが使えなくてもインターネットにつながれば自分のサーバーにファイルを保存できるようにする。</p>
+<p class="wp-block-paragraph">RailsとかFlaskとかアプリケーションサーバーをたてず、nginxだけでやる方法の備忘録。</p>
+<p class="wp-block-paragraph">ちなみに、Webサーバーでファイルの共有ができる仕組みを<a data-id="https://ja.wikipedia.org/wiki/WebDAV" data-type="URL" href="https://ja.wikipedia.org/wiki/WebDAV" rel="noopener" target="_blank">WebDAV</a>というらしい。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">–with-http_dav_moduleのインストール</a></li><li><a href="#toc2" tabindex="0">サーバーの設定</a><ol><li><a href="#toc3" tabindex="0">ファイルを保存するディレクトリを作成</a></li><li><a href="#toc4" tabindex="0">Nginxの設定</a></li></ol></li><li><a href="#toc5" tabindex="0">curlコマンドでファイルをアップロード</a></li><li><a href="#toc6" tabindex="0">終わりに</a></li><li><a href="#toc7" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">–with-http_dav_moduleのインストール</span></h2>
+<p class="wp-block-paragraph">nginxだけでWebDAVを実現するには<a data-id="http://nginx.org/en/docs/http/ngx_http_dav_module.html" data-type="URL" href="http://nginx.org/en/docs/http/ngx_http_dav_module.html" rel="noopener" target="_blank">ngx_http_dav_moduleモジュール</a>が必要。</p>
+<p class="wp-block-paragraph"><code>$nginx -V</code>で<code>--with-http_dav_module</code>が含まれていればOK。</p>
+<p class="wp-block-paragraph">特にインストールした記憶はないが入っていたのでインストール方法は省略する。</p>
+<h2 class="wp-block-heading"><span id="toc2">サーバーの設定</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">ファイルを保存するディレクトリを作成</span></h3>
+<p class="wp-block-paragraph">適当なディレクトリを作成する</p>
+<pre class="wp-block-code"><code>sudo mkdir /var/www/dav</code></pre>
+<p class="wp-block-paragraph">webサーバーからデータを保存可能にする</p>
+<pre class="wp-block-code"><code>sudo chown www-data:www-data /var/www/dav</code></pre>
+<h3 class="wp-block-heading"><span id="toc4">Nginxの設定</span></h3>
+<p class="wp-block-paragraph">/etc/nginx/conf.d/dav.conf</p>
+<pre class="wp-block-code"><code>server {
+	root /var/www/dav/;
+	server_name dav.example.com;
+
+	charset UTF-8;
+
+	location ~ "/upload/([0-9a-zA-Z-.]*)$" {
+		dav_methods PUT MKCOL COPY MOVE;
+		dav_access user:rw group:rw all:rw;
+
+		client_body_temp_path /var/www/dav/;
+		create_full_put_path on;
+	}
+}</code></pre>
+<p class="wp-block-paragraph">設定ができたらnginxを再起動</p>
+<pre class="wp-block-code"><code>$ sudo nginx -t
+$ sudo service nginx restart</code></pre>
+<p class="wp-block-paragraph">アップロードできるファイルの上限を変更したいときは<code>client_max_body_size 100M;</code>などと指定する。</p>
+<p class="wp-block-paragraph">※ファイル名は英数字だけにしている。ハイフンなどは許可していない。</p>
+<h2 class="wp-block-heading"><span id="toc5">curlコマンドでファイルをアップロード</span></h2>
+<pre class="wp-block-code"><code>curl -T text.txt --url http://dav.example.com/upload/text.txt -X PUT</code></pre>
+<p class="wp-block-paragraph">サーバーの /var/www/dav/upload/text.txtに保存される。</p>
+<p class="wp-block-paragraph">(自分用メモ: サブドメインはfileにしている)</p>
+<h2 class="wp-block-heading"><span id="toc6">終わりに</span></h2>
+<p class="wp-block-paragraph">これでインターネットがつながっていれば欲しいファイルを自分のサーバーに保存できるようになった！</p>
+<p class="wp-block-paragraph">パスワードをつけたりファイルの上限を決めたりもできるがまた今度。</p>
+<h2 class="wp-block-heading"><span id="toc7">参考サイト</span></h2>
+<ul class="wp-block-list">
+<li><a href="https://qiita.com/himao/items/a957d0a9c4f171012aff">nginxでwebdav環境を作成する。 #Ubuntu – Qiita</a></li>
+<li><a href="https://stackoverflow.com/questions/55787223/upload-file-to-nginx-with-curl">Upload file to Nginx with cURL – Stack Overflow</a></li>
+<li><a href="https://www.filestash.app/2021/12/09/nginx-webdav/">How to create a webdav server with Nginx</a></li>
+<li><a href="https://qiita.com/SoarTec-lab/items/7a8c55b2167419349db3">curlコマンドでWebDAVサーバアクセス #Linux – Qiita</a></li>
+</ul>

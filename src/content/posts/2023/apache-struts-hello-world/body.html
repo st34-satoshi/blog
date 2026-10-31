@@ -1,0 +1,101 @@
+<p class="wp-block-paragraph">ひょんなことでApache StrutsでWebサーバーをたてることになったのでHello Worldのやり方。</p>
+<p class="wp-block-paragraph">最終的なコード: <a href="https://github.com/st34-satoshi/hello-struts">st34-satoshi/hello-struts: Apache Struts Hello World</a></p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">Apache Strutsとは</a></li><li><a href="#toc2" tabindex="0">準備</a><ol><li><a href="#toc3" tabindex="0">Eclipseのダウロード</a></li><li><a href="#toc4" tabindex="0">Mavenのインストール</a><ol><li><a href="#toc5" tabindex="0">詰まった箇所</a></li></ol></li></ol></li><li><a href="#toc6" tabindex="0">Hello Worldを表示する</a><ol><li><a href="#toc7" tabindex="0">Eclipseでプロジェクトを作成</a></li><li><a href="#toc8" tabindex="0">プログラミング</a></li><li><a href="#toc9" tabindex="0">実行</a></li></ol></li><li><a href="#toc10" tabindex="0">終わりに</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">Apache Strutsとは</span></h2>
+<p class="wp-block-paragraph">フリーオープンソースのWebフレームワーク。JavaでWebアプリケーションを作るときの選択肢の一つになる。</p>
+<p class="wp-block-paragraph">公式ページ: <a href="https://struts.apache.org/">Welcome to the Apache Struts project</a></p>
+<h2 class="wp-block-heading"><span id="toc2">準備</span></h2>
+<p class="wp-block-paragraph">こちらのサイトを参考にHello Worldを表示する。サイト通りだとうまくいかないこともあった。</p>
+<p class="wp-block-paragraph"><a href="https://www.eclipse.org/downloads/packages/">Eclipse Packages | The Eclipse Foundation – home to a global community, the Eclipse IDE, Jakarta EE and over 350 open source projects…</a></p>
+<h3 class="wp-block-heading"><span id="toc3">Eclipseのダウロード</span></h3>
+<p class="wp-block-paragraph">Eclipseがなくても良いかわからないが、開発用にインストールする。(追記: Eclipseなしでも大丈夫だった)</p>
+<p class="wp-block-paragraph">installerをインストールしてEclipse IDE for Java Developersをインストールする。</p>
+<p class="wp-block-paragraph"><a href="https://www.eclipse.org/downloads/packages/">Eclipse Packages | The Eclipse Foundation – home to a global community, the Eclipse IDE, Jakarta EE and over 350 open source projects…</a></p>
+<h3 class="wp-block-heading"><span id="toc4">Mavenのインストール</span></h3>
+<p class="wp-block-paragraph">mvnコマンドを実行できるように。</p>
+<p class="wp-block-paragraph">最初にJDKをインストールする。<a href="https://docs.oracle.com/en/java/javase/20/install/installation-jdk-macos.html#GUID-F575EB4A-70D3-4AB4-A20E-DBE95171AB5F">JDK Installation Guide</a></p>
+<p class="wp-block-paragraph">こちらのサイトを参考にインストールする。<a href="https://qiita.com/saitoryc/items/737ee9e711f1ebe0dcfa">MacにMavenをインストールする – Qiita</a></p>
+<p class="wp-block-paragraph">apache-maven-3.9.3-bin.tar.gzをインストールして、/usr/local/libに移動する。README.txtを参考に、インストールする。JAVA_HOMEはJDKをインストールしたときに勝手に設定されていた。</p>
+<h4 class="wp-block-heading"><span id="toc5">詰まった箇所</span></h4>
+<p class="wp-block-paragraph">~/.zshrcにパスを通すところでミスって mvn command not foundがずっと出ていた。</p>
+<p class="wp-block-paragraph">~/.zshrcにexport PATH=”/usr/local/lib/apache-maven-3.9.3/bin:$PATH” を追加してsource ~/.zshrcで反映させる。</p>
+<h2 class="wp-block-heading"><span id="toc6">Hello Worldを表示する</span></h2>
+<h3 class="wp-block-heading"><span id="toc7">Eclipseでプロジェクトを作成</span></h3>
+<p class="wp-block-paragraph">hello_strutsなどの名前でプロジェクトを作成する。</p>
+<h3 class="wp-block-heading"><span id="toc8">プログラミング</span></h3>
+<p class="wp-block-paragraph">pom.xml (細かい書き方はわかってないけど一応動く)</p>
+<pre class="wp-block-code"><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;com.mcnz&lt;/groupId&gt;
+  &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;
+  &lt;!-- Hello World in Struts with a struts.xml file --&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+      &lt;artifactId&gt;struts2-core&lt;/artifactId&gt;
+      &lt;version&gt;2.5.5&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+      &lt;version&gt;3.1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.struts&lt;/groupId&gt;
+      &lt;artifactId&gt;struts2-convention-plugin&lt;/artifactId&gt;
+      &lt;version&gt;2.5.10&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+	&lt;finalName&gt;hello-struts&lt;/finalName&gt;
+    &lt;plugins&gt;
+		&lt;plugin&gt;
+            &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+            &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+            &lt;version&gt;9.4.7.v20170914&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;webApp&gt;
+                    &lt;contextPath&gt;/${build.finalName}&lt;/contextPath&gt;
+                &lt;/webApp&gt;
+                &lt;stopKey&gt;CTRL+C&lt;/stopKey&gt;
+                &lt;stopPort&gt;8999&lt;/stopPort&gt;
+                &lt;scanIntervalSeconds&gt;10&lt;/scanIntervalSeconds&gt;
+                &lt;scanTargets&gt;
+                    &lt;scanTarget&gt;src/main/webapp/index.jsp&lt;/scanTarget&gt;
+                &lt;/scanTargets&gt;
+                &lt;resources&gt;
+                &lt;resource&gt;&lt;directory&gt;./src/main/webapp&lt;/directory&gt;&lt;/resource&gt;
+              &lt;/resources&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+
+&lt;/project&gt;</code></pre>
+<p class="wp-block-paragraph">src/main/webapp/index.jsp</p>
+<pre class="wp-block-code"><code>&lt;!DOCTYPE html&gt;
+&lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Basic Struts 2 Application - Welcome&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome To Struts 2!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 class="wp-block-heading"><span id="toc9">実行</span></h3>
+<pre class="wp-block-code"><code>$ mvn jetty:run</code></pre>
+<p class="wp-block-paragraph">ブラウザを開く: http://localhost:8080/hello-struts/index.jsp</p>
+<h2 class="wp-block-heading"><span id="toc10">終わりに</span></h2>
+<p class="wp-block-paragraph">難しかったけど実行できて良かった。</p>
+<p class="wp-block-paragraph">新しく始めるプロジェクトでStrutsを使うことはなさそうかなぁ。</p>

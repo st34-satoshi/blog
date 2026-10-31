@@ -1,108 +1,78 @@
 <!-- #container -->
-
-
-
-
-
-
 <ul class="mobile-footer-menu-buttons mobile-menu-buttons">
-
-
-  <!-- メニューボタン -->
-  <li class="navi-menu-button menu-button">
-    <input id="navi-menu-input" type="checkbox" class="display-none">
-    <label id="navi-menu-open" class="menu-open menu-button-in" for="navi-menu-input">
-      <span class="navi-menu-icon menu-icon">
-        <span class="fa fa-bars" aria-hidden="true"></span>
-      </span>
-      <span class="navi-menu-caption menu-caption">メニュー</span>
-    </label>
-    <label class="display-none" id="navi-menu-close" for="navi-menu-input"></label>
-    <div id="navi-menu-content" class="navi-menu-content menu-content">
-      <label class="navi-menu-close-button menu-close-button" for="navi-menu-input"><span class="fa fa-close" aria-hidden="true"></span></label>
-      <ul class="menu-drawer"><li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-18"><a href="/" aria-current="page">Home</a></li>
-<li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19"><a href="/about/">About</a></li>
-<li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21"><a href="https://blog.stu345.com/sitemap/">Sitemap</a></li>
-<li id="menu-item-20" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20"><a href="https://blog.stu345.com/contact/">Contact</a></li>
-</ul>    </div>
-  </li>
-
-
+<!-- メニューボタン -->
+<li class="navi-menu-button menu-button">
+<input class="display-none" id="navi-menu-input" type="checkbox"/>
+<label class="menu-open menu-button-in" for="navi-menu-input" id="navi-menu-open">
+<span class="navi-menu-icon menu-icon">
+<span aria-hidden="true" class="fa fa-bars"></span>
+</span>
+<span class="navi-menu-caption menu-caption">メニュー</span>
+</label>
+<label class="display-none" for="navi-menu-input" id="navi-menu-close"></label>
+<div class="navi-menu-content menu-content" id="navi-menu-content">
+<label class="navi-menu-close-button menu-close-button" for="navi-menu-input"><span aria-hidden="true" class="fa fa-close"></span></label>
+<ul class="menu-drawer"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-18" id="menu-item-18"><a href="/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19" id="menu-item-19"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21" id="menu-item-21"><a href="/sitemap/">Sitemap</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20" id="menu-item-20"><a href="/contact/">Contact</a></li>
+</ul> </div>
+</li>
 <!-- ホームボタン -->
 <li class="home-menu-button menu-button">
-  <a href="/" class="menu-button-in">
-    <span class="home-menu-icon menu-icon">
-      <span class="fa fa-home" aria-hidden="true"></span>
-    </span>
-    <span class="home-menu-caption menu-caption">ホーム</span>
-  </a>
+<a class="menu-button-in" href="/">
+<span class="home-menu-icon menu-icon">
+<span aria-hidden="true" class="fa fa-home"></span>
+</span>
+<span class="home-menu-caption menu-caption">ホーム</span>
+</a>
 </li>
-
-
 <!-- 検索ボタン -->
-  <!-- 検索ボタン -->
-  <li class="search-menu-button menu-button">
-    <input id="search-menu-input" type="checkbox" class="display-none">
-    <label id="search-menu-open" class="menu-open menu-button-in" for="search-menu-input">
-      <span class="search-menu-icon menu-icon">
-        <span class="fa fa-search" aria-hidden="true"></span>
-      </span>
-      <span class="search-menu-caption menu-caption">検索</span>
-    </label>
-    <label class="display-none" id="search-menu-close" for="search-menu-input"></label>
-    <div id="search-menu-content" class="search-menu-content">
-      <form class="search-box input-box" method="get" action="https://blog.stu345.com/" role="search">
-  <input type="text" placeholder="サイト内を検索" name="s" class="search-edit" aria-label="input" value="">
-  <button type="submit" class="search-submit" aria-label="button"><span class="fa fa-search" aria-hidden="true"></span></button>
+<!-- 検索ボタン -->
+<li class="search-menu-button menu-button">
+<input class="display-none" id="search-menu-input" type="checkbox"/>
+<label class="menu-open menu-button-in" for="search-menu-input" id="search-menu-open">
+<span class="search-menu-icon menu-icon">
+<span aria-hidden="true" class="fa fa-search"></span>
+</span>
+<span class="search-menu-caption menu-caption">検索</span>
+</label>
+<label class="display-none" for="search-menu-input" id="search-menu-close"></label>
+<div class="search-menu-content" id="search-menu-content">
+<form action="/search/" class="search-box input-box" method="get" role="search">
+<input aria-label="input" class="search-edit" name="s" placeholder="サイト内を検索" type="text" value=""/>
+<button aria-label="button" class="search-submit" type="submit"><span aria-hidden="true" class="fa fa-search"></span></button>
 </form>
-    </div>
-  </li>
-
-
+</div>
+</li>
 <!-- トップボタン -->
 <li class="top-menu-button menu-button">
-  <a href="#" class="go-to-top-common top-menu-a menu-button-in">
-    <span class="top-menu-icon menu-icon">
-      <span class="fa fa-arrow-up" aria-hidden="true"></span>
-    </span>
-    <span class="top-menu-caption menu-caption">トップ</span>
-  </a>
+<a class="go-to-top-common top-menu-a menu-button-in" href="#">
+<span class="top-menu-icon menu-icon">
+<span aria-hidden="true" class="fa fa-arrow-up"></span>
+</span>
+<span class="top-menu-caption menu-caption">トップ</span>
+</a>
 </li>
-
-
 <!-- サイドバーボタン -->
-  <li class="sidebar-menu-button menu-button">
-    <input id="sidebar-menu-input" type="checkbox" class="display-none">
-    <label id="sidebar-menu-open" class="menu-open menu-button-in" for="sidebar-menu-input">
-      <span class="sidebar-menu-icon menu-icon">
-        <span class="fa fa-outdent" aria-hidden="true"></span>
-      </span>
-      <span class="sidebar-menu-caption menu-caption">サイドバー</span>
-    </label>
-    <label class="display-none" id="sidebar-menu-close" for="sidebar-menu-input"></label>
-    <div id="sidebar-menu-content" class="sidebar-menu-content menu-content">
-      <label class="sidebar-menu-close-button menu-close-button" for="sidebar-menu-input"><span class="fa fa-close" aria-hidden="true"></span></label>
-    </div>
-  </li>
-
+<li class="sidebar-menu-button menu-button">
+<input class="display-none" id="sidebar-menu-input" type="checkbox"/>
+<label class="menu-open menu-button-in" for="sidebar-menu-input" id="sidebar-menu-open">
+<span class="sidebar-menu-icon menu-icon">
+<span aria-hidden="true" class="fa fa-outdent"></span>
+</span>
+<span class="sidebar-menu-caption menu-caption">サイドバー</span>
+</label>
+<label class="display-none" for="sidebar-menu-input" id="sidebar-menu-close"></label>
+<div class="sidebar-menu-content menu-content" id="sidebar-menu-content">
+<label class="sidebar-menu-close-button menu-close-button" for="sidebar-menu-input"><span aria-hidden="true" class="fa fa-close"></span></label>
+</div>
+</li>
 </ul>
-
-
-
-  <div id="go-to-top" class="go-to-top">
-      <button class="go-to-top-button go-to-top-common go-to-top-hide go-to-top-button-icon-font" aria-label="トップへ戻る"><span class="fa fa-angle-double-up"></span></button>
-  </div>
-
-
-
-
-
-
-
-
-
-
-<script id="baguettebox-js-js" src="/assets/theme/plugins/baguettebox/dist/baguetteBox.min.js?ver=7.1.4&#038;fver=20260911025403"></script>
+<div class="go-to-top" id="go-to-top">
+<button aria-label="トップへ戻る" class="go-to-top-button go-to-top-common go-to-top-hide go-to-top-button-icon-font"><span class="fa fa-angle-double-up"></span></button>
+</div>
+<script id="baguettebox-js-js" src="/assets/theme/plugins/baguettebox/dist/baguetteBox.min.js?ver=7.1.4&amp;fver=20260911025403"></script>
 <script id="baguettebox-js-js-after">
 (function($){
            baguetteBox.run(".entry-content");
@@ -110,35 +80,10 @@
 
 //# sourceURL=baguettebox-js-js-after
 </script>
-
 <script id="cocoon-js-js-extra">
 var cocoon_localize_script_options = {"is_lazy_load_enable":null,"is_fixed_mobile_buttons_enable":"","is_google_font_lazy_load_enable":""};
 //# sourceURL=cocoon-js-js-extra
 </script>
-<script id="cocoon-js-js" src="/assets/theme/javascript.js?ver=7.1.4&#038;fver=20260911025403"></script>
-<script id="cocoon-group-link-js" src="/assets/theme/js/group-link.js?ver=1789095243&#038;fver=20260911025403"></script>
-
-
-
-
-
-
-
-
-
-
-    <div class="copy-info">タイトルとURLをコピーしました</div>
-          <script>
-      (function($){
-        const selector = '.copy-button';//clipboardで使う要素を指定
-        $(selector).click(function(event){
-          //クリック動作をキャンセル
-          event.preventDefault();
-          //クリップボード動作
-          navigator.clipboard.writeText($(selector).attr('data-clipboard-text')).then(
-            () => {
-              $('.copy-info').fadeIn(500).delay(1000).fadeOut(500);
-            });
-        });
-      })(jQuery);
-      </script>
+<script id="cocoon-js-js" src="/assets/theme/javascript.js?ver=7.1.4&amp;fver=20260911025403"></script>
+<script id="cocoon-group-link-js" src="/assets/theme/js/group-link.js?ver=1789095243&amp;fver=20260911025403"></script>
+<div class="copy-info">タイトルとURLをコピーしました</div>

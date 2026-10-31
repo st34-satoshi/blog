@@ -13,12 +13,14 @@
     "astro": "astro",
     "preview:cloudflare": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "check:files": "node scripts/check-file-sizes.mjs"
+    "check:files": "node scripts/check-file-sizes.mjs",
+    "check:site": "node scripts/check-site.mjs"
   },
   "dependencies": {
     "astro": "^7.4.4"
   },
   "devDependencies": {
+    "parse5": "^8.0.1",
     "wrangler": "4.156.0"
   }
 }

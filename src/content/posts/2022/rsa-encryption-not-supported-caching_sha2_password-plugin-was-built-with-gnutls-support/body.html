@@ -1,0 +1,44 @@
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">やりたいこと</a></li><li><a href="#toc2" tabindex="0">エラー</a></li><li><a href="#toc3" tabindex="0">正しいdocker-compose.yml</a></li><li><a href="#toc4" tabindex="0">それでもエラー</a><ol><li><a href="#toc5" tabindex="0">解決策</a></li></ol></li><li><a href="#toc6" tabindex="0">関連記事</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">やりたいこと</span></h2>
+<p class="wp-block-paragraph">docker-composeでrailsのアプリを作る。DBにmysqlを使用する。</p>
+<h2 class="wp-block-heading"><span id="toc2">エラー</span></h2>
+<pre class="wp-block-code"><code>RSA Encryption not supported - caching_sha2_password plugin was built with GnuTLS support</code></pre>
+<h2 class="wp-block-heading"><span id="toc3">正しいdocker-compose.yml</span></h2>
+<pre class="wp-block-code"><code>version: "3.9"
+services:
+  db:
+    platform: linux/x86_64 # for M1Mac
+    image: mysql:8.0
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    <span class="bold-green">command: --default_authentication_plugin=mysql_native_password</span>
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid &amp;&amp; bundle exec rails s -p 3000 -b '0.0.0.0'"
+    stdin_open: true # for biding.pry
+    tty: true # for biding.pry
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+volumes:
+  mysql-data:
+    driver: local</code></pre>
+<p class="wp-block-paragraph"><code>command: --default_authentication_plugin=mysql_native_password</code> を指定する事がポイント</p>
+<h2 class="wp-block-heading"><span id="toc4">それでもエラー</span></h2>
+<p class="wp-block-paragraph">docker-compose.ymlが正しいはずなのに同じエラーが出た。</p>
+<h3 class="wp-block-heading"><span id="toc5">解決策</span></h3>
+<pre class="wp-block-code"><code><span class="bold-green">docker volume rm app_mysql-data</span></code></pre>
+<p class="wp-block-paragraph">volumeで<span class="bold-red">永続化したデータベース</span>がdocker-compose buildでは<span class="bold-red">更新されない</span>！volumeを削除してからbuildすればOK.</p>
+<h2 class="wp-block-heading"><span id="toc6">関連記事</span></h2>
+<figure class="wp-block-embed is-type-wp-embed is-provider-notes-to-forget wp-block-embed-notes-to-forget"><div class="wp-block-embed__wrapper">
+<a class="blogcard-wrap internal-blogcard-wrap a-wrap cf" href="/blog-sitemap-software-engineer/" title="プログラミング関連"><div class="blogcard internal-blogcard ib-left cf"><div class="blogcard-label internal-blogcard-label"><span class="fa"></span></div><figure class="blogcard-thumbnail internal-blogcard-thumbnail"><img alt="" class="blogcard-thumb-image internal-blogcard-thumb-image wp-post-image" decoding="async" height="90" sizes="(max-width: 160px) 100vw, 160px" src="/wp-content/uploads/2021/04/hollywood-160x90.png" srcset="/wp-content/uploads/2021/04/hollywood-160x90.png 160w, /wp-content/uploads/2021/04/hollywood-120x68.png 120w" width="160"/></figure><div class="blogcard-content internal-blogcard-content"><div class="blogcard-title internal-blogcard-title">プログラミング関連</div><div class="blogcard-snippet internal-blogcard-snippet">プログラミングだったり、ソフトウェアエンジニア関連。Webアプリ開発APITwitterの Webhook APIを使ってみる | Notes to ForgetLINE APIを使ってみる | Notes to ForgetSlackにp...</div></div><div class="blogcard-footer internal-blogcard-footer cf"><div class="blogcard-site internal-blogcard-site"><div class="blogcard-favicon internal-blogcard-favicon"><img alt="" class="blogcard-favicon-image internal-blogcard-favicon-image" decoding="async" height="16" src="/assets/blog-favicon.png" width="16"/></div><div class="blogcard-domain internal-blogcard-domain"></div></div><div class="blogcard-date internal-blogcard-date"><div class="blogcard-post-date internal-blogcard-post-date">2022.08.08</div></div></div></div></a>
+</div></figure>

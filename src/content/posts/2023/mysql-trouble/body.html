@@ -1,0 +1,16 @@
+<p class="wp-block-paragraph">ときどき使うMySQLの備忘録</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">indexが効いているかを確かめたい</a></li><li><a href="#toc2" tabindex="0">複合インデックスの順番</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">indexが効いているかを確かめたい</span></h2>
+<p class="wp-block-paragraph">EXPLAINをつけることでSELECTで使われたインデックスなどの情報を出力できる。</p>
+<pre class="wp-block-code"><code>EXPLAIN SELECT * FROM users WHERE id = 1</code></pre>
+<p class="wp-block-paragraph">参考サイト: <a href="https://qiita.com/tsurumiii/items/0b70f1a1ee0499be2002">MySQLのEXPLAIN（実行プラン）まとめ – Qiita</a></p>
+<p class="wp-block-paragraph"></p>
+<h2 class="wp-block-heading"><span id="toc2">複合インデックスの順番</span></h2>
+<p class="wp-block-paragraph">複合インデックスをつけるとseq_in_indexの番号がつく。</p>
+<p class="wp-block-paragraph">条件で絞り込みたいsolumnよりSeq_in_indexの番号が若いcolumは条件に含めないとインデックスが効かなくなる。</p>
+<p class="wp-block-paragraph">Seq_in_indexが1,2のcolumnを条件に含めればインデックスが効く。3だけだと1,2が必要でインデックスが効かない。</p>
+<p class="wp-block-paragraph">参考サイト: <a href="https://qiita.com/tatsuya_1995/items/af43df6574c84360aecc">【MySQL】複合インデックスを設定してみる – Qiita</a></p>

@@ -1,0 +1,27 @@
+<p class="wp-block-paragraph">久しぶりに競技プログラミングをやろうとしたらc++のコンパイル方法を忘れたので、備忘録。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">gccのインストール</a><ol><li><a href="#toc2" tabindex="0">インストールの確認</a></li></ol></li><li><a href="#toc3" tabindex="0">シンボリックリンクやエイリアスをつける</a></li><li><a href="#toc4" tabindex="0">参考サイト</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">gccのインストール</span></h2>
+<ol class="wp-block-list"><li><code>brew install gcc</code></li><li><code>brew upgrade</code></li></ol>
+<h3 class="wp-block-heading"><span id="toc2">インストールの確認</span></h3>
+<pre class="wp-block-code"><code>% /opt/homebrew/bin/gcc-13 -v
+Using built-in specs.
+COLLECT_GCC=/opt/homebrew/bin/gcc-13
+COLLECT_LTO_WRAPPER=/opt/homebrew/Cellar/gcc/13.1.0/bin/../libexec/gcc/aarch64-apple-darwin22/13/lto-wrapper
+Target: aarch64-apple-darwin22
+Configured with: ../configure --prefix=/opt/homebrew/opt/gcc --libdir=/opt/homebrew/opt/gcc/lib/gcc/current --disable-nls --enable-checking=release --with-gcc-major-version-only --enable-languages=c,c++,objc,obj-c++,fortran --program-suffix=-13 --with-gmp=/opt/homebrew/opt/gmp --with-mpfr=/opt/homebrew/opt/mpfr --with-mpc=/opt/homebrew/opt/libmpc --with-isl=/opt/homebrew/opt/isl --with-zstd=/opt/homebrew/opt/zstd --with-pkgversion='Homebrew GCC 13.1.0' --with-bugurl=https://github.com/Homebrew/homebrew-core/issues --with-system-zlib --build=aarch64-apple-darwin22 --with-sysroot=/Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk
+Thread model: posix
+Supported LTO compression algorithms: zlib zstd
+gcc version 13.1.0 (Homebrew GCC 13.1.0)</code></pre>
+<h2 class="wp-block-heading"><span id="toc3">シンボリックリンクやエイリアスをつける</span></h2>
+<pre class="wp-block-code"><code>% which gcc
+/usr/bin/gcc</code></pre>
+<p class="wp-block-paragraph">which gccで/usr/bin/gccが参照されるのでhomebrewでインストールした方を参照したい。</p>
+<p class="wp-block-paragraph">シンボリックインクでも良いが今回はエイリアスにしてみる。</p>
+<p class="wp-block-paragraph">atcoderコマンドでg++が実行される。g++のバージョンは適切なバージョンにする。</p>
+<pre class="wp-block-code"><code>alias atcoder=/opt/homebrew/bin/g++-13</code></pre>
+<h2 class="wp-block-heading"><span id="toc4">参考サイト</span></h2>
+<ul class="wp-block-list"><li><a href="https://qiita.com/EvtHorizonCoder/items/145724e16c1b57ab64eb">競技プログラミングC++環境構築 (macOS) 2023年版 – Qiita</a></li></ul>

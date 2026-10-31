@@ -1,0 +1,34 @@
+<p class="wp-block-paragraph">社会人になって3年ぶりくらいにAtCoderをやってみて勉強しなおした知識まとめ。</p>
+<p class="wp-block-paragraph">3年前は水色だったけど、3年ぶりにABCに出たらパフォーマンス600くらいで泣いた。</p>
+<p class="wp-block-paragraph">新しいことを勉強したら、随時更新する。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">水色に戻るまで</a><ol><li><a href="#toc2" tabindex="0"> 座標圧縮</a></li><li><a href="#toc3" tabindex="0">Mod</a><ol><li><a href="#toc4" tabindex="0">参考記事</a></li></ol></li><li><a href="#toc5" tabindex="0">ビット演算</a></li><li><a href="#toc6" tabindex="0">二次元累積和</a></li><li><a href="#toc7" tabindex="0">c++</a><ol><li><a href="#toc8" tabindex="0">vectorの参照渡し</a></li></ol></li></ol></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">水色に戻るまで</span></h2>
+<h3 class="wp-block-heading"><span id="toc2"> 座標圧縮</span></h3>
+<p class="wp-block-paragraph">数列の大小が必要だが差の大きさが必要ないとき使える。</p>
+<p class="wp-block-paragraph">数列Aを座標圧縮したいときは、数列Aを数列Bにコピーして、Bをソートして、mapを使って{num: index}みたいにして、数列Aの数字をindexに置換すれば良い。</p>
+<p class="wp-block-paragraph">参考記事: <a href="https://drken1215.hatenablog.com/entry/2021/08/09/235400">座標圧縮 (座圧) – けんちょんの競プロ精進記録</a></p>
+<h3 class="wp-block-heading"><span id="toc3">Mod</span></h3>
+<p class="wp-block-paragraph">数字が大きくなりすぎないように使う。四則演算と累乗はすぐにできるようにしておく必要がある。</p>
+<h4 class="wp-block-heading"><span id="toc4">参考記事</span></h4>
+<ul class="wp-block-list"><li><a href="https://qiita.com/drken/items/3b4fdf0a78e7a138cd9a">「1000000007 で割ったあまり」の求め方を総特集！ 〜 逆元から離散対数まで 〜 – Qiita</a></li><li><a href="https://qiita.com/uesho/items/1ee5c3e665c72c035880">【競プロライブラリ】mint(modint)で学ぶC++ – Qiita</a></li><li><a href="https://github.com/atcoder/ac-library/blob/master/document_ja/modint.md">ac-library/document_ja/modint.md at master · atcoder/ac-library</a></li></ul>
+<h3 class="wp-block-heading"><span id="toc5">ビット演算</span></h3>
+<p class="wp-block-paragraph">2進数で全探索をするときなど。</p>
+<p class="wp-block-paragraph"><a href="https://qiita.com/drken/items/7c6ff2aa4d8fce1c9361">ビット演算 (bit 演算) の使い方を総特集！ 〜 マスクビットから bit DP まで 〜 – Qiita</a></p>
+<h3 class="wp-block-heading"><span id="toc6">二次元累積和</span></h3>
+<p class="wp-block-paragraph">一次元の累積和がわかっていれば二次元も直感的だった。</p>
+<p class="wp-block-paragraph">問題を解くときの発想になかったので覚えておくと便利。</p>
+<p class="wp-block-paragraph">参考: <a href="https://qiita.com/drken/items/56a6b68edef8fc605821">累積和を何も考えずに書けるようにする！ – Qiita</a></p>
+<h3 class="wp-block-heading"><span id="toc7">c++</span></h3>
+<h4 class="wp-block-heading"><span id="toc8">vectorの参照渡し</span></h4>
+<p class="wp-block-paragraph">関数にvectorを渡すとき参照渡しにしないと毎回deep copyになる(たぶん、少なくとも処理が遅くなってTLEになった)。</p>
+<p class="wp-block-paragraph">結論: &amp;をつける。</p>
+<pre class="wp-block-code"><code>// 良い例(vectorのshallow copy)
+bool dfs(vector&lt;string&gt;&amp; s, int n){
+}</code></pre>
+<pre class="wp-block-code"><code>// 悪い例(vectorのdeep copy)
+bool dfs(vector&lt;string&gt; s, int n){
+}</code></pre>

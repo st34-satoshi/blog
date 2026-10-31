@@ -1,0 +1,30 @@
+<p class="wp-block-paragraph"><code>apt-get install postgresql-client-14</code> で失敗した人のために。</p>
+<div class="toc tnt-number toc-center tnt-number border-element" id="toc"><input checked="" class="toc-checkbox" id="toc-checkbox-1" type="checkbox"/><label class="toc-title" for="toc-checkbox-1">目次</label>
+<div class="toc-content">
+<ol class="toc-list open"><li><a href="#toc1" tabindex="0">環境</a></li><li><a href="#toc2" tabindex="0">エラーメッセージ</a><ol><li><a href="#toc3" tabindex="0">バックアップ作成時</a></li><li><a href="#toc4" tabindex="0">postgresql-client-14をインストール</a></li></ol></li><li><a href="#toc5" tabindex="0">解決方法</a></li></ol>
+</div>
+</div>
+<h2 class="wp-block-heading"><span id="toc1">環境</span></h2>
+<p class="wp-block-paragraph">dockerのコンテナ(ruby:3.1.3)内。dockerを使っていなければsudoをつける必要があるかも。</p>
+<h2 class="wp-block-heading"><span id="toc2">エラーメッセージ</span></h2>
+<h3 class="wp-block-heading"><span id="toc3">バックアップ作成時</span></h3>
+<pre class="wp-block-code"><code>$ pg_dump -h db -p 5432 db1
+pg_dump: error: server version: 14.1 (Debian 14.1-1.pgdg110+1); pg_dump version: 13.11 (Debian 13.11-0+deb11u1)
+pg_dump: error: aborting because of server version mismatch</code></pre>
+<p class="wp-block-paragraph">postgresql-client-14が必要と言われる。</p>
+<h3 class="wp-block-heading"><span id="toc4">postgresql-client-14をインストール</span></h3>
+<pre class="wp-block-code"><code>$ apt-get install postgresql-client-14
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+E: Unable to locate package postgresql-client-14</code></pre>
+<p class="wp-block-paragraph">ん？<code> <span class="bold-red">E: Unable to locate package postgresql-client-14</span></code></p>
+<h2 class="wp-block-heading"><span id="toc5">解決方法</span></h2>
+<p class="wp-block-paragraph"><a href="https://www.postgresql.org/download/linux/debian/#apt" rel="noopener" target="_blank">公式</a>のインストール方法を実行すれば良い。</p>
+<p class="wp-block-paragraph">※ lsb_releaseは最初にインストールする。</p>
+<pre class="wp-block-code"><code>$ apt-get install -y lsb-release
+$ sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" &gt; /etc/apt/sources.list.d/pgdg.list'
+$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+$ apt-get update
+$ apt-get install -y postgresql-client-14</code></pre>
+<p class="wp-block-paragraph">postgresqlのそれぞれのバージョンががあるレポジトリへのパスを設定する必要があったらしい。</p>
