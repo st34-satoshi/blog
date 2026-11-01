@@ -4,3 +4,24 @@
   inset: auto;
   visibility: visible;
 }
+
+/* Markdown TOCs share the legacy appearance, with wrapping on narrow screens. */
+.markdown-toc {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+}
+/* Keep the existing checkbox/label behavior accessible from the keyboard. */
+.markdown-toc .toc-checkbox {
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  clip-path: inset(50%);
+  overflow: hidden;
+}
+.markdown-toc .toc-checkbox:focus-visible + .toc-title {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}

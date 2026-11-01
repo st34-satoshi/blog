@@ -14,12 +14,14 @@
     "preview:cloudflare": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
     "check:files": "node scripts/check-file-sizes.mjs",
+    "test:toc": "node --test scripts/test-toc.mjs",
     "check:site": "node scripts/check-site.mjs"
   },
   "dependencies": {
     "astro": "^7.4.4"
   },
   "devDependencies": {
+    "@astrojs/markdown-satteri": "0.4.6",
     "parse5": "^8.0.1",
     "wrangler": "4.156.0"
   }
