@@ -5,7 +5,7 @@ publishedAt: 2026-11-19T17:00:00+09:00
 description: "ConoHa VPSのNo working init foundを外部ISOから調査。initramfsの破損とext4の不整合を修復し、UbuntuとDockerのWebサービスを復旧した記録。"
 categories: [プログラミング]
 tags: [ConoHa, Ubuntu, Linux, Docker]
-draft: true
+draft: false
 ---
 
 ConoHaからのメールをきっかけに管理画面を開くと、VPSが起動しなくなっていた。コンソールには次のエラーが出ていた。
