@@ -1,5 +1,5 @@
 ---
-title: "チェス大会反省ノート"
+title: "2026年 チェス大会反省ノート"
 slug: "chess-tournament-recaps"
 publishedAt: "2026-02-18T04:55:50Z"
 updatedAt: "2026-11-03T14:55:04+00:00"
